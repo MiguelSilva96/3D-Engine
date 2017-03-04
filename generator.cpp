@@ -75,11 +75,10 @@ vector<string> plane(float x, float y, float z, int div) {
 */
 vector<string> box(float x, float y, float z, int div) {
     vector<string> v;
+    //top
+    v = plane(x, y/2, z, div);
     for(int i = 0; i < div; i++) {
         for(int j = 0; j < div; j++) {
-            //top
-            vector<string> aux = plane(x, y/2, z, div);
-            v.insert(v.end(), aux.begin(), aux.end());
             //base
             v.push_back(vertexString(x/2-x/div*(i+1), -y/2, -z/2+z/div*j));
             v.push_back(vertexString(x/2-x/div*i, -y/2, -z/2+z/div*j));
