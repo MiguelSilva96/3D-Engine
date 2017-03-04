@@ -182,5 +182,6 @@ int main(int argc, char **argv) {
     vector<string>::iterator it;
     for(it = vertexes.begin(); it != vertexes.end(); ++it)
         cout << *it;
+    vertexes.clear();
     //sphere(2,15,15);
 }
