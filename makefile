@@ -1,11 +1,11 @@
 CC=g++ -std=c++11 -Wno-deprecated -I headers
-
+MKDIR_P = mkdir -p
 
 ODIR = build
 SDIR = src
 INC = -Iinc
 
-all : generator engine
+all : generator
 
 _OBJSG = generator.o shapes.o
 _OBJS += $(_OBJSG)
