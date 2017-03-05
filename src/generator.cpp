@@ -120,7 +120,7 @@ int main(int argc, char **argv) {
         for(it = vertexes.begin(); it != vertexes.end(); ++it)
             file << *it;
     }
-    else std::cout << "Can't write to file";
+    else std::cout << "Can't write to file\n";
     vertexes.clear();
     return 0;
 }

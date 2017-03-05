@@ -1,0 +1,5 @@
+<?xml version="1.0" ?>
+<scene>
+	<model file='box.3d' />
+    <model file='sphere.3d' />
+</scene>

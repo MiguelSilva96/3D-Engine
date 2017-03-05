@@ -31,6 +31,7 @@ include_directories (${TXML_DIR} ${HEADER_DIR})
 set( LEARN_CMAKE_SOURCES 
   engine.cpp
   vertex.cpp
+  tinyxml2/tinyxml2.cpp
 )
 
 add_executable(${PROJECT_NAME} ${LEARN_CMAKE_SOURCES})
