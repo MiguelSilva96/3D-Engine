@@ -106,7 +106,7 @@ std::vector<std::string> getVertexes(char **input) {
 int main(int argc, char **argv) {
     std::vector<std::string> vertexes;
     std::ofstream file;
-    std::string folder = "shapes/";
+    std::string folder = "../shapes/";
     if(argc < 6 || !verifyInput(argv) || argc > 8) {
         std::cout << "Input error\n";
         return -1;
