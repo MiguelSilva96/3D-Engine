@@ -1,5 +1,5 @@
-#ifndef __SHAPES_H_INCLUDED__
-#define __SHAPES_H_INCLUDED__
+#ifndef SHAPES_H
+#define SHAPES_H
 
 #include <vector>
 #include <string>
