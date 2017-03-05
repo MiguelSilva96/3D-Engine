@@ -102,17 +102,16 @@ std::vector<std::string> sphere(float radius, int slices, int stacks) {
     for (int i = 0; i < stacks; i++) {
         for (int j = 0; j < slices; j++) {
             if (i != stacks - 1) {
-                fi = i * M_PI/stacks;
-                teta = j * 2 * M_PI/slices;
-                v.push_back(vertexString(radius * cos(teta)*sin(fi),
-                            radius * cos(fi),
-                            radius * sin(teta)*sin(fi)));
                 fi = (i + 1) * M_PI/stacks;
                 teta = (j + 1) * 2 * M_PI/slices;
                 v.push_back(vertexString(radius * cos(teta)*sin(fi),
                             radius * cos(fi),
                             radius * sin(teta)*sin(fi)));
                 teta = j * 2 * M_PI/slices;
+                v.push_back(vertexString(radius * cos(teta)*sin(fi),
+                            radius * cos(fi),
+                            radius * sin(teta)*sin(fi)));
+                fi = i * 2 * M_PI/slices;
                 v.push_back(vertexString(radius * cos(teta)*sin(fi),
                             radius * cos(fi),
                             radius * sin(teta)*sin(fi)));
