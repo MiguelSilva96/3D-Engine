@@ -27,3 +27,13 @@ include_directories (${TXML_DIR})
 add_executable(${PROJECT_NAME} engine.cpp)
 
 target_link_libraries(${PROJECT_NAME} ${OPENGL_LIBRARIES} ${GLUT_LIBRARY} )
+
+PROJECT(generator)
+
+set(INCLUDE_DIR ../headers)
+include_directories (${INCLUDE_DIR})
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
+add_executable(${PROJECT_NAME} generator.cpp)
+
+
+
