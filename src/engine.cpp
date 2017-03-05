@@ -26,6 +26,7 @@ int main(int argc, char **argv) {
 	glutCreateWindow("Engine");
 
 // Callback registration
+	Vertex b(1,2,3);
 	
 // OpenGL settings 
 	glEnable(GL_DEPTH_TEST);

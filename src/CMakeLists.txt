@@ -20,20 +20,34 @@ if(NOT OPENGL_FOUND)
     message(ERROR " OPENGL not found!")
 endif(NOT OPENGL_FOUND)
 
-set(TXML_DIR ../tinyxml2)
-set(INCLUDE_DIR ../headers)
-include_directories (${INCLUDE_DIR})
-include_directories (${TXML_DIR})
-add_executable(${PROJECT_NAME} engine.cpp)
+set(TXML_DIR tinyxml2)
+set(HEADER_DIR headers)
+
+include_directories (${TXML_DIR} ${HEADER_DIR})
+
+# Include Directories
+# In GCC, this will invoke the "-I" command
+
+set( LEARN_CMAKE_SOURCES 
+  engine.cpp
+  vertex.cpp
+)
+
+add_executable(${PROJECT_NAME} ${LEARN_CMAKE_SOURCES})
 
 target_link_libraries(${PROJECT_NAME} ${OPENGL_LIBRARIES} ${GLUT_LIBRARY} )
 
 PROJECT(generator)
 
-set(INCLUDE_DIR ../headers)
-include_directories (${INCLUDE_DIR})
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
-add_executable(${PROJECT_NAME} generator.cpp)
+set(HEADER_DIR headers)
+include_directories (${TXML_DIR} ${HEADER_DIR})
 
+set( LEARN_CMAKE_SOURCES 
+  generator.cpp
+  shapes.cpp
+)
+
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
+add_executable(${PROJECT_NAME} ${LEARN_CMAKE_SOURCES})
 
 

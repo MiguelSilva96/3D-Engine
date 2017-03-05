@@ -3,7 +3,8 @@
 
 class Vertex {
     public:
-        const int x, y, z;
+        float x, y, z;
+        Vertex(float, float, float);
 };
 
 #endif
