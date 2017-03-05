@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 2.8)
 
 # Project Name
-PROJECT(engine)
+PROJECT(cg_phase1)
 
 find_package(GLUT REQUIRED)
 include_directories(${GLUT_INCLUDE_DIR})
@@ -20,35 +20,13 @@ if(NOT OPENGL_FOUND)
     message(ERROR " OPENGL not found!")
 endif(NOT OPENGL_FOUND)
 
-set(TXML_DIR tinyxml2)
-set(HEADER_DIR headers)
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/headers)
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/tinyxml2)
 
-include_directories (${TXML_DIR} ${HEADER_DIR})
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/tinyxml2)
+add_definitions(-std=c++11)
 
-# Include Directories
-# In GCC, this will invoke the "-I" command
+add_executable(engine engine.cpp tinyxml2/tinyxml2.cpp vertex.cpp)
+add_executable(generator generator.cpp shapes.cpp)
 
-set( LEARN_CMAKE_SOURCES 
-  engine.cpp
-  vertex.cpp
-  tinyxml2/tinyxml2.cpp
-)
-
-add_executable(${PROJECT_NAME} ${LEARN_CMAKE_SOURCES})
-
-target_link_libraries(${PROJECT_NAME} ${OPENGL_LIBRARIES} ${GLUT_LIBRARY} )
-
-PROJECT(generator)
-
-set(HEADER_DIR headers)
-include_directories (${TXML_DIR} ${HEADER_DIR})
-
-set( LEARN_CMAKE_SOURCES 
-  generator.cpp
-  shapes.cpp
-)
-
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
-add_executable(${PROJECT_NAME} ${LEARN_CMAKE_SOURCES})
-
-
+target_link_libraries(engine ${OPENGL_LIBRARIES} ${GLUT_LIBRARY} tinyxml2)
