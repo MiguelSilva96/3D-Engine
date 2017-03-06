@@ -1,7 +1,7 @@
 /**
     Practical Assignment Computer Graphics
     generator.cpp
-    Purpose: Generate vertexes to create geometric figures.
+    Purpose: Generate vertexes to create geometric figures.	
 
     @author Jose Silva, Joao Coelho, Luís Fernandes, Pedro Cunha
     @version 1.0

@@ -7,6 +7,8 @@
     @version 1.0
 */
 
+#include <stdlib.h>
+
 #ifdef __APPLE__
 #include <GLUT/glut.h>
 #else
@@ -157,7 +159,7 @@ int main(int argc, char **argv) {
     if(argc > 1)
         filename = argv[1];
     else
-        filename = strcat(filename, "../config.xml");
+        strcpy(filename, "../config.xml");
     loadVertexes(filename);
 
     // Callback registration

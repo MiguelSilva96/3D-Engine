@@ -98,7 +98,7 @@ std::vector<std::string> box(float x, float y, float z, int div) {
 
 std::vector<std::string> sphere(float radius, int slices, int stacks) {
     std::vector<std::string> v;
-    float teta, fi;
+    double teta, fi;
     for (int i = 0; i < stacks; i++) {
         for (int j = 0; j < slices; j++) {
             if (i != stacks - 1) {
