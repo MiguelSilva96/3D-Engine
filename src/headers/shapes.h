@@ -59,4 +59,17 @@ std::vector<std::string> cylinder(float radB, float radT, float height, int slic
 */
 std::vector<std::string> torus(float inner, float outer, int sides, int rings);
 
+/**
+    Returns vertexes for a rubi.
+
+    @param rb Bottom radius for top cylinder.
+    @param rt Top radius for top cylinder.
+    @param heightb Bottom height.
+    @param heightt Top height.
+    @param slices Number of slices.
+    @param stacks Number of stacks.
+    @return Vector with all strings of the vertexes.
+*/
+std::vector<std::string> ruby(float rb, float rt, float heightb, float heightt, int slices, int stacks);
+
 #endif

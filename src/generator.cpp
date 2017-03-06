@@ -60,6 +60,15 @@ bool verifyInput(char **input) {
                 && regex_match(input[4], ints)
                 && regex_match(input[5], ints)
                 && (input[6] != NULL);
+
+    else if(!strcmp(shape, "ruby"))
+        result = regex_match(input[2], floats)
+                && regex_match(input[3], floats)
+                && regex_match(input[4], floats)
+                && regex_match(input[5], floats)
+                && regex_match(input[6], ints)
+                && regex_match(input[7], ints)
+                && (input[8] != NULL);
     return result;
 }
 
@@ -72,7 +81,8 @@ bool verifyInput(char **input) {
 std::vector<std::string> getVertexes(char **input) {
     char *shape = input[1];
     float x, y, z, radius, height;
-    int div, slices, stacks;
+    float r1, r2, h1, h2;
+    int div, slices, stacks, sides, rings;
     std::vector<std::string> vertexes;
     if(!strcmp(shape, "plane")) {
         x = std::stof(input[2]);
@@ -100,14 +110,40 @@ std::vector<std::string> getVertexes(char **input) {
         stacks = std::stoi(input[5]);
         vertexes = cylinder(radius, 0.0f, height, slices, stacks);
     }
+    else if(!strcmp(shape, "cylinder")) {
+        r1 = std::stof(input[2]);
+        r2 = std::stof(input[3]);
+        height = std::stof(input[4]);
+        slices = std::stoi(input[5]);
+        stacks = std::stoi(input[5]);
+        vertexes = cylinder(r1, r2, height, slices, stacks);
+    }
+    else if(!strcmp(shape, "torus")) {
+        r1 = std::stof(input[2]);
+        r2 = std::stof(input[3]);
+        sides = std::stoi(input[4]);
+        rings = std::stoi(input[5]);
+        vertexes = torus(r1, r2, sides, rings);
+    }
+    else if(!strcmp(shape, "ruby")) {
+        r1 = std::stof(input[2]);
+        r2 = std::stof(input[3]);
+        h1 = std::stof(input[4]);
+        h2 = std::stof(input[5]);
+        slices = std::stoi(input[6]);
+        stacks = std::stoi(input[7]);
+        vertexes = ruby(r1, r2, h1, h2, slices, stacks);
+    }
     return vertexes;
 }
+
+
 
 int main(int argc, char **argv) {
     std::vector<std::string> vertexes;
     std::ofstream file;
     std::string folder = "../shapes/";
-    if(argc < 6 || !verifyInput(argv) || argc > 8) {
+    if(argc < 6 || !verifyInput(argv) || argc > 9) {
         std::cout << "Input error\n";
         return -1;
     }

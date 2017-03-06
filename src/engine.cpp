@@ -66,7 +66,7 @@ void renderScene(void) {
     float px = radius * sin(al);
     float pz = radius * cos(al);
     float py = radius * sin(beta);
-    gluLookAt(px,py,pz, 
+    gluLookAt(px, py, pz, 
               0.0,0.0,0.0,
               0.0f,1.0f,0.0f);
 

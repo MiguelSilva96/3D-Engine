@@ -138,50 +138,46 @@ std::vector<std::string> sphere(float radius, int slices, int stacks) {
 
 
 std::vector<std::string> cylinder(float radB, float radT, float height, int slices, int stacks) {
-    float alpha = (float) 2 * M_PI / slices;
-    float h = (float) height / stacks;              //P1(0, 0, radB) é o ponto de referência, usado como ponto inicial
-    float px = 0.0f, py = 0.0f, pz = (float) radB;
-    float pOp1 = 0.0f;                              //ângulo formado pela linha do raio do ponto em que estamos e o eixo dos z's no sentido de P1
-    float tx, ty, tz, qx, qy, qz;
-    float lvl;                                      //recebe o valor da altura em função das stacks percorridas
     std::vector<std::string> v;
-    for(int j = 1; j <= slices; j++) {
-        qx = px; qy = py; qz = pz;
-        pOp1 = alpha * j;
-        v.push_back(vertexString(px, 0.0f, pz));
-        px = sin(pOp1) * radB;
-        pz = cos(pOp1) * radB;
+    float alpha = (float)2* M_PI / slices;
+    float h = (float)height / stacks;
+    float angle;                            //ângulo formado pela linha do raio do ponto em que estamos e o eixo dos z's
+    float lvl;                              //recebe o valor do raio em função das stacks percorridas
+    float prev_lvl;                         //recebe o valor anterior do raio em função das stacks percorridas
+    //draw base
+    for (int j = 1; j <= slices; j++) {
+        v.push_back(vertexString(sin(alpha*(j-1))*radB, 
+                    0.0f, cos(alpha*(j-1))*radB));
+        angle = alpha * j;
         v.push_back(vertexString(0.0f, 0.0f, 0.0f));
-        v.push_back(vertexString(px, 0.0f, pz));
-        //draw top
-        tx = px; ty = py; tz = pz;
-        for(int i = 1; i <= stacks; i++){
-            lvl = radB - (float) (radB - radT) * i/stacks;
-            v.push_back(vertexString(qx, qy, qz));
-            v.push_back(vertexString(tx, ty, tz));
-            v.push_back(vertexString(lvl*sin(alpha*(j-1)), h*i, lvl * cos(alpha * (j-1))));
-            v.push_back(vertexString(lvl*sin(alpha*(j-1)), h*i, lvl * cos(alpha * (j-1))));
-            v.push_back(vertexString(tx, ty, tz));
-            v.push_back(vertexString(lvl * sin(pOp1), h*i, lvl * cos(pOp1)));
-            tx = lvl * sin(pOp1);
-            ty = h * i;
-            tz = lvl * cos(pOp1);
-            qx = lvl * sin(alpha*(j - 1));
-            qy = h * i;
-            qz = lvl * cos(alpha * (j - 1));
+        v.push_back(vertexString(sin(angle)*radB, 0.0f, cos(angle)*radB));
+        prev_lvl = radB;
+        //draw sides
+        for (int i = 1; i <= stacks; i++){
+            lvl = radB - (float) (radB - radT)*i/stacks;
+            v.push_back(vertexString(prev_lvl * sin(alpha*(j - 1)), 
+                        h*(i-1), prev_lvl * cos(alpha*(j - 1))));
+            v.push_back(vertexString(prev_lvl * sin(angle), 
+                        h*(i - 1), prev_lvl * cos(angle)));
+            v.push_back(vertexString(lvl * sin(alpha*(j - 1)), 
+                        h * i, lvl * cos(alpha * (j - 1))));
+            v.push_back(vertexString(lvl * sin(alpha*(j - 1)), 
+                        h * i, lvl * cos(alpha * (j - 1))));
+            v.push_back(vertexString(prev_lvl * sin(angle), 
+                        h*(i - 1), prev_lvl * cos(angle)));
+            v.push_back(vertexString(lvl * sin(angle), 
+                        h*i, lvl * cos(angle)));
+            prev_lvl = lvl;
         }
     }
-    if(radT > 0) {
-        for(int j = 1; j <= slices; j++) {
-            pOp1 = alpha * j;
-            qx = sin(pOp1) * radT;
-            qz = cos(pOp1) * radT;
-            v.push_back(vertexString(qx, height, qz));
-            pOp1 = alpha * (j - 1);
-            qx = sin(pOp1) * radT;
-            qz = cos(pOp1) * radT;
+    //draw top
+    if (radT) {
+        for (int j = 1; j <= slices; j++) {
+            angle = alpha * j;
+            v.push_back(vertexString(sin(angle)*radT, height, cos(angle)*radT));
+            angle = alpha * (j - 1);
             v.push_back(vertexString(0.0f, height, 0.0f));
-            v.push_back(vertexString(qx, height, qz));
+            v.push_back(vertexString(sin(angle)*radT, height, cos(angle)*radT));
         }
     }
     return v;
@@ -227,13 +223,35 @@ std::vector<std::string> torus(float inner, float outer, int sides, int rings) {
     return v;
 }
 
-
-/*
-void drawRubi(int rb, int rt, int heightb, int heightt, int slices, int stacks){
-    glColor3f(1.0, 0.0, 0.0);
-    drawCone(rb, rt, heightt, slices, stacks);
-    glRotatef(180, 1.0f, 0.0f, 0.0f);
-    glColor3f(1, 1, 0);
-    drawCone(rb, 0, heightb, slices,stacks);
+std::vector<std::string> ruby(float rb, float rt, float heightb, float heightt, int slices, int stacks) {
+    int i, j;
+    float alpha = (float)2 * M_PI / slices;
+    float h = (float)heightb / stacks;
+    float angle;                            //ângulo formado pela linha do raio do ponto em que estamos e o eixo dos z's
+    float lvl;                              //recebe o valor do raio em função das stacks percorridas
+    float prev_lvl;                         //recebe o valor anterior do raio em função das stacks percorridas
+    std::vector<std::string> v;
+    v = cylinder(rb, rt, heightt, slices, stacks);
+    for (j = 1; j <= slices; j++) {
+        angle = alpha * j;
+        prev_lvl = rb;
+        //draw sides
+        for (i = 1; i <= stacks; i++) {
+            lvl = rb - (float)rb*i / stacks;
+            v.push_back(vertexString(prev_lvl * sin(alpha*(j - 1)), 
+                        -h*(i - 1), prev_lvl * cos(alpha*(j - 1))));
+            v.push_back(vertexString(prev_lvl * sin(angle), 
+                        -h*(i - 1), prev_lvl * cos(angle)));
+            v.push_back(vertexString(lvl * sin(alpha*(j - 1)), 
+                        -h * i, lvl * cos(alpha * (j - 1))));
+            v.push_back(vertexString(lvl * sin(alpha*(j - 1)),
+                        -h * i, lvl * cos(alpha * (j - 1))));
+            v.push_back(vertexString(prev_lvl * sin(angle), 
+                        -h * (i - 1), prev_lvl * cos(angle)));
+            v.push_back(vertexString(lvl * sin(angle), 
+                        -h * i, lvl * cos(angle)));
+            prev_lvl = lvl;
+        }
+    }
+    return v;
 }
-*/
