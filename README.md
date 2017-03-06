@@ -12,7 +12,6 @@ build directory: build;
 
 ### Shapes available on generator and their arguments:  
 
-#### Plane (On XZ)
 	plane xLength(float or int) zLength(float or int) divisions filename
     box xLength y(height) zLength divisions(of each face) filename
     sphere radius slices stacks filename
