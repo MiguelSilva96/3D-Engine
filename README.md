@@ -1,11 +1,33 @@
 # CGTP
 Computer Graphics Pratical Assignment, University of Minho 2016/2017
 
-# Run
-Use cmake, source dir: src, build dir: build
+## Run
+Use cmake:  
+source directory: src;  
+build directory: build;  
 
-# Explorer Cam 
-Arrow keys
+./generator(or generator.exe or VS w/ cmd args) \<shapename\> \<shapeArgs\> \<fileForVertexes\>  
 
-# Change fill/line/point
-F1
+./engine(or engine.exe or VS w/ cmd args) \<xmlFile\> (optional, go to note)
+
+### Shapes available on generator and their arguments:  
+
+#### Plane (On XZ)
+	plane xLength(float or int) zLength(float or int) divisions filename
+    box xLength y(height) zLength divisions(of each face) filename
+    sphere radius slices stacks filename
+    cone radius height slices stacks filename
+    cylinder bottomRadius topRadius height slices stacks filename
+    torus innerRadius outterRadius sides rings
+
+### Note:  
+If you use the generator to create new shape,
+don't forget to add the file name at config.xml,
+    or other xml file using that form (in this case you must
+    give the path as an argument for engine)
+
+## Explorer Cam 
+Use Arrow keys;
+
+## Change fill/line/point
+F1;
