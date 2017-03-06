@@ -154,20 +154,20 @@ std::vector<std::string> cylinder(float radB, float radT, float height, int slic
         prev_lvl = radB;
         //draw sides
         for (int i = 1; i <= stacks; i++){
-            lvl = radB - (float) (radB - radT)*i/stacks;
-            v.push_back(vertexString(prev_lvl * sin(alpha*(j - 1)), 
-                        h*(i-1), prev_lvl * cos(alpha*(j - 1))));
-            v.push_back(vertexString(prev_lvl * sin(angle), 
-                        h*(i - 1), prev_lvl * cos(angle)));
-            v.push_back(vertexString(lvl * sin(alpha*(j - 1)), 
-                        h * i, lvl * cos(alpha * (j - 1))));
-            v.push_back(vertexString(lvl * sin(alpha*(j - 1)), 
-                        h * i, lvl * cos(alpha * (j - 1))));
-            v.push_back(vertexString(prev_lvl * sin(angle), 
-                        h*(i - 1), prev_lvl * cos(angle)));
-            v.push_back(vertexString(lvl * sin(angle), 
-                        h*i, lvl * cos(angle)));
-            prev_lvl = lvl;
+			lvl = radB - (float)(radB - radT)*i / stacks;
+			v.push_back(vertexString(prev_lvl * sin(alpha*(j - 1)),
+				h*(i - 1), prev_lvl * cos(alpha*(j - 1))));
+			v.push_back(vertexString(prev_lvl * sin(angle),
+				h*(i - 1), prev_lvl * cos(angle)));
+			v.push_back(vertexString(lvl * sin(alpha*(j - 1)),
+				h * i, lvl * cos(alpha * (j - 1))));
+			v.push_back(vertexString(lvl * sin(alpha*(j - 1)),
+				h * i, lvl * cos(alpha * (j - 1))));
+			v.push_back(vertexString(prev_lvl * sin(angle),
+				h*(i - 1), prev_lvl * cos(angle)));
+			v.push_back(vertexString(lvl * sin(angle),
+				h*i, lvl * cos(angle)));
+			prev_lvl = lvl;
         }
     }
     //draw top
@@ -238,18 +238,18 @@ std::vector<std::string> ruby(float rb, float rt, float heightb, float heightt, 
         //draw sides
         for (i = 1; i <= stacks; i++) {
             lvl = rb - (float)rb*i / stacks;
+			v.push_back(vertexString(prev_lvl * sin(angle),
+				-h*(i - 1), prev_lvl * cos(angle)));
             v.push_back(vertexString(prev_lvl * sin(alpha*(j - 1)), 
                         -h*(i - 1), prev_lvl * cos(alpha*(j - 1))));
-            v.push_back(vertexString(prev_lvl * sin(angle), 
-                        -h*(i - 1), prev_lvl * cos(angle)));
             v.push_back(vertexString(lvl * sin(alpha*(j - 1)), 
                         -h * i, lvl * cos(alpha * (j - 1))));
             v.push_back(vertexString(lvl * sin(alpha*(j - 1)),
                         -h * i, lvl * cos(alpha * (j - 1))));
-            v.push_back(vertexString(prev_lvl * sin(angle), 
+			v.push_back(vertexString(lvl * sin(angle),
+				-h * i, lvl * cos(angle)));
+			v.push_back(vertexString(prev_lvl * sin(angle), 
                         -h * (i - 1), prev_lvl * cos(angle)));
-            v.push_back(vertexString(lvl * sin(angle), 
-                        -h * i, lvl * cos(angle)));
             prev_lvl = lvl;
         }
     }
