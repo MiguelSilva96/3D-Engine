@@ -17,7 +17,12 @@ build directory: build;
     sphere radius slices stacks filename
     cone radius height slices stacks filename
     cylinder bottomRadius topRadius height slices stacks filename
-    torus innerRadius outterRadius sides rings
+    torus innerRadius outterRadius sides rings filename
+    ruby middleRadius topRadius bottomHeight TopHeight slices stacks filename 
+
+
+Example scenes for each shape available(box.xml, sphere.xml, etc...),  
+Load them on engine to see the examples.
 
 ### Note:  
 If you use the generator to create new shape,
