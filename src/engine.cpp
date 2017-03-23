@@ -29,8 +29,8 @@
 std::vector<Vertex> vertexes;
 int modes[] = {GL_FILL, GL_LINE, GL_POINT};
 int mode = 0;
-int radius = 8;
-float beta = 0, al = 0;
+float radius = 8;
+float beta = 0, alfa = 0;
 
 void changeSize(int w, int h) {
     // Prevent a divide by zero, when window is too short
@@ -63,8 +63,8 @@ void renderScene(void) {
 
     // set the camera
     glLoadIdentity();
-    float px = radius * sin(al);
-    float pz = radius * cos(al);
+    float px = radius * cos(beta) * sin(alfa);
+    float pz = radius * cos(beta) * cos(alfa);
     float py = radius * sin(beta);
     gluLookAt(px, py, pz, 
               0.0,0.0,0.0,
@@ -85,10 +85,10 @@ void renderScene(void) {
 void manageEvents(int key_code, int x, int y) {
     switch(key_code) {
         case GLUT_KEY_RIGHT:
-            al += 0.1;
+            alfa -= 0.1;
             break;
         case GLUT_KEY_LEFT:
-            al -= 0.1;
+            alfa += 0.1;
             break;
         case GLUT_KEY_UP:
             if(beta < M_PI/2)
@@ -101,6 +101,13 @@ void manageEvents(int key_code, int x, int y) {
         case GLUT_KEY_F1:
             mode = (mode+1)%3;
             break;
+        case GLUT_KEY_PAGE_UP: 
+            radius += 0.1f;
+            break;
+        case GLUT_KEY_PAGE_DOWN: 
+            radius -= 0.1f;
+            if (radius < 0.1f)
+                radius = 0.1f;
     }
     glutPostRedisplay();
 }

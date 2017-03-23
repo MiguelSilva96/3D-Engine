@@ -35,3 +35,8 @@ Use Arrow keys;
 
 ## Change fill/line/point
 F1;
+
+## Zoom
+
+In: PageDown
+Out: PageUp
