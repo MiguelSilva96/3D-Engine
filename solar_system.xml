@@ -1,0 +1,93 @@
+<?xml version="1.0" ?>
+<scene>
+	<!-- Sun -->
+	<group>
+		<translate X=X Y=Y Z=Z />
+		<scale X=X Y=Y Z=Z/>
+		<models>
+			<model file=”sphere.3d” />
+		</models>
+	</group>
+
+	<!-- Mercury -->
+	<group>
+		<translate X=X Y=Y Z=Z />
+		<scale X=X Y=Y Z=Z/>
+		<models>
+			<model file=”sphere.3d” />
+		</models>
+	</group>
+
+	<!-- Venus -->
+	<group>
+		<translate X=X Y=Y Z=Z />
+		<scale X=X Y=Y Z=Z/>
+		<models>
+			<model file=”sphere.3d” />
+		</models>
+	</group>
+
+	<!-- Earth -->
+	<group>
+		<translate X=X Y=Y Z=Z />
+		<scale X=X Y=Y Z=Z/>
+		<models>
+			<model file=”sphere.3d” />
+		</models>
+	</group>
+
+	<!-- Mars -->
+	<group>
+		<translate X=X Y=Y Z=Z />
+		<scale X=X Y=Y Z=Z/>
+		<models>
+			<model file=”sphere.3d” />
+		</models>
+	</group>
+
+	<!-- Jupiter -->
+	<group>
+		<translate X=X Y=Y Z=Z />
+		<scale X=X Y=Y Z=Z/>
+		<models>
+			<model file=”sphere.3d” />
+		</models>
+	</group>
+
+	<!-- Saturn -->
+	<group>
+		<translate X=X Y=Y Z=Z />
+		<scale X=X Y=Y Z=Z/>
+		<models>
+			<model file=”sphere.3d” />
+		</models>
+	</group>
+
+	<!-- Uranus -->
+	<group>
+		<translate X=X Y=Y Z=Z />
+		<scale X=X Y=Y Z=Z/>
+		<models>
+			<model file=”sphere.3d” />
+		</models>
+	</group>
+
+	<!-- Neptune -->
+	<group>
+		<translate X=X Y=Y Z=Z />
+		<scale X=X Y=Y Z=Z/>
+		<models>
+			<model file=”sphere.3d” />
+		</models>
+	</group>
+
+	<!-- Pluto -->
+	<group>
+		<translate X=X Y=Y Z=Z />
+		<scale X=X Y=Y Z=Z/>
+		<models>
+			<model file=”sphere.3d” />
+		</models>
+	</group>
+
+</scene> 
