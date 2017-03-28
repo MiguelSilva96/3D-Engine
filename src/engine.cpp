@@ -19,10 +19,10 @@
 #include <math.h>
 #include "vertex.h"
 #include "tinyxml2.h"
+#include "xmlParser.h"
 #include <string.h>
 #include <vector>
 #include <regex>
-#include <fstream>
 #include <iostream>
 #include <sstream>
 
@@ -112,44 +112,12 @@ void manageEvents(int key_code, int x, int y) {
     glutPostRedisplay();
 }
 
-std::vector<std::string> split(std::string str, char delim) {
-    std::string buf;
-    std::stringstream ss(str);
-    std::vector<std::string> tokens;
-    while (ss >> buf)
-        tokens.push_back(buf);
-    return tokens;
-}
-
-void loadVertexes(const char* filename) {
-    float x, y, z;
-    std::vector<std::string> aux;
-
-    tinyxml2::XMLDocument* doc;
-    tinyxml2::XMLElement* elem;
-    tinyxml2::XMLNode* root;
-    doc = new tinyxml2::XMLDocument();
-    tinyxml2::XMLError e = doc -> LoadFile(filename);
-    root = doc -> FirstChildElement("scene");
-    elem = root -> FirstChildElement("model");
-
-    for(; elem != NULL; elem = elem -> NextSiblingElement()) {
-        std::string line;
-        std::string file = "../shapes/";
-        
-        file.append(elem -> Attribute("file"));
-        std::ifstream filedisc;
-        filedisc.open(file);
-
-        getline(filedisc, line);
-        while(getline(filedisc, line)) {
-            aux = split(line, ' ');
-            x = stof(aux.at(0));
-            y = stof(aux.at(1));
-            z = stof(aux.at(2));
-            vertexes.push_back(Vertex(x,y,z));
-        }
-    }
+bool loadVertexes(const char* filename) {
+    XmlParser *xmlparser = new XmlParser(filename);
+    if(xmlparser -> readError())
+        return false;
+    vertexes = xmlparser -> getCurShapeVertexes();
+    return true;
 }
 
 int main(int argc, char **argv) {
@@ -167,7 +135,10 @@ int main(int argc, char **argv) {
         filename = argv[1];
     else
         strcpy(filename, "../config.xml");
-    loadVertexes(filename);
+    if(!loadVertexes(filename)) {
+        std::cout << "Error reading xml\n";
+        return 1;
+    }
 
     // Callback registration
     glutDisplayFunc(renderScene);
