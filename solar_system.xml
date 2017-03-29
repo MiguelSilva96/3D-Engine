@@ -34,18 +34,18 @@
 	<group>
 		<color r="0" g="191" b="255" />
 		<translate X="6" Y="6" Z="6" />
-		<scale X="X" Y="Y" Z="Z"/>
+		<scale X="1.5" Y="1.5" Z="1.5"/>
 		<models>
 			<model file="sphere.3d" />
 		</models>	
-		<!-- Moon -->
+		<!-- Moon 
 		<group>
 			<translate X="X" Y="Y" Z="Z" />
 			<scale X="X" Y="Y" Z="Z"/>
 			<models>
 				<model file="sphere.3d" />
 			</models>
-		</group>
+		</group>-->
 	</group>
 
 	<!-- Mars -->

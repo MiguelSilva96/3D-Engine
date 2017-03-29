@@ -9,27 +9,22 @@
 
 #include <stdlib.h>
 
-#ifdef __APPLE__
-#include <GLUT/glut.h>
-#else
-#include <GL/glut.h>
-#endif
-
 #define _USE_MATH_DEFINES
 #include <math.h>
 #include "vertex.h"
 #include "tinyxml2.h"
 #include "xmlParser.h"
+#include "transforms.h" //includes OpenGL too
 #include <string.h>
 #include <vector>
 #include <regex>
 #include <iostream>
 #include <sstream>
 
-std::vector<Vertex> vertexes;
+std::vector<Group> groups;
 int modes[] = {GL_FILL, GL_LINE, GL_POINT};
 int mode = 0;
-float radius = 8;
+float radius = 80;
 float beta = 0, alfa = 0;
 
 void changeSize(int w, int h) {
@@ -57,6 +52,43 @@ void changeSize(int w, int h) {
     glMatrixMode(GL_MODELVIEW);
 }
 
+void renderGroup(Group g) {
+    std::vector<Vertex> vertexes;
+    std::vector<Transformation*> transforms;
+    std::vector<Group> subgroups;
+    
+    glPushMatrix();
+    
+    transforms = g.getTransformations();
+    std::vector<Transformation*>::iterator itTr;
+    itTr = transforms.begin();
+    for(; itTr != transforms.end(); ++itTr) {
+        Transformation* t = *itTr;
+        t -> transform();
+    }
+
+    glBegin(GL_TRIANGLES);
+    vertexes = g.getVertexes();
+    std::vector<Vertex>::iterator it;
+    it = vertexes.begin();
+    for(; it != vertexes.end(); ++it) {
+        Vertex v = *it;
+        glVertex3f(v.x, v.y, v.z);
+    }
+    glEnd();
+
+    subgroups = g.getSubGroups();
+    std::vector<Group>::iterator itGr;
+    itGr = subgroups.begin();
+    for(; itGr != subgroups.end(); ++itGr) {
+        Group gr = *itGr;
+        renderGroup(gr);
+    }
+    
+    glPopMatrix();
+}
+
+
 void renderScene(void) {
     // clear buffers
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -71,13 +103,12 @@ void renderScene(void) {
               0.0f,1.0f,0.0f);
 
     glPolygonMode(GL_FRONT, modes[mode]);
-    glBegin(GL_TRIANGLES);
-    std::vector<Vertex>::iterator it;
-    for(it = vertexes.begin(); it != vertexes.end(); ++it) {
-        Vertex v = *it;
-        glVertex3f(v.x, v.y, v.z);
+
+    std::vector<Group>::iterator it;
+    for(it = groups.begin(); it != groups.end(); ++it) {
+        Group g = *it;
+        renderGroup(g);
     }
-    glEnd();
     // End of frame
     glutSwapBuffers();
 }
@@ -85,17 +116,17 @@ void renderScene(void) {
 void manageEvents(int key_code, int x, int y) {
     switch(key_code) {
         case GLUT_KEY_RIGHT:
-            alfa -= 0.1;
-            break;
-        case GLUT_KEY_LEFT:
             alfa += 0.1;
             break;
+        case GLUT_KEY_LEFT:
+            alfa -= 0.1;
+            break;
         case GLUT_KEY_UP:
-            if(beta < M_PI/2)
+            if(beta < 1.5f)
                 beta += 0.1;
             break;
         case GLUT_KEY_DOWN:
-            if(beta > -M_PI/2)
+            if(beta > -1.5f)
                 beta -= 0.1;
             break;
         case GLUT_KEY_F1:
@@ -116,7 +147,9 @@ bool loadVertexes(const char* filename) {
     XmlParser *xmlparser = new XmlParser(filename);
     if(xmlparser -> readError())
         return false;
-    vertexes = xmlparser -> getCurShapeVertexes();
+    while(xmlparser -> startNextGroup())
+        groups.push_back(xmlparser -> getGroup());
+    delete(xmlparser);
     return true;
 }
 

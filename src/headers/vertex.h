@@ -4,7 +4,11 @@
 class Vertex {
     public:
         float x, y, z;
-        Vertex(float, float, float);
+        Vertex(float a, float b, float c)  {
+        	x = a;
+        	y = b;
+        	z = c;
+        }
 };
 
 #endif
