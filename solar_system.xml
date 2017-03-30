@@ -16,7 +16,7 @@
 		<translate X="25" Y="0" Z="0" />
 		<scale X="0.5" Y="0.5" Z="0.5"/>
 		<models>
-			<model file="sphere.3d" />
+			<model file="sphereRochosos.3d" />
 		</models>
 	</group>
 
@@ -26,7 +26,7 @@
 		<translate X="30.5" Y="0" Z="0" />
 		<scale X="2" Y="2" Z="2"/>
 		<models>
-			<model file="sphere.3d" />
+			<model file="sphereRochosos.3d" />
 		</models>
 	</group>
 
@@ -36,7 +36,7 @@
 		<translate X="36" Y="0" Z="0" />
 		<scale X="1.5" Y="1.5" Z="1.5"/>
 		<models>
-			<model file="sphere.3d" />
+			<model file="sphereRochosos.3d" />
 		</models>	
 		<!-- Moon -->
 		<group>
@@ -44,7 +44,7 @@
 			<translate X="1" Y="0" Z="2" />
 			<scale X="0.5" Y="0.5" Z="0.5"/>
 			<models>
-				<model file="sphere.3d" />
+				<model file="sphereLuas.3d" />
 			</models>
 		</group>-->
 	</group>
@@ -55,7 +55,7 @@
 		<translate X="43" Y="0" Z="0" />
 		<scale X="1" Y="1" Z="1"/>
 		<models>
-			<model file="sphere.3d" />
+			<model file="sphereRochosos.3d" />
 		</models>
 		<!-- Fobos -->
 		<group>
@@ -63,7 +63,7 @@
 			<translate X="1" Y="0" Z="-2" />
 			<scale X="0.001" Y="0.001" Z="0.001"/>
 			<models>
-				<model file="sphere.3d" />
+				<model file="sphereLuas.3d" />
 			</models>
 		</group>
 		<!-- Deimos -->
@@ -72,7 +72,7 @@
 			<translate X="1" Y="1" Z="2" />
 			<scale X="0.001" Y="0.001" Z="0.001"/>
 			<models>
-				<model file="sphere.3d" />
+				<model file="sphereLuas.3d" />
 			</models>
 		</group>
 	</group>
@@ -91,7 +91,7 @@
 			<translate X="1.5" Y="0" Z="1.5" />
 			<scale X="0.1" Y="0.1" Z="0.1"/>
 			<models>
-				<model file="sphere.3d" />
+				<model file="sphereLuas.3d" />
 			</models>
 		</group>
 		<!-- Europa -->
@@ -100,7 +100,7 @@
 			<translate X="-1.5" Y="-0.5" Z="-1.5" />
 			<scale X="0.1" Y="0.1" Z="0.1"/>
 			<models>
-				<model file="sphere.3d" />
+				<model file="sphereLuas.3d" />
 			</models>
 		</group>
 		<!-- Ganímedes -->
@@ -109,7 +109,7 @@
 			<translate X="-1.5" Y="0.5" Z="1.5" />
 			<scale X="0.25" Y="0.25" Z="0.25"/>
 			<models>
-				<model file="sphere.3d" />
+				<model file="sphereLuas.3d" />
 			</models>
 		</group>
 		<!-- Calisto -->
@@ -118,7 +118,7 @@
 			<translate X="1.5" Y="1" Z="-1.5" />
 			<scale X="0.2" Y="0.2" Z="0.2"/>
 			<models>
-				<model file="sphere.3d" />
+				<model file="sphereLuas.3d" />
 			</models>
 		</group>
 	</group>
@@ -137,7 +137,7 @@
 			<translate X="-1.75" Y="0" Z="2" />
 			<scale X="0.25" Y="0.25" Z="0.25"/>
 			<models>
-				<model file="sphere.3d" />
+				<model file="sphereLuas.3d" />
 			</models>
 		</group>
 		<!-- Reia -->
@@ -146,7 +146,7 @@
 			<translate X="1.75" Y="1" Z="-2" />
 			<scale X="0.055" Y="0.055" Z="0.055"/>
 			<models>
-				<model file="sphere.3d" />
+				<model file="sphereLuas.3d" />
 			</models>
 		</group>
 		<!-- Jápeto -->
@@ -155,7 +155,7 @@
 			<translate X="1.5" Y="0" Z="2.5" />
 			<scale X="0.055" Y="0.055" Z="0.055"/>
 			<models>
-				<model file="sphere.3d" />
+				<model file="sphereLuas.3d" />
 			</models>
 		</group>
 		<!-- Dione -->
@@ -164,7 +164,7 @@
 			<translate X="-2" Y="1.5" Z="2" />
 			<scale X="0.05" Y="0.05" Z="0.05"/>
 			<models>
-				<model file="sphere.3d" />
+				<model file="sphereLuas.3d" />
 			</models>
 		</group>
 	</group>
@@ -183,7 +183,7 @@
 			<translate X="-1.5" Y="0" Z="2" />
 			<scale X="0.05" Y="0.05" Z="0.05"/>
 			<models>
-				<model file="sphere.3d" />
+				<model file="sphereLuas.3d" />
 			</models>
 		</group>
 		<!-- Oberon -->
@@ -192,7 +192,7 @@
 			<translate X="2" Y="0" Z="2" />
 			<scale X="0.05" Y="0.05" Z="0.05"/>
 			<models>
-				<model file="sphere.3d" />
+				<model file="sphereLuas.3d" />
 			</models>
 		</group>
 		<!-- Umbriel -->
@@ -201,7 +201,7 @@
 			<translate X="1.5" Y="1" Z="-1.5" />
 			<scale X="0.05" Y="0.05" Z="0.05"/>
 			<models>
-				<model file="sphere.3d" />
+				<model file="sphereLuas.3d" />
 			</models>
 		</group>
 		<!-- Ariel -->
@@ -210,7 +210,7 @@
 			<translate X="-2" Y="1.5" Z="-1.5" />
 			<scale X="0.05" Y="0.05" Z="0.05"/>
 			<models>
-				<model file="sphere.3d" />
+				<model file="sphereLuas.3d" />
 			</models>
 		</group>
 	</group>
@@ -229,7 +229,7 @@
 			<translate X="1.5" Y="0" Z="-2" />
 			<scale X="0.035" Y="0.035" Z="0.035"/>
 			<models>
-				<model file="sphere.3d" />
+				<model file="sphereLuas.3d" />
 			</models>
 		</group>
 		<!-- Tritão --> 
@@ -238,7 +238,7 @@
 			<translate X="1.5" Y="1" Z="1.5" />
 			<scale X="0.08" Y="0.08" Z="0.08"/>
 			<models>
-				<model file="sphere.3d" />
+				<model file="sphereLuas.3d" />
 			</models>
 		</group>
 	</group>
