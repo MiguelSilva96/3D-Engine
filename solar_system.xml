@@ -38,7 +38,7 @@
 		<models>
 			<model file="sphere.3d" />
 		</models>	
-		<!-- Moon 
+		<!-- Lua 
 		<group>
 			<translate X="X" Y="Y" Z="Z" />
 			<scale X="X" Y="Y" Z="Z"/>
@@ -56,6 +56,22 @@
 		<models>
 			<model file="sphere.3d" />
 		</models>
+		<!-- Fobos
+		<group>
+			<translate X="X" Y="Y" Z="Z" />
+			<scale X="X" Y="Y" Z="Z"/>
+			<models>
+				<model file="sphere.3d" />
+			</models>
+		</group>-->
+		<!-- Deimos
+		<group>
+			<translate X="X" Y="Y" Z="Z" />
+			<scale X="X" Y="Y" Z="Z"/>
+			<models>
+				<model file="sphere.3d" />
+			</models>
+		</group>-->
 	</group>
 
 	<!-- Jupiter -->
@@ -66,6 +82,38 @@
 		<models>
 			<model file="sphere.3d" />
 		</models>
+		<!-- Io
+		<group>
+			<translate X="X" Y="Y" Z="Z" />
+			<scale X="X" Y="Y" Z="Z"/>
+			<models>
+				<model file="sphere.3d" />
+			</models>
+		</group>-->
+		<!-- Europa 
+		<group>
+			<translate X="X" Y="Y" Z="Z" />
+			<scale X="X" Y="Y" Z="Z"/>
+			<models>
+				<model file="sphere.3d" />
+			</models>
+		</group>-->
+		<!-- Ganímedes 
+		<group>
+			<translate X="X" Y="Y" Z="Z" />
+			<scale X="X" Y="Y" Z="Z"/>
+			<models>
+				<model file="sphere.3d" />
+			</models>
+		</group>-->
+		<!-- Calisto 
+		<group>
+			<translate X="X" Y="Y" Z="Z" />
+			<scale X="X" Y="Y" Z="Z"/>
+			<models>
+				<model file="sphere.3d" />
+			</models>
+		</group>-->
 	</group>
 
 	<!-- Saturn -->
@@ -76,6 +124,38 @@
 		<models>
 			<model file="sphere.3d" />
 		</models>
+		<!-- Titã 
+		<group>
+			<translate X="X" Y="Y" Z="Z" />
+			<scale X="X" Y="Y" Z="Z"/>
+			<models>
+				<model file="sphere.3d" />
+			</models>
+		</group>-->
+		<!-- Reia 
+		<group>
+			<translate X="X" Y="Y" Z="Z" />
+			<scale X="X" Y="Y" Z="Z"/>
+			<models>
+				<model file="sphere.3d" />
+			</models>
+		</group>-->
+		<!-- Jápeto 
+		<group>
+			<translate X="X" Y="Y" Z="Z" />
+			<scale X="X" Y="Y" Z="Z"/>
+			<models>
+				<model file="sphere.3d" />
+			</models>
+		</group>-->
+		<!-- Dione 
+		<group>
+			<translate X="X" Y="Y" Z="Z" />
+			<scale X="X" Y="Y" Z="Z"/>
+			<models>
+				<model file="sphere.3d" />
+			</models>
+		</group>-->
 	</group>
 
 	<!-- Uranus -->
@@ -86,6 +166,38 @@
 		<models>
 			<model file="sphere.3d" />
 		</models>
+		<!-- Titânia 
+		<group>
+			<translate X="X" Y="Y" Z="Z" />
+			<scale X="X" Y="Y" Z="Z"/>
+			<models>
+				<model file="sphere.3d" />
+			</models>
+		</group>-->
+		<!-- Oberon 
+		<group>
+			<translate X="X" Y="Y" Z="Z" />
+			<scale X="X" Y="Y" Z="Z"/>
+			<models>
+				<model file="sphere.3d" />
+			</models>
+		</group>-->
+		<!-- Umbriel 
+		<group>
+			<translate X="X" Y="Y" Z="Z" />
+			<scale X="X" Y="Y" Z="Z"/>
+			<models>
+				<model file="sphere.3d" />
+			</models>
+		</group>-->
+		<!-- Ariel 
+		<group>
+			<translate X="X" Y="Y" Z="Z" />
+			<scale X="X" Y="Y" Z="Z"/>
+			<models>
+				<model file="sphere.3d" />
+			</models>
+		</group>-->
 	</group>
 
 	<!-- Neptune -->
@@ -96,6 +208,22 @@
 		<models>
 			<model file="sphere.3d" />
 		</models>
+		<!-- Proteu 
+		<group>
+			<translate X="X" Y="Y" Z="Z" />
+			<scale X="X" Y="Y" Z="Z"/>
+			<models>
+				<model file="sphere.3d" />
+			</models>
+		</group>-->
+		<!-- Tritão 
+		<group>
+			<translate X="X" Y="Y" Z="Z" />
+			<scale X="X" Y="Y" Z="Z"/>
+			<models>
+				<model file="sphere.3d" />
+			</models>
+		</group>-->
 	</group>
 
 </scene> 
