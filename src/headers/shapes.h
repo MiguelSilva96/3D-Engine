@@ -72,4 +72,15 @@ std::vector<std::string> torus(float inner, float outer, int sides, int rings);
 */
 std::vector<std::string> ruby(float rb, float rt, float heightb, float heightt, int slices, int stacks);
 
+
+/**
+Returns vertexes for a crown.
+
+@param inner Inner radius.
+@param outer Outer radius.
+@param sides Number of sides.
+@return Vector with all strings of the vertexes.
+*/
+std::vector<std::string> crown(float inner, float outer, int sides);
+
 #endif

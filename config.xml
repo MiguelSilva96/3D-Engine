@@ -25,4 +25,9 @@
     	   <model file='ruby.3d' />
         </models>
     </group>
+    <group>
+        <models>
+           <model file='crown.2d' />
+        </models>
+    </group>
 </scene>

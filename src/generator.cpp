@@ -69,6 +69,11 @@ bool verifyInput(char **input) {
                 && regex_match(input[6], ints)
                 && regex_match(input[7], ints)
                 && (input[8] != NULL);
+    else if(!strcmp(shape, "crown"))
+        result = regex_match(input[2], floats)
+                && regex_match(input[3], floats)
+                && regex_match(input[4], ints)
+                && (input[5] != NULL);
     return result;
 }
 
@@ -133,6 +138,12 @@ std::vector<std::string> getVertexes(char **input) {
         slices = std::stoi(input[6]);
         stacks = std::stoi(input[7]);
         vertexes = ruby(r1, r2, h1, h2, slices, stacks);
+    }
+    else if(!strcmp(shape, "crown")) {
+        r1 = std::stof(input[2]);
+        r2 = std::stof(input[3]);
+        sides = std::stoi(input[4]);
+        vertexes = crown(r1, r2, sides);
     }
     return vertexes;
 }

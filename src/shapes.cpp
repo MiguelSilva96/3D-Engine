@@ -256,3 +256,43 @@ std::vector<std::string> ruby(float rb, float rt, float heightb, float heightt, 
     }
     return v;
 }
+
+
+std::vector<std::string> crown(float inner, float outer, int sides) {
+    float alpha = (float) 2 * M_PI / sides;
+    float r = outer - inner;
+    float beta = (float) 2 * M_PI / sides;
+    float angle1, angle2;
+    std::vector<std::string> v;
+    for (int i = 1; i <= sides; i++) {
+        for (int j = 1; j <= sides; j++) {
+            angle1 = alpha * (i - 1);
+            angle2 = beta * (j - 1);
+            v.push_back(vertexString(sin(angle1)*(outer - r*cos(angle2)), 
+                        0, 
+                        cos(angle1)*(outer - r*cos(angle2))));
+            angle2 = beta * j;
+            v.push_back(vertexString(sin(angle1)*(outer - r*cos(angle2)), 
+                        0, 
+                        cos(angle1)*(outer - r*cos(angle2))));
+            angle2 = beta * (j-1);
+            angle1 = alpha * i;
+            v.push_back(vertexString(sin(angle1)*(outer - r*cos(angle2)), 
+                        0, 
+                        cos(angle1)*(outer - r*cos(angle2))));
+            v.push_back(vertexString(sin(angle1)*(outer - r*cos(angle2)), 
+                        0, 
+                        cos(angle1)*(outer - r*cos(angle2))));
+            angle1 = alpha * (i - 1);
+            angle2 = beta * j;
+            v.push_back(vertexString(sin(angle1)*(outer - r*cos(angle2)), 
+                        0, 
+                        cos(angle1)*(outer - r*cos(angle2))));
+            angle1 = alpha * i;
+            v.push_back(vertexString(sin(angle1)*(outer - r*cos(angle2)), 
+                        0, 
+                        cos(angle1)*(outer - r*cos(angle2))));
+        }   
+    }
+    return v;
+}
