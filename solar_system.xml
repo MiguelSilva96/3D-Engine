@@ -13,7 +13,7 @@
 	<!-- Mercury -->
 	<group>
 		<color r="139" g="69" b="19" />
-		<translate X="2" Y="0" Z="0" />
+		<translate X="13" Y="0" Z="0" />
 		<scale X="1" Y="1" Z="1"/>
 		<models>
 			<model file="sphere.3d" />
@@ -23,7 +23,7 @@
 	<!-- Venus -->
 	<group>
 		<color r="139" g="90" b="0" />
-		<translate X="4" Y="0" Z="0" />
+		<translate X="18.5" Y="0" Z="0" />
 		<scale X="2" Y="2" Z="2"/>
 		<models>
 			<model file="sphere.3d" />
@@ -33,15 +33,16 @@
 	<!-- Earth -->
 	<group>
 		<color r="0" g="191" b="255" />
-		<translate X="6" Y="6" Z="6" />
+		<translate X="24" Y="0" Z="0" />
 		<scale X="1.5" Y="1.5" Z="1.5"/>
 		<models>
 			<model file="sphere.3d" />
 		</models>	
-		<!-- Lua 
+		<!-- Moon -->
 		<group>
-			<translate X="X" Y="Y" Z="Z" />
-			<scale X="X" Y="Y" Z="Z"/>
+			<color r="105" g="105" b="105" />
+			<translate X="0.5" Y="0" Z="1" />
+			<scale X="0.1" Y="0.1" Z="0.1"/>
 			<models>
 				<model file="sphere.3d" />
 			</models>
@@ -51,7 +52,7 @@
 	<!-- Mars -->
 	<group>
 		<color r="205" g="79" b="57" />
-		<translate X="8" Y="0" Z="0" />
+		<translate X="31" Y="0" Z="0" />
 		<scale X="1.5" Y="1.5" Z="1.5"/>
 		<models>
 			<model file="sphere.3d" />
@@ -77,7 +78,7 @@
 	<!-- Jupiter -->
 	<group>
 		<color r="205" g="133" b="0" />
-		<translate X="10" Y="0" Z="0" />
+		<translate X="63,5" Y="0" Z="0" />
 		<scale X="4" Y="4" Z="4"/>
 		<models>
 			<model file="sphere.3d" />
@@ -119,7 +120,7 @@
 	<!-- Saturn -->
 	<group>
 		<color r="255" g="236" b="139" />
-		<translate X="12" Y="0" Z="0" />
+		<translate X="89" Y="0" Z="0" />
 		<scale X="3.25" Y="3.25" Z="3.25"/>
 		<models>
 			<model file="sphere.3d" />
@@ -161,7 +162,7 @@
 	<!-- Uranus -->
 	<group>
 		<color r="193" g="205" b="205" />
-		<translate X="14" Y="0" Z="0" />
+		<translate X="160" Y="0" Z="0" />
 		<scale X="2.15" Y="2.15" Z="2.15"/>
 		<models>
 			<model file="sphere.3d" />
@@ -203,7 +204,7 @@
 	<!-- Neptune -->
 	<group>
 		<color r="113" g="113" b="198" />
-		<translate X="16" Y="0" Z="0" />
+		<translate X="240" Y="0" Z="0" />
 		<scale X="2" Y="2" Z="2"/>
 		<models>
 			<model file="sphere.3d" />
