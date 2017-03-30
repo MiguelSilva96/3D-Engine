@@ -13,13 +13,8 @@
 	<!-- Mercury -->
 	<group>
 		<color r="139" g="69" b="19" />
-<<<<<<< HEAD
 		<translate X="25" Y="0" Z="0" />
 		<scale X="0.5" Y="0.5" Z="0.5"/>
-=======
-		<translate X="13" Y="0" Z="0" />
-		<scale X="1" Y="1" Z="1"/>
->>>>>>> bad5c0b11d918188d7b67d9a18c78fb22fd2c641
 		<models>
 			<model file="sphere.3d" />
 		</models>
@@ -28,11 +23,7 @@
 	<!-- Venus -->
 	<group>
 		<color r="139" g="90" b="0" />
-<<<<<<< HEAD
 		<translate X="30.5" Y="0" Z="0" />
-=======
-		<translate X="18.5" Y="0" Z="0" />
->>>>>>> bad5c0b11d918188d7b67d9a18c78fb22fd2c641
 		<scale X="2" Y="2" Z="2"/>
 		<models>
 			<model file="sphere.3d" />
@@ -42,11 +33,7 @@
 	<!-- Earth -->
 	<group>
 		<color r="0" g="191" b="255" />
-<<<<<<< HEAD
 		<translate X="36" Y="0" Z="0" />
-=======
-		<translate X="24" Y="0" Z="0" />
->>>>>>> bad5c0b11d918188d7b67d9a18c78fb22fd2c641
 		<scale X="1.5" Y="1.5" Z="1.5"/>
 		<models>
 			<model file="sphere.3d" />
@@ -54,13 +41,8 @@
 		<!-- Moon -->
 		<group>
 			<color r="105" g="105" b="105" />
-<<<<<<< HEAD
 			<translate X="1" Y="0" Z="2" />
 			<scale X="0.5" Y="0.5" Z="0.5"/>
-=======
-			<translate X="0.5" Y="0" Z="1" />
-			<scale X="0.1" Y="0.1" Z="0.1"/>
->>>>>>> bad5c0b11d918188d7b67d9a18c78fb22fd2c641
 			<models>
 				<model file="sphere.3d" />
 			</models>
@@ -70,7 +52,6 @@
 	<!-- Mars -->
 	<group>
 		<color r="205" g="79" b="57" />
-<<<<<<< HEAD
 		<translate X="43" Y="0" Z="0" />
 		<scale X="1" Y="1" Z="1"/>
 		<models>
@@ -94,44 +75,16 @@
 				<model file="sphere.3d" />
 			</models>
 		</group>
-=======
-		<translate X="31" Y="0" Z="0" />
-		<scale X="1.5" Y="1.5" Z="1.5"/>
-		<models>
-			<model file="sphere.3d" />
-		</models>
-		<!-- Fobos
-		<group>
-			<translate X="X" Y="Y" Z="Z" />
-			<scale X="X" Y="Y" Z="Z"/>
-			<models>
-				<model file="sphere.3d" />
-			</models>
-		</group>-->
-		<!-- Deimos
-		<group>
-			<translate X="X" Y="Y" Z="Z" />
-			<scale X="X" Y="Y" Z="Z"/>
-			<models>
-				<model file="sphere.3d" />
-			</models>
-		</group>-->
->>>>>>> bad5c0b11d918188d7b67d9a18c78fb22fd2c641
 	</group>
 
 	<!-- Jupiter -->
 	<group>
 		<color r="205" g="133" b="0" />
-<<<<<<< HEAD
 		<translate X="75,5" Y="0" Z="0" />
-=======
-		<translate X="63,5" Y="0" Z="0" />
->>>>>>> bad5c0b11d918188d7b67d9a18c78fb22fd2c641
 		<scale X="4" Y="4" Z="4"/>
 		<models>
 			<model file="sphere.3d" />
 		</models>
-<<<<<<< HEAD
 		<!-- Io -->
 		<group>
 			<color r="105" g="105" b="105" />
@@ -168,55 +121,16 @@
 				<model file="sphere.3d" />
 			</models>
 		</group>
-=======
-		<!-- Io
-		<group>
-			<translate X="X" Y="Y" Z="Z" />
-			<scale X="X" Y="Y" Z="Z"/>
-			<models>
-				<model file="sphere.3d" />
-			</models>
-		</group>-->
-		<!-- Europa 
-		<group>
-			<translate X="X" Y="Y" Z="Z" />
-			<scale X="X" Y="Y" Z="Z"/>
-			<models>
-				<model file="sphere.3d" />
-			</models>
-		</group>-->
-		<!-- Ganímedes 
-		<group>
-			<translate X="X" Y="Y" Z="Z" />
-			<scale X="X" Y="Y" Z="Z"/>
-			<models>
-				<model file="sphere.3d" />
-			</models>
-		</group>-->
-		<!-- Calisto 
-		<group>
-			<translate X="X" Y="Y" Z="Z" />
-			<scale X="X" Y="Y" Z="Z"/>
-			<models>
-				<model file="sphere.3d" />
-			</models>
-		</group>-->
->>>>>>> bad5c0b11d918188d7b67d9a18c78fb22fd2c641
 	</group>
 
 	<!-- Saturn -->
 	<group>
 		<color r="255" g="236" b="139" />
-<<<<<<< HEAD
 		<translate X="101" Y="0" Z="0" />
-=======
-		<translate X="89" Y="0" Z="0" />
->>>>>>> bad5c0b11d918188d7b67d9a18c78fb22fd2c641
 		<scale X="3.25" Y="3.25" Z="3.25"/>
 		<models>
 			<model file="sphere.3d" />
 		</models>
-<<<<<<< HEAD
 		<!-- Titã -->
 		<group>
 			<color r="105" g="105" b="105" />
@@ -253,55 +167,16 @@
 				<model file="sphere.3d" />
 			</models>
 		</group>
-=======
-		<!-- Titã 
-		<group>
-			<translate X="X" Y="Y" Z="Z" />
-			<scale X="X" Y="Y" Z="Z"/>
-			<models>
-				<model file="sphere.3d" />
-			</models>
-		</group>-->
-		<!-- Reia 
-		<group>
-			<translate X="X" Y="Y" Z="Z" />
-			<scale X="X" Y="Y" Z="Z"/>
-			<models>
-				<model file="sphere.3d" />
-			</models>
-		</group>-->
-		<!-- Jápeto 
-		<group>
-			<translate X="X" Y="Y" Z="Z" />
-			<scale X="X" Y="Y" Z="Z"/>
-			<models>
-				<model file="sphere.3d" />
-			</models>
-		</group>-->
-		<!-- Dione 
-		<group>
-			<translate X="X" Y="Y" Z="Z" />
-			<scale X="X" Y="Y" Z="Z"/>
-			<models>
-				<model file="sphere.3d" />
-			</models>
-		</group>-->
->>>>>>> bad5c0b11d918188d7b67d9a18c78fb22fd2c641
 	</group>
 
 	<!-- Uranus -->
 	<group>
 		<color r="193" g="205" b="205" />
-<<<<<<< HEAD
 		<translate X="172" Y="0" Z="0" />
-=======
-		<translate X="160" Y="0" Z="0" />
->>>>>>> bad5c0b11d918188d7b67d9a18c78fb22fd2c641
 		<scale X="2.15" Y="2.15" Z="2.15"/>
 		<models>
 			<model file="sphere.3d" />
 		</models>
-<<<<<<< HEAD
 		<!-- Titânia -->
 		<group>
 			<color r="105" g="105" b="105" />
@@ -338,55 +213,16 @@
 				<model file="sphere.3d" />
 			</models>
 		</group>
-=======
-		<!-- Titânia 
-		<group>
-			<translate X="X" Y="Y" Z="Z" />
-			<scale X="X" Y="Y" Z="Z"/>
-			<models>
-				<model file="sphere.3d" />
-			</models>
-		</group>-->
-		<!-- Oberon 
-		<group>
-			<translate X="X" Y="Y" Z="Z" />
-			<scale X="X" Y="Y" Z="Z"/>
-			<models>
-				<model file="sphere.3d" />
-			</models>
-		</group>-->
-		<!-- Umbriel 
-		<group>
-			<translate X="X" Y="Y" Z="Z" />
-			<scale X="X" Y="Y" Z="Z"/>
-			<models>
-				<model file="sphere.3d" />
-			</models>
-		</group>-->
-		<!-- Ariel 
-		<group>
-			<translate X="X" Y="Y" Z="Z" />
-			<scale X="X" Y="Y" Z="Z"/>
-			<models>
-				<model file="sphere.3d" />
-			</models>
-		</group>-->
->>>>>>> bad5c0b11d918188d7b67d9a18c78fb22fd2c641
 	</group>
 
 	<!-- Neptune -->
 	<group>
 		<color r="113" g="113" b="198" />
-<<<<<<< HEAD
 		<translate X="252" Y="0" Z="0" />
-=======
-		<translate X="240" Y="0" Z="0" />
->>>>>>> bad5c0b11d918188d7b67d9a18c78fb22fd2c641
 		<scale X="2" Y="2" Z="2"/>
 		<models>
 			<model file="sphere.3d" />
 		</models>
-<<<<<<< HEAD
 		<!-- Proteu -->
 		<group>
 			<color r="105" g="105" b="105" />
@@ -405,24 +241,6 @@
 				<model file="sphere.3d" />
 			</models>
 		</group>
-=======
-		<!-- Proteu 
-		<group>
-			<translate X="X" Y="Y" Z="Z" />
-			<scale X="X" Y="Y" Z="Z"/>
-			<models>
-				<model file="sphere.3d" />
-			</models>
-		</group>-->
-		<!-- Tritão 
-		<group>
-			<translate X="X" Y="Y" Z="Z" />
-			<scale X="X" Y="Y" Z="Z"/>
-			<models>
-				<model file="sphere.3d" />
-			</models>
-		</group>-->
->>>>>>> bad5c0b11d918188d7b67d9a18c78fb22fd2c641
 	</group>
 
 </scene> 
