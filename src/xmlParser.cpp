@@ -1,5 +1,4 @@
 #include "xmlParser.h"
-#include <iostream>
 
 XmlParser::XmlParser(const char *filename) {
     doc   = new tinyxml2::XMLDocument();
@@ -18,20 +17,28 @@ std::vector<std::string> XmlParser::split(std::string str, char delim) {
     return tokens;
 }
 
-std::vector<Vertex> XmlParser::getCurVertexes(void) {
+std::vector<File*> XmlParser::getCurVertexes(void) {
     tinyxml2::XMLElement* auxEl;
     std::vector<std::string> aux;
-    std::vector<Vertex> vertexes;
+    std::vector<File*> vertexes;
     std::string line;
     std::string file = "../shapes/";
+
     float x, y, z;
     auxEl = elem;
     auxEl = auxEl -> FirstChildElement("models");
     auxEl = auxEl -> FirstChildElement("model");
 
     for(; auxEl != nullptr; auxEl = auxEl -> NextSiblingElement()) {
-        file.append(auxEl -> Attribute("file"));
+        std::vector<Vertex> vert;
         std::ifstream filedisc;
+
+        file.append(auxEl -> Attribute("file"));
+        if(loadedFiles.find(file) != loadedFiles.end()) {
+            vertexes.push_back(loadedFiles[file]);
+            continue;
+        }
+
         filedisc.open(file);
         getline(filedisc, line);
     
@@ -40,8 +47,11 @@ std::vector<Vertex> XmlParser::getCurVertexes(void) {
             x = stof(aux.at(0));
             y = stof(aux.at(1));
             z = stof(aux.at(2));
-            vertexes.push_back(Vertex(x,y,z));
+            vert.push_back(Vertex(x,y,z));
         }
+        File* f = new File(vert);
+        vertexes.push_back(f);
+        loadedFiles[file] = f;
     }
     return vertexes;
 }
@@ -84,6 +94,14 @@ std::vector<Transformation*> XmlParser::getCurTransformations(void) {
             transforms.push_back(t);    
         }
 
+        if(!strcmp(value, "color")) {
+            auxEl -> QueryFloatAttribute("r", &x);
+            auxEl -> QueryFloatAttribute("g", &y);
+            auxEl -> QueryFloatAttribute("b", &z);
+            t = new Color(x, y, z);
+            transforms.push_back(t);    
+        }
+
         auxEl = auxEl -> NextSiblingElement();
     }
     return transforms;
@@ -91,7 +109,7 @@ std::vector<Transformation*> XmlParser::getCurTransformations(void) {
 
 Group XmlParser::getGroup(void) {
     tinyxml2::XMLElement* auxEl;
-    std::vector<Vertex> vertexes;
+    std::vector<File*> vertexes;
     std::vector<Transformation*> transforms;
     std::vector<Group> subgroups;
     auxEl = elem;

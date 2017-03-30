@@ -2,14 +2,13 @@
 #define XMLPARSER_H
 
 #include <vector>
+#include <map>
 #include <string>
 #include <iostream>
 #include <fstream>
 #include <sstream>
-#include "vertex.h"
-#include "transforms.h"
 #include "tinyxml2.h"
-#include <group.h>
+#include "group.h"
 
 
 class XmlParser {
@@ -18,10 +17,11 @@ class XmlParser {
         tinyxml2::XMLElement* elem;
         tinyxml2::XMLNode* root;
         tinyxml2::XMLError error;
+        std::map<std::string, File*> loadedFiles;
 
         std::vector<std::string> split(std::string str, char delim);
         std::vector<Transformation*> getCurTransformations(void);
-        std::vector<Vertex> getCurVertexes(void);
+        std::vector<File*> getCurVertexes(void);
 
     public:
         XmlParser(XmlParser*);

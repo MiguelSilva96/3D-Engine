@@ -25,7 +25,7 @@ include_directories(${CMAKE_CURRENT_SOURCE_DIR}/tinyxml2)
 
 add_definitions(-std=c++11)
 
-add_executable(engine engine.cpp xmlParser.cpp group.cpp tinyxml2/tinyxml2.cpp)
+add_executable(engine engine.cpp xmlParser.cpp group.cpp file.cpp tinyxml2/tinyxml2.cpp)
 add_executable(generator generator.cpp shapes.cpp)
 
 target_link_libraries(engine ${OPENGL_LIBRARIES} ${GLUT_LIBRARY})

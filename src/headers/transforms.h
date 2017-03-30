@@ -7,7 +7,6 @@
 #include <GL/glut.h>
 #endif
 
-#include <iostream>
 
 class Transformation {
     public:
@@ -29,6 +28,14 @@ class Scale: public Transformation {
 		Scale(float a, float b, float c) : Transformation(a,b,c) { } 
 		void transform(void) {
 			glScalef(x, y, z);
+		};
+};
+
+class Color: public Transformation { 
+	public:
+		Color(float a, float b, float c) : Transformation(a,b,c) { } 
+		void transform(void) {
+			glColor3ub(x, y, z);
 		};
 };
 

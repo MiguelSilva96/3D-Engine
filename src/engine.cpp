@@ -12,6 +12,7 @@
 #define _USE_MATH_DEFINES
 #include <math.h>
 #include "vertex.h"
+#include "file.h"
 #include "tinyxml2.h"
 #include "xmlParser.h"
 #include "transforms.h" //includes OpenGL too
@@ -21,7 +22,9 @@
 #include <iostream>
 #include <sstream>
 
-std::vector<Group> groups;
+using namespace std;
+
+vector<Group> groups;
 int modes[] = {GL_FILL, GL_LINE, GL_POINT};
 int mode = 0;
 float radius = 80;
@@ -53,14 +56,18 @@ void changeSize(int w, int h) {
 }
 
 void renderGroup(Group g) {
-    std::vector<Vertex> vertexes;
-    std::vector<Transformation*> transforms;
-    std::vector<Group> subgroups;
+    vector<File*> files;
+    vector<Group> subgroups;
+    vector<Vertex> vert;
+    vector<Transformation*> transforms;
+    vector<Transformation*>::iterator itTr;
+    vector<File*>::iterator it;
+    vector<Vertex>::iterator itVr;
+    vector<Group>::iterator itGr;
     
     glPushMatrix();
     
     transforms = g.getTransformations();
-    std::vector<Transformation*>::iterator itTr;
     itTr = transforms.begin();
     for(; itTr != transforms.end(); ++itTr) {
         Transformation* t = *itTr;
@@ -68,17 +75,20 @@ void renderGroup(Group g) {
     }
 
     glBegin(GL_TRIANGLES);
-    vertexes = g.getVertexes();
-    std::vector<Vertex>::iterator it;
-    it = vertexes.begin();
-    for(; it != vertexes.end(); ++it) {
-        Vertex v = *it;
-        glVertex3f(v.x, v.y, v.z);
+    files = g.getVertexes();
+    it = files.begin();
+    for(; it != files.end(); ++it) {
+        File *f = *it;
+        vert = f -> getVertexes();
+        itVr = vert.begin();
+        for(; itVr != vert.end(); ++itVr) {
+            Vertex v = *itVr;
+            glVertex3f(v.x, v.y, v.z);
+        }
     }
     glEnd();
 
     subgroups = g.getSubGroups();
-    std::vector<Group>::iterator itGr;
     itGr = subgroups.begin();
     for(; itGr != subgroups.end(); ++itGr) {
         Group gr = *itGr;
@@ -104,7 +114,7 @@ void renderScene(void) {
 
     glPolygonMode(GL_FRONT, modes[mode]);
 
-    std::vector<Group>::iterator it;
+    vector<Group>::iterator it;
     for(it = groups.begin(); it != groups.end(); ++it) {
         Group g = *it;
         renderGroup(g);
@@ -133,10 +143,10 @@ void manageEvents(int key_code, int x, int y) {
             mode = (mode+1)%3;
             break;
         case GLUT_KEY_PAGE_UP: 
-            radius += 0.1f;
+            radius += 1.0f;
             break;
         case GLUT_KEY_PAGE_DOWN: 
-            radius -= 0.1f;
+            radius -= 1.0f;
             if (radius < 0.1f)
                 radius = 0.1f;
     }
@@ -169,7 +179,7 @@ int main(int argc, char **argv) {
     else
         strcpy(filename, "../config.xml");
     if(!loadVertexes(filename)) {
-        std::cout << "Error reading xml\n";
+        cout << "Error reading xml\n";
         return 1;
     }
 
