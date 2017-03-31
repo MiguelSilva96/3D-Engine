@@ -17,6 +17,12 @@
 			<model file="sphereRochosos.3d" diffR="0.627451" diffG="0.321569" diffB="0.176471" />
 		</models>
 	</group>
+	<group>
+		<scale X="25" Y="1.0" Z="27"/>
+		<models>
+			<model file="orbitsRoc.2d" />
+		</models>
+	</group>
 
 	<!-- Venus -->
 	<group>
@@ -24,6 +30,12 @@
 		<scale X="2" Y="2" Z="2"/>
 		<models>
 			<model file="sphereRochosos.3d" diffR="0.627451" diffG="0.3" diffB="0.176471" />
+		</models>
+	</group>
+	<group>
+		<scale X="30.5" Y="1.0" Z="32.5"/>
+		<models>
+			<model file="orbitsRoc.2d" />
 		</models>
 	</group>
 
@@ -42,6 +54,12 @@
 				<model file="sphereLuas.3d" diffR="0.439216" diffG="0.501961" diffB="0.564706" />
 			</models>
 		</group>
+	</group>
+	<group>
+		<scale X="36" Y="1.0" Z="38"/>
+		<models>
+			<model file="orbitsRoc.2d" />
+		</models>
 	</group>
 
 	<!-- Mars -->
@@ -67,6 +85,12 @@
 				<model file="sphereLuas.3d" diffR="0.439216" diffG="0.501961" diffB="0.564706" />
 			</models>
 		</group>
+	</group>
+	<group>
+		<scale X="43" Y="1.0" Z="45"/>
+		<models>
+			<model file="orbitsRoc.2d" />
+		</models>
 	</group>
 
 	<!-- Asteroids -->
@@ -118,6 +142,12 @@
 				<model file="sphereLuas.3d" diffR="0.439216" diffG="0.501961" diffB="0.564706" />
 			</models>
 		</group>
+	</group>
+	<group>
+		<scale X="75.5" Y="1.0" Z="77.5"/>
+		<models>
+			<model file="orbitsGas.2d" />
+		</models>
 	</group>
 
 	<!-- Saturn -->
@@ -174,6 +204,12 @@
 			</models>
 		</group>
 	</group>
+	<group>
+		<scale X="101" Y="1.0" Z="103"/>
+		<models>
+			<model file="orbitsGas.2d" />
+		</models>
+	</group>
 
 	<!-- Uranus -->
 	<group>
@@ -215,6 +251,12 @@
 			</models>
 		</group>
 	</group>
+	<group>
+		<scale X="172" Y="1.0" Z="174"/>
+		<models>
+			<model file="orbitsGas.2d" />
+		</models>
+	</group>
 
 	<!-- Neptune -->
 	<group>
@@ -239,6 +281,12 @@
 				<model file="sphereLuas.3d" diffR="0.439216" diffG="0.501961" diffB="0.564706" />
 			</models>
 		</group>
+	</group>
+	<group>
+		<scale X="252" Y="1.0" Z="254"/>
+		<models>
+			<model file="orbitsGas.2d" />
+		</models>
 	</group>
 
 </scene> 
