@@ -8,34 +8,44 @@ XmlParser::XmlParser(const char *filename) {
 }
 
 
-std::vector<std::string> XmlParser::split(std::string str, char delim) {
-    std::string buf;
-    std::stringstream ss(str);
-    std::vector<std::string> tokens;
+vector<string> XmlParser::split(string str, char delim) {
+    string buf;
+    stringstream ss(str);
+    vector<string> tokens;
     while(ss >> buf)
         tokens.push_back(buf);
     return tokens;
 }
 
-std::vector<File*> XmlParser::getCurVertexes(void) {
+vector<pair<Color*,File*>> XmlParser::getCurVertexes(void) {
     tinyxml2::XMLElement* auxEl;
-    std::vector<std::string> aux;
-    std::vector<File*> vertexes;
-    std::string line;
-    std::string file = "../shapes/";
+    vector<string> aux;
+    vector<pair<Color*,File*>> vertexes;
+    string line;
+    string file = "../shapes/";
+    pair<Color*, File*> p;
 
     float x, y, z;
+    float r, g, b;
     auxEl = elem;
     auxEl = auxEl -> FirstChildElement("models");
     auxEl = auxEl -> FirstChildElement("model");
 
     for(; auxEl != nullptr; auxEl = auxEl -> NextSiblingElement()) {
-        std::vector<Vertex> vert;
-        std::ifstream filedisc;
+        vector<Vertex> vert;
+        ifstream filedisc;
+
+        auxEl -> QueryFloatAttribute("diffR", &r);
+        auxEl -> QueryFloatAttribute("diffG", &g);
+        auxEl -> QueryFloatAttribute("diffB", &b);
+        if(!auxEl -> Attribute("diffR"))
+            r = g = b = 1.0f;
+        Color* c =  new Color(r, g, b);
 
         file.append(auxEl -> Attribute("file"));
         if(loadedFiles.find(file) != loadedFiles.end()) {
-            vertexes.push_back(loadedFiles[file]);
+            p = make_pair(c, loadedFiles[file]);
+            vertexes.push_back(p);
             continue;
         }
 
@@ -50,15 +60,16 @@ std::vector<File*> XmlParser::getCurVertexes(void) {
             vert.push_back(Vertex(x,y,z));
         }
         File* f = new File(vert);
-        vertexes.push_back(f);
+        p = make_pair(c, f);
+        vertexes.push_back(p);
         loadedFiles[file] = f;
     }
     return vertexes;
 }
 
-std::vector<Transformation*> XmlParser::getCurTransformations(void) {
+vector<Transformation*> XmlParser::getCurTransformations(void) {
     tinyxml2::XMLElement* auxEl;
-    std::vector<Transformation*> transforms;
+    vector<Transformation*> transforms;
     float x, y, z, angle;
     auxEl = elem;
     auxEl = auxEl -> FirstChildElement();
@@ -94,14 +105,6 @@ std::vector<Transformation*> XmlParser::getCurTransformations(void) {
             transforms.push_back(t);    
         }
 
-        if(!strcmp(value, "color")) {
-            auxEl -> QueryFloatAttribute("r", &x);
-            auxEl -> QueryFloatAttribute("g", &y);
-            auxEl -> QueryFloatAttribute("b", &z);
-            t = new Color(x, y, z);
-            transforms.push_back(t);    
-        }
-
         auxEl = auxEl -> NextSiblingElement();
     }
     return transforms;
@@ -109,9 +112,9 @@ std::vector<Transformation*> XmlParser::getCurTransformations(void) {
 
 Group XmlParser::getGroup(void) {
     tinyxml2::XMLElement* auxEl;
-    std::vector<File*> vertexes;
-    std::vector<Transformation*> transforms;
-    std::vector<Group> subgroups;
+    vector<pair<Color*,File*>> vertexes;
+    vector<Transformation*> transforms;
+    vector<Group> subgroups;
     auxEl = elem;
 
     transforms = XmlParser::getCurTransformations();

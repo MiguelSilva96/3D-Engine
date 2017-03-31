@@ -10,6 +10,7 @@
 #include "tinyxml2.h"
 #include "group.h"
 
+using namespace std;
 
 class XmlParser {
     private:
@@ -17,11 +18,11 @@ class XmlParser {
         tinyxml2::XMLElement* elem;
         tinyxml2::XMLNode* root;
         tinyxml2::XMLError error;
-        std::map<std::string, File*> loadedFiles;
+        map<string, File*> loadedFiles;
 
-        std::vector<std::string> split(std::string str, char delim);
-        std::vector<Transformation*> getCurTransformations(void);
-        std::vector<File*> getCurVertexes(void);
+        vector<string> split(string str, char delim);
+        vector<Transformation*> getCurTransformations(void);
+        vector<pair<Color*,File*>> getCurVertexes(void);
 
     public:
         XmlParser(XmlParser*);

@@ -5,7 +5,6 @@
 #include "vertex.h"
 
 
-
 class File {
     private:
     	std::vector<Vertex> vertexes;

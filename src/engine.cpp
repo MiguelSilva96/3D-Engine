@@ -56,15 +56,16 @@ void changeSize(int w, int h) {
 }
 
 void renderGroup(Group g) {
-    vector<File*> files;
+    vector<pair<Color*,File*>> files;
     vector<Group> subgroups;
     vector<Vertex> vert;
     vector<Transformation*> transforms;
     vector<Transformation*>::iterator itTr;
-    vector<File*>::iterator it;
+    vector<pair<Color*,File*>>::iterator it;
     vector<Vertex>::iterator itVr;
     vector<Group>::iterator itGr;
-    
+
+
     glPushMatrix();
     
     transforms = g.getTransformations();
@@ -78,7 +79,9 @@ void renderGroup(Group g) {
     files = g.getVertexes();
     it = files.begin();
     for(; it != files.end(); ++it) {
-        File *f = *it;
+        pair<Color*,File*> p = *it;
+        File *f = p.second;
+        p.first -> transform();
         vert = f -> getVertexes();
         itVr = vert.begin();
         for(; itVr != vert.end(); ++itVr) {

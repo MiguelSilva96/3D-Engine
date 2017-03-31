@@ -2,243 +2,217 @@
 <scene>
 	<!-- Sun -->
 	<group>
-		<color r="255" g="69" b="0"/>
 		<translate X="0" Y="0" Z="0" />
 		<scale X="20" Y="20" Z="20"/>
 		<models>
-			<model file="sphere.3d" />
+			<model file="sphere.3d" diffR="0.854902" diffG="0.647059" diffB="0.12549" />
 		</models>
 	</group>
 
 	<!-- Mercury -->
 	<group>
-		<color r="139" g="69" b="19" />
 		<translate X="25" Y="0" Z="0" />
 		<scale X="0.5" Y="0.5" Z="0.5"/>
 		<models>
-			<model file="sphereRochosos.3d" />
+			<model file="sphereRochosos.3d" diffR="0.627451" diffG="0.321569" diffB="0.176471" />
 		</models>
 	</group>
 
 	<!-- Venus -->
 	<group>
-		<color r="139" g="90" b="0" />
 		<translate X="30.5" Y="0" Z="0" />
 		<scale X="2" Y="2" Z="2"/>
 		<models>
-			<model file="sphereRochosos.3d" />
+			<model file="sphereRochosos.3d" diffR="0.627451" diffG="0.3" diffB="0.176471" />
 		</models>
 	</group>
 
 	<!-- Earth -->
 	<group>
-		<color r="0" g="191" b="255" />
 		<translate X="36" Y="0" Z="0" />
 		<scale X="1.5" Y="1.5" Z="1.5"/>
 		<models>
-			<model file="sphereRochosos.3d" />
+			<model file="sphereRochosos.3d" diffR="0.27451" diffG="0.509804" diffB="0.705882" />
 		</models>	
 		<!-- Moon -->
 		<group>
-			<color r="105" g="105" b="105" />
 			<translate X="1" Y="0" Z="2" />
 			<scale X="0.5" Y="0.5" Z="0.5"/>
 			<models>
-				<model file="sphereLuas.3d" />
+				<model file="sphereLuas.3d" diffR="0.439216" diffG="0.501961" diffB="0.564706" />
 			</models>
-		</group>-->
+		</group>
 	</group>
 
 	<!-- Mars -->
 	<group>
-		<color r="205" g="79" b="57" />
 		<translate X="43" Y="0" Z="0" />
 		<scale X="1" Y="1" Z="1"/>
 		<models>
-			<model file="sphereRochosos.3d" />
+			<model file="sphereRochosos.3d" diffR="0.545098" diffG="0.0" diffB="0.0" />
 		</models>
 		<!-- Fobos -->
 		<group>
-			<color r="105" g="105" b="105" />
 			<translate X="1" Y="0" Z="-2" />
 			<scale X="0.001" Y="0.001" Z="0.001"/>
 			<models>
-				<model file="sphereLuas.3d" />
+				<model file="sphereLuas.3d" diffR="0.439216" diffG="0.501961" diffB="0.564706" />
 			</models>
 		</group>
 		<!-- Deimos -->
 		<group>
-			<color r="105" g="105" b="105" />
 			<translate X="1" Y="1" Z="2" />
 			<scale X="0.001" Y="0.001" Z="0.001"/>
 			<models>
-				<model file="sphereLuas.3d" />
+				<model file="sphereLuas.3d" diffR="0.439216" diffG="0.501961" diffB="0.564706" />
 			</models>
 		</group>
 	</group>
 
 	<!-- Jupiter -->
 	<group>
-		<color r="205" g="133" b="0" />
 		<translate X="75,5" Y="0" Z="0" />
 		<scale X="4" Y="4" Z="4"/>
 		<models>
-			<model file="sphere.3d" />
+			<model file="sphere.3d" diffR="0.721569" diffG="0.52549" diffB="0.0431373" />
 		</models>
 		<!-- Io -->
 		<group>
-			<color r="105" g="105" b="105" />
 			<translate X="1.5" Y="0" Z="1.5" />
 			<scale X="0.1" Y="0.1" Z="0.1"/>
 			<models>
-				<model file="sphereLuas.3d" />
+				<model file="sphereLuas.3d" diffR="0.439216" diffG="0.501961" diffB="0.564706" />
 			</models>
 		</group>
 		<!-- Europa -->
 		<group>
-			<color r="105" g="105" b="105" />
 			<translate X="-1.5" Y="-0.5" Z="-1.5" />
 			<scale X="0.1" Y="0.1" Z="0.1"/>
 			<models>
-				<model file="sphereLuas.3d" />
+				<model file="sphereLuas.3d" diffR="0.439216" diffG="0.501961" diffB="0.564706" />
 			</models>
 		</group>
 		<!-- Ganímedes -->
 		<group>
-			<color r="105" g="105" b="105" />
 			<translate X="-1.5" Y="0.5" Z="1.5" />
 			<scale X="0.25" Y="0.25" Z="0.25"/>
 			<models>
-				<model file="sphereLuas.3d" />
+				<model file="sphereLuas.3d" diffR="0.439216" diffG="0.501961" diffB="0.564706" />
 			</models>
 		</group>
 		<!-- Calisto -->
 		<group>
-			<color r="105" g="105" b="105" />
 			<translate X="1.5" Y="1" Z="-1.5" />
 			<scale X="0.2" Y="0.2" Z="0.2"/>
 			<models>
-				<model file="sphereLuas.3d" />
+				<model file="sphereLuas.3d" diffR="0.439216" diffG="0.501961" diffB="0.564706" />
 			</models>
 		</group>
 	</group>
 
 	<!-- Saturn -->
 	<group>
-		<color r="255" g="236" b="139" />
 		<translate X="101" Y="0" Z="0" />
 		<scale X="3.25" Y="3.25" Z="3.25"/>
 		<models>
-			<model file="sphere.3d" />
+			<model file="sphere.3d" diffR="0.870588 " diffG="0.721569 " diffB="0.529412" />
 		</models>
 		<!-- Titã -->
 		<group>
-			<color r="105" g="105" b="105" />
 			<translate X="-1.75" Y="0" Z="2" />
 			<scale X="0.25" Y="0.25" Z="0.25"/>
 			<models>
-				<model file="sphereLuas.3d" />
+				<model file="sphereLuas.3d" diffR="0.439216" diffG="0.501961" diffB="0.564706" />
 			</models>
 		</group>
 		<!-- Reia -->
 		<group>
-			<color r="105" g="105" b="105" />
 			<translate X="1.75" Y="1" Z="-2" />
 			<scale X="0.055" Y="0.055" Z="0.055"/>
 			<models>
-				<model file="sphereLuas.3d" />
+				<model file="sphereLuas.3d" diffR="0.439216" diffG="0.501961" diffB="0.564706" />
 			</models>
 		</group>
 		<!-- Jápeto -->
 		<group>
-			<color r="105" g="105" b="105" />
 			<translate X="1.5" Y="0" Z="2.5" />
 			<scale X="0.055" Y="0.055" Z="0.055"/>
 			<models>
-				<model file="sphereLuas.3d" />
+				<model file="sphereLuas.3d" diffR="0.439216" diffG="0.501961" diffB="0.564706" />
 			</models>
 		</group>
 		<!-- Dione -->
 		<group>
-			<color r="105" g="105" b="105" />
 			<translate X="-2" Y="1.5" Z="2" />
 			<scale X="0.05" Y="0.05" Z="0.05"/>
 			<models>
-				<model file="sphereLuas.3d" />
+				<model file="sphereLuas.3d" diffR="0.439216" diffG="0.501961" diffB="0.564706" />
 			</models>
 		</group>
 	</group>
 
 	<!-- Uranus -->
 	<group>
-		<color r="193" g="205" b="205" />
 		<translate X="172" Y="0" Z="0" />
 		<scale X="2.15" Y="2.15" Z="2.15"/>
 		<models>
-			<model file="sphere.3d" />
+			<model file="sphere.3d" diffR="0.690196" diffG="0.768627 " diffB="0.870588" />
 		</models>
 		<!-- Titânia -->
 		<group>
-			<color r="105" g="105" b="105" />
 			<translate X="-1.5" Y="0" Z="2" />
 			<scale X="0.05" Y="0.05" Z="0.05"/>
 			<models>
-				<model file="sphereLuas.3d" />
+				<model file="sphereLuas.3d" diffR="0.439216" diffG="0.501961" diffB="0.564706" />
 			</models>
 		</group>
 		<!-- Oberon -->
 		<group>
-			<color r="105" g="105" b="105" />
 			<translate X="2" Y="0" Z="2" />
 			<scale X="0.05" Y="0.05" Z="0.05"/>
 			<models>
-				<model file="sphereLuas.3d" />
+				<model file="sphereLuas.3d" diffR="0.439216" diffG="0.501961" diffB="0.564706" />
 			</models>
 		</group>
 		<!-- Umbriel -->
 		<group>
-			<color r="105" g="105" b="105" />
 			<translate X="1.5" Y="1" Z="-1.5" />
 			<scale X="0.05" Y="0.05" Z="0.05"/>
 			<models>
-				<model file="sphereLuas.3d" />
+				<model file="sphereLuas.3d" diffR="0.439216" diffG="0.501961" diffB="0.564706" />
 			</models>
 		</group>
 		<!-- Ariel -->
 		<group>
-			<color r="105" g="105" b="105" />
 			<translate X="-2" Y="1.5" Z="-1.5" />
 			<scale X="0.05" Y="0.05" Z="0.05"/>
 			<models>
-				<model file="sphereLuas.3d" />
+				<model file="sphereLuas.3d" diffR="0.439216" diffG="0.501961" diffB="0.564706" />
 			</models>
 		</group>
 	</group>
 
 	<!-- Neptune -->
 	<group>
-		<color r="113" g="113" b="198" />
 		<translate X="252" Y="0" Z="0" />
 		<scale X="2" Y="2" Z="2"/>
 		<models>
-			<model file="sphere.3d" />
+			<model file="sphere.3d" diffR="0.576471 " diffG="0.439216 " diffB="0.858824" />
 		</models>
 		<!-- Proteu -->
 		<group>
-			<color r="105" g="105" b="105" />
 			<translate X="1.5" Y="0" Z="-2" />
 			<scale X="0.035" Y="0.035" Z="0.035"/>
 			<models>
-				<model file="sphereLuas.3d" />
+				<model file="sphereLuas.3d" diffR="0.439216" diffG="0.501961" diffB="0.564706" />
 			</models>
 		</group>
 		<!-- Tritão --> 
 		<group>
-			<color r="105" g="105" b="105" />
 			<translate X="1.5" Y="1" Z="1.5" />
 			<scale X="0.08" Y="0.08" Z="0.08"/>
 			<models>
-				<model file="sphereLuas.3d" />
+				<model file="sphereLuas.3d" diffR="0.439216" diffG="0.501961" diffB="0.564706" />
 			</models>
 		</group>
 	</group>

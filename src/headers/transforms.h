@@ -35,7 +35,7 @@ class Color: public Transformation {
 	public:
 		Color(float a, float b, float c) : Transformation(a,b,c) { } 
 		void transform(void) {
-			glColor3ub(x, y, z);
+			glColor3f(x, y, z);
 		};
 };
 

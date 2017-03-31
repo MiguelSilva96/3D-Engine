@@ -2,20 +2,23 @@
 #define FIGURE_H
 
 #include <vector>
+#include <utility>
 #include "transforms.h"
 #include "file.h"
 
+using namespace std;
+
 class Group {
     private:
-        std::vector<File*> vertexes;
-        std::vector<Transformation*> transforms;
-        std::vector<Group> subgroups;
+        vector<pair<Color*,File*>> vertexes;
+        vector<Transformation*> transforms;
+        vector<Group> subgroups;
     
     public:
-        Group(std::vector<File*>, std::vector<Transformation*>, std::vector<Group>);
-        std::vector<Transformation*> getTransformations(void);
-        std::vector<File*> getVertexes(void);
-        std::vector<Group> getSubGroups(void);
+        Group(vector<pair<Color*,File*>>, vector<Transformation*>, vector<Group>);
+        vector<Transformation*> getTransformations(void);
+        vector<pair<Color*,File*>> getVertexes(void);
+        vector<Group> getSubGroups(void);
 
 };
 
