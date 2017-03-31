@@ -15,6 +15,7 @@ class Group {
         vector<Group> subgroups;
     
     public:
+    	float n, outR, inR, minScale, maxScale;
         Group(vector<pair<Color*,File*>>, vector<Transformation*>, vector<Group>);
         vector<Transformation*> getTransformations(void);
         vector<pair<Color*,File*>> getVertexes(void);

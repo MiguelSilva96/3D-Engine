@@ -5,14 +5,14 @@
 		<translate X="0" Y="0" Z="0" />
 		<scale X="20" Y="20" Z="20"/>
 		<models>
-			<model file="sphere.3d" diffR="0.854902" diffG="0.647059" diffB="0.12549" />
+			<model file="sphere.3d" diffR="1.00" diffG="0.50" diffB="0.0" />
 		</models>
 	</group>
 
 	<!-- Mercury -->
 	<group>
 		<translate X="25" Y="0" Z="0" />
-		<scale X="0.5" Y="0.5" Z="0.5"/>
+		<scale X="0.75" Y="0.75" Z="0.75"/>
 		<models>
 			<model file="sphereRochosos.3d" diffR="0.627451" diffG="0.321569" diffB="0.176471" />
 		</models>
@@ -37,7 +37,7 @@
 		<!-- Moon -->
 		<group>
 			<translate X="1" Y="0" Z="2" />
-			<scale X="0.5" Y="0.5" Z="0.5"/>
+			<scale X="0.35" Y="0.35" Z="0.35"/>
 			<models>
 				<model file="sphereLuas.3d" diffR="0.439216" diffG="0.501961" diffB="0.564706" />
 			</models>
@@ -67,6 +67,16 @@
 				<model file="sphereLuas.3d" diffR="0.439216" diffG="0.501961" diffB="0.564706" />
 			</models>
 		</group>
+	</group>
+
+	<!-- Asteroids -->
+	<group>
+		<random N="500" inR="52" outR="58" maxScale="0.2" minScale="0.05"/>
+		<models>
+			<model file="asteroids1.3d" diffR="0.572549" diffG="0.556863" diffB="0.466667" />
+			<model file="asteroids2.3d" diffR="0.439216" diffG="0.501961" diffB="0.564706" />
+			<model file="asteroids1.3d" diffR="0.333333" diffG="0.333333" diffB="0.333333" />
+		</models>
 	</group>
 
 	<!-- Jupiter -->
@@ -117,6 +127,20 @@
 		<models>
 			<model file="sphere.3d" diffR="0.870588 " diffG="0.721569 " diffB="0.529412" />
 		</models>
+		<!-- Rings -->
+		<group>
+			<rotate X="1.0" Y="0.0" Z="0.0" A="10.0"/>
+			<scale X="1.0" Y="1.0" Z="1.2"/>
+			<models>
+				<model file="crown.2d" diffR="0.662745" diffG="0.662745" diffB="0.662745" />
+			</models>
+			<group>
+			<scale X="1.30" Y="1.30" Z="1.30"/>
+			<models>
+				<model file="crown.2d" diffR="0.411765" diffG="0.411765" diffB="0.411765" />
+			</models>
+		</group>
+		</group>
 		<!-- Titã -->
 		<group>
 			<translate X="-1.75" Y="0" Z="2" />

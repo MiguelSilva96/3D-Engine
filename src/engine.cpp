@@ -55,42 +55,91 @@ void changeSize(int w, int h) {
     glMatrixMode(GL_MODELVIEW);
 }
 
-void renderGroup(Group g) {
-    vector<pair<Color*,File*>> files;
-    vector<Group> subgroups;
-    vector<Vertex> vert;
-    vector<Transformation*> transforms;
-    vector<Transformation*>::iterator itTr;
-    vector<pair<Color*,File*>>::iterator it;
+float myRandom() {
+    float r = ((double) rand() / (RAND_MAX));
+    return r;
+}
+
+void draw(vector<Vertex> vert) {
     vector<Vertex>::iterator itVr;
-    vector<Group>::iterator itGr;
-
-
-    glPushMatrix();
-    
-    transforms = g.getTransformations();
-    itTr = transforms.begin();
-    for(; itTr != transforms.end(); ++itTr) {
-        Transformation* t = *itTr;
-        t -> transform();
-    }
-
+    itVr = vert.begin();
     glBegin(GL_TRIANGLES);
+    for(; itVr != vert.end(); ++itVr) {
+        Vertex v = *itVr;
+        glVertex3f(v.x, v.y, v.z);
+    }
+    glEnd();
+}
+
+void renderRandom(Group g) {
+    vector<pair<Color*,File*>> files;
+    vector<pair<Color*,File*>>::iterator it;
+    vector<Vertex> vert;
+
+    srand(31457);
+    int nr = 0;
+    int out = g.outR;
+    float in = g.inR;
+
     files = g.getVertexes();
     it = files.begin();
     for(; it != files.end(); ++it) {
         pair<Color*,File*> p = *it;
         File *f = p.second;
-        p.first -> transform();
         vert = f -> getVertexes();
-        itVr = vert.begin();
-        for(; itVr != vert.end(); ++itVr) {
-            Vertex v = *itVr;
-            glVertex3f(v.x, v.y, v.z);
+        while (nr < g.n) {
+
+            float x = myRandom() * 2*out - out;
+            float z = myRandom() * 2*out - out;
+            float s = myRandom() * g.maxScale + g.minScale;
+            float aux  = x*x + z*z;
+            
+            if (aux > in*in && aux < out*out) {
+                glPushMatrix();
+                p.first -> transform();
+                glTranslatef(x, 0, z);
+                glScalef(s, s, s);
+                draw(vert);
+                glPopMatrix();
+                nr++;
+            }
+        }
+        nr = 0;
+    }
+}
+
+void renderGroup(Group g) {
+    vector<pair<Color*,File*>> files;
+    vector<Group> subgroups;
+    vector<Vertex> vert;
+    vector<Transformation*> aux;
+    vector<Transformation*> transforms;
+    vector<Transformation*>::iterator itTr;
+    vector<pair<Color*,File*>>::iterator it;
+    vector<Group>::iterator itGr;
+
+    glPushMatrix();
+    
+    if(g.n > 0) {
+        renderRandom(g);
+    } else {
+        transforms = g.getTransformations();
+        itTr = transforms.begin();
+        for(; itTr != transforms.end(); ++itTr) {
+            Transformation* t = *itTr;
+            t -> transform();
+        }
+
+        files = g.getVertexes();
+        it = files.begin();
+        for(; it != files.end(); ++it) {
+            pair<Color*,File*> p = *it;
+            File *f = p.second;
+            p.first -> transform();
+            vert = f -> getVertexes();
+            draw(vert);
         }
     }
-    glEnd();
-
     subgroups = g.getSubGroups();
     itGr = subgroups.begin();
     for(; itGr != subgroups.end(); ++itGr) {

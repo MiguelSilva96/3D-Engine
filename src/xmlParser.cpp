@@ -5,6 +5,7 @@ XmlParser::XmlParser(const char *filename) {
     error = doc -> LoadFile(filename);
     root  = doc -> FirstChildElement("scene");
     elem  = nullptr;
+    n = -1;
 }
 
 
@@ -29,7 +30,8 @@ vector<pair<Color*,File*>> XmlParser::getCurVertexes(void) {
     float r, g, b;
     auxEl = elem;
     auxEl = auxEl -> FirstChildElement("models");
-    auxEl = auxEl -> FirstChildElement("model");
+    if(auxEl)
+        auxEl = auxEl -> FirstChildElement("model");
 
     for(; auxEl != nullptr; auxEl = auxEl -> NextSiblingElement()) {
         vector<Vertex> vert;
@@ -63,6 +65,7 @@ vector<pair<Color*,File*>> XmlParser::getCurVertexes(void) {
         p = make_pair(c, f);
         vertexes.push_back(p);
         loadedFiles[file] = f;
+        file = "../shapes/";
     }
     return vertexes;
 }
@@ -88,7 +91,7 @@ vector<Transformation*> XmlParser::getCurTransformations(void) {
             transforms.push_back(t);
         }
 
-        if(!strcmp(value, "rotate")) {
+        else if(!strcmp(value, "rotate")) {
             auxEl -> QueryFloatAttribute("X", &x);
             auxEl -> QueryFloatAttribute("Y", &y);
             auxEl -> QueryFloatAttribute("Z", &z);
@@ -97,13 +100,22 @@ vector<Transformation*> XmlParser::getCurTransformations(void) {
             transforms.push_back(t);
         }
 
-        if(!strcmp(value, "scale")) {
+        else if(!strcmp(value, "scale")) {
             auxEl -> QueryFloatAttribute("X", &x);
             auxEl -> QueryFloatAttribute("Y", &y);
             auxEl -> QueryFloatAttribute("Z", &z);
             t = new Scale(x, y, z);
             transforms.push_back(t);    
         }
+
+        else if(!strcmp(value, "random")) {
+            auxEl -> QueryFloatAttribute("N", &n);
+            auxEl -> QueryFloatAttribute("inR", &inR);
+            auxEl -> QueryFloatAttribute("outR", &outR);
+            auxEl -> QueryFloatAttribute("minScale", &minScale);
+            auxEl -> QueryFloatAttribute("maxScale", &maxScale);
+        }
+
 
         auxEl = auxEl -> NextSiblingElement();
     }
@@ -127,7 +139,16 @@ Group XmlParser::getGroup(void) {
     }
 
     elem = auxEl;
-    return Group(vertexes, transforms, subgroups);
+    Group res  = Group(vertexes, transforms, subgroups);
+    if(n > 0) {
+        res.n = n;
+        res.outR = outR;
+        res.inR = inR;
+        res.minScale = minScale;
+        res.maxScale = maxScale;
+        n = -1;
+    }
+    return res;
 }
 
 

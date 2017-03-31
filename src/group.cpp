@@ -4,6 +4,7 @@ Group::Group(vector<pair<Color*,File*>> v, vector<Transformation*> t, vector<Gro
 	vertexes   = v;
 	transforms = t;
 	subgroups  = g;
+	n = -1;
 }
 
 vector<Transformation*> Group::getTransformations(void) {
