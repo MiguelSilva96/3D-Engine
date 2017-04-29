@@ -29,8 +29,9 @@ int modes[] = {GL_FILL, GL_LINE, GL_POINT};
 int mode = 0;
 float radius = 80;
 float beta = 0, alfa = 0;
-vector<float> vertexes;
-GLuint buffers[2];
+float lx = 0.0f, ly = 0.0f, lz = 0.0f;
+float px = 0.0f, py = 0.0f, pz = -100.0f;
+float upx = 0.0f, upy = 1.0f, upz = 0.0f;
 
 void changeSize(int w, int h) {
     // Prevent a divide by zero, when window is too short
@@ -57,34 +58,30 @@ void changeSize(int w, int h) {
     glMatrixMode(GL_MODELVIEW);
 }
 
+void cross(float *a, float *b, float *res) {
+
+    res[0] = a[1] * b[2] - a[2] * b[1];
+    res[1] = a[2] * b[0] - a[0] * b[2];
+    res[2] = a[0] * b[1] - a[1] * b[0];
+}
+
+void normalize(float *a) {
+
+    float l = sqrt(a[0] * a[0] + a[1] * a[1] + a[2] * a[2]);
+    a[0] = a[0] / l;
+    a[1] = a[1] / l;
+    a[2] = a[2] / l;
+}
+
 float myRandom() {
     float r = ((double) rand() / (RAND_MAX));
     return r;
 }
 
-void prep(vector<Vertex> vert) {
-    glGenBuffers(1, buffers);
-    glBindBuffer(GL_ARRAY_BUFFER, buffers[0]);
-    glBufferData(
-        GL_ARRAY_BUFFER, 
-        vert.size() * sizeof(float) * 3, 
-        &(vert[0].x), 
-        GL_STATIC_DRAW
-    );
-}
-
-void draw(vector<Vertex> vert) {
-    glBindBuffer(GL_ARRAY_BUFFER, buffers[0]);
-    glVertexPointer(3, GL_FLOAT, 0, 0);
-    glDrawArrays(GL_TRIANGLES, 0, vert.size() * 3);
-
-    vertexes.clear();
-}
 
 void renderRandom(Group g) {
     vector<pair<Color*,File*>> files;
     vector<pair<Color*,File*>>::iterator it;
-    vector<Vertex> vert;
 
     srand(31457);
     int nr = 0;
@@ -96,7 +93,6 @@ void renderRandom(Group g) {
     for(; it != files.end(); ++it) {
         pair<Color*,File*> p = *it;
         File *f = p.second;
-        vert = f -> getVertexes();
         while (nr < g.n) {
 
             float x = myRandom() * 2*out - out;
@@ -109,8 +105,8 @@ void renderRandom(Group g) {
                 p.first -> transform();
                 glTranslatef(x, 0, z);
                 glScalef(s, s, s);
-                prep(vert);
-                draw(vert);
+                f -> prepare();
+                f -> draw();
                 glPopMatrix();
                 nr++;
             }
@@ -122,7 +118,6 @@ void renderRandom(Group g) {
 void renderGroup(Group g) {
     vector<pair<Color*,File*>> files;
     vector<Group> subgroups;
-    vector<Vertex> vert;
     vector<Transformation*> aux;
     vector<Transformation*> transforms;
     vector<Transformation*>::iterator itTr;
@@ -147,9 +142,8 @@ void renderGroup(Group g) {
             pair<Color*,File*> p = *it;
             File *f = p.second;
             p.first -> transform();
-            vert = f -> getVertexes();
-            prep(vert);
-            draw(vert);
+            f -> prepare();
+            f -> draw();
         }
     }
     subgroups = g.getSubGroups();
@@ -169,12 +163,12 @@ void renderScene(void) {
 
     // set the camera
     glLoadIdentity();
-    float px = radius * cos(beta) * sin(alfa);
-    float pz = radius * cos(beta) * cos(alfa);
-    float py = radius * sin(beta);
+    lx = px + radius *sin(alfa) * cos(beta);
+    ly = py + radius *sin(beta);
+    lz = pz + radius *cos(alfa) * cos(beta);
     gluLookAt(px, py, pz, 
-              0.0,0.0,0.0,
-              0.0f,1.0f,0.0f);
+              lx, ly, lz,
+              upx, upy, upz);
 
     glPolygonMode(GL_FRONT, modes[mode]);
 
@@ -187,13 +181,65 @@ void renderScene(void) {
     glutSwapBuffers();
 }
 
+void manageKeyboard(unsigned char key_code, int x, int y) {
+    int step = 10;
+    float d[3];
+    d[0] = lx - px;
+    d[1] = ly - py;
+    d[2] = lz - pz;
+    normalize(d);
+    float up[3] = { upx, upy, upz };
+    float r[3];
+    cross(d, up, r);
+
+    switch (key_code) {
+        case 'w':
+        case 'W':
+            px += step * d[0];
+            py += step * d[1];
+            pz += step * d[2];
+            lx += step * d[0];
+            ly += step * d[1];
+            lz += step * d[2];
+            break;
+        case 's':
+        case 'S':
+            px -= step * d[0];
+            py -= step * d[1];
+            pz -= step * d[2];
+            lx -= step * d[0];
+            ly -= step * d[1];
+            lz -= step * d[2];
+            break;
+        case 'a':
+        case 'A':
+            px -= step * r[0];
+            py -= step * r[1];
+            pz -= step * r[2];
+            lx -= step * r[0];
+            ly -= step * r[1];
+            lz -= step * r[2];
+            break;
+        case 'd':
+        case 'D':
+            px += step * r[0];
+            py += step * r[1];
+            pz += step * r[2];
+            lx += step * r[0];
+            ly += step * r[1];
+            lz += step * r[2];
+            break;
+    }
+    glutPostRedisplay();
+}
+
 void manageEvents(int key_code, int x, int y) {
     switch(key_code) {
         case GLUT_KEY_RIGHT:
-            alfa += 0.1;
+            alfa -= 0.1;
             break;
         case GLUT_KEY_LEFT:
-            alfa -= 0.1;
+            alfa += 0.1;
             break;
         case GLUT_KEY_UP:
             if(beta < 1.5f)
@@ -223,6 +269,7 @@ bool loadVertexes(const char* filename) {
         return false;
     while(xmlparser -> startNextGroup())
         groups.push_back(xmlparser -> getGroup());
+    vector<Group>::iterator it;
     delete(xmlparser);
     return true;
 }
@@ -264,6 +311,7 @@ int main(int argc, char **argv) {
 
     // Registration of the keyboard callbacks
     glutSpecialFunc(manageEvents);
+    glutKeyboardFunc(manageKeyboard);
 
 #ifndef __APPLE__   
     glewInit();
