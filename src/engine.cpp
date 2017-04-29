@@ -62,30 +62,21 @@ float myRandom() {
     return r;
 }
 
-void bind(vector<Vertex> vert) {
-    vector<Vertex>::iterator itVr;
-    itVr = vert.begin();
-    for(; itVr != vert.end(); ++itVr) {
-        Vertex v = *itVr;
-        vertexes.push_back(v.x);
-        vertexes.push_back(v.y);
-        vertexes.push_back(v.z);
-    }
-
+void prep(vector<Vertex> vert) {
     glGenBuffers(1, buffers);
     glBindBuffer(GL_ARRAY_BUFFER, buffers[0]);
     glBufferData(
         GL_ARRAY_BUFFER, 
-        vertexes.size() * sizeof(float), 
-        &(vertexes[0]), 
+        vert.size() * sizeof(float) * 3, 
+        &(vert[0].x), 
         GL_STATIC_DRAW
     );
 }
 
-void draw() {
+void draw(vector<Vertex> vert) {
     glBindBuffer(GL_ARRAY_BUFFER, buffers[0]);
     glVertexPointer(3, GL_FLOAT, 0, 0);
-    glDrawArrays(GL_TRIANGLES, 0, vertexes.size());
+    glDrawArrays(GL_TRIANGLES, 0, vert.size() * 3);
 
     vertexes.clear();
 }
@@ -118,8 +109,8 @@ void renderRandom(Group g) {
                 p.first -> transform();
                 glTranslatef(x, 0, z);
                 glScalef(s, s, s);
-                bind(vert);
-                draw(    );
+                prep(vert);
+                draw(vert);
                 glPopMatrix();
                 nr++;
             }
@@ -157,8 +148,8 @@ void renderGroup(Group g) {
             File *f = p.second;
             p.first -> transform();
             vert = f -> getVertexes();
-            bind(vert);
-            draw(    );
+            prep(vert);
+            draw(vert);
         }
     }
     subgroups = g.getSubGroups();
