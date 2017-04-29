@@ -4,7 +4,7 @@
     Purpose: Display figures on the screen as instructed on input file
 
     @author Jose Silva, Joao Coelho, Luís Fernandes, Pedro Cunha
-    @version 1.0
+    @version 1.3
 */
 
 #include <stdlib.h>
@@ -29,6 +29,8 @@ int modes[] = {GL_FILL, GL_LINE, GL_POINT};
 int mode = 0;
 float radius = 80;
 float beta = 0, alfa = 0;
+vector<float> vertexes;
+GLuint buffers[2];
 
 void changeSize(int w, int h) {
     // Prevent a divide by zero, when window is too short
@@ -60,15 +62,32 @@ float myRandom() {
     return r;
 }
 
-void draw(vector<Vertex> vert) {
+void bind(vector<Vertex> vert) {
     vector<Vertex>::iterator itVr;
     itVr = vert.begin();
-    glBegin(GL_TRIANGLES);
     for(; itVr != vert.end(); ++itVr) {
         Vertex v = *itVr;
-        glVertex3f(v.x, v.y, v.z);
+        vertexes.push_back(v.x);
+        vertexes.push_back(v.y);
+        vertexes.push_back(v.z);
     }
-    glEnd();
+
+    glGenBuffers(1, buffers);
+    glBindBuffer(GL_ARRAY_BUFFER, buffers[0]);
+    glBufferData(
+        GL_ARRAY_BUFFER, 
+        vertexes.size() * sizeof(float), 
+        &(vertexes[0]), 
+        GL_STATIC_DRAW
+    );
+}
+
+void draw() {
+    glBindBuffer(GL_ARRAY_BUFFER, buffers[0]);
+    glVertexPointer(3, GL_FLOAT, 0, 0);
+    glDrawArrays(GL_TRIANGLES, 0, vertexes.size());
+
+    vertexes.clear();
 }
 
 void renderRandom(Group g) {
@@ -99,7 +118,8 @@ void renderRandom(Group g) {
                 p.first -> transform();
                 glTranslatef(x, 0, z);
                 glScalef(s, s, s);
-                draw(vert);
+                bind(vert);
+                draw(    );
                 glPopMatrix();
                 nr++;
             }
@@ -137,7 +157,8 @@ void renderGroup(Group g) {
             File *f = p.second;
             p.first -> transform();
             vert = f -> getVertexes();
-            draw(vert);
+            bind(vert);
+            draw(    );
         }
     }
     subgroups = g.getSubGroups();
@@ -215,6 +236,17 @@ bool loadVertexes(const char* filename) {
     return true;
 }
 
+void init() {
+
+    // OpenGL settings 
+    glEnable(GL_DEPTH_TEST);
+    glEnable(GL_CULL_FACE);
+    glClearColor(0.0f,0.0f,0.0f,0.0f);
+
+    glEnableClientState(GL_VERTEX_ARRAY);
+
+}
+
 int main(int argc, char **argv) {
     char *filename = (char *) malloc(64);
 
@@ -231,7 +263,7 @@ int main(int argc, char **argv) {
     else
         strcpy(filename, "../config.xml");
     if(!loadVertexes(filename)) {
-        cout << "Error reading xml\n";
+        cout << "Error reading xml" << endl;
         return 1;
     }
 
@@ -241,11 +273,12 @@ int main(int argc, char **argv) {
 
     // Registration of the keyboard callbacks
     glutSpecialFunc(manageEvents);
-    
-    // OpenGL settings 
-    glEnable(GL_DEPTH_TEST);
-    glEnable(GL_CULL_FACE);
-    glClearColor(0.0f,0.0f,0.0f,0.0f);
+
+#ifndef __APPLE__   
+    glewInit();
+#endif  
+
+    init();
 
     // GLUT's main loop
     glutMainLoop();
