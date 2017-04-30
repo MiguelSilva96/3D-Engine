@@ -18,6 +18,21 @@ vector<string> XmlParser::split(string str, char delim) {
     return tokens;
 }
 
+vector<Vertex> XmlParser::getPoints(void) {
+    vector<Vertex> points;
+    tinyxml2::XMLElement* auxEl;
+    float x,y,z;
+    auxEl = elem;
+    auxEl = auxEl -> FirstChildElement("point");
+    for(; auxEl != nullptr; auxEl = auxEl -> NextSiblingElement()) {
+        auxEl -> QueryFloatAttribute("X", &x);
+        auxEl -> QueryFloatAttribute("Y", &y);
+        auxEl -> QueryFloatAttribute("Z", &z);
+        points.push_back(Vertex(x,y,z));
+    }
+    return points;
+}
+
 vector<pair<Color*,File*>> XmlParser::getCurVertexes(void) {
     tinyxml2::XMLElement* auxEl;
     vector<string> aux;
@@ -73,7 +88,7 @@ vector<pair<Color*,File*>> XmlParser::getCurVertexes(void) {
 vector<Transformation*> XmlParser::getCurTransformations(void) {
     tinyxml2::XMLElement* auxEl;
     vector<Transformation*> transforms;
-    float x, y, z, angle;
+    float x, y, z, angle, time = -1;
     auxEl = elem;
     auxEl = auxEl -> FirstChildElement();
     if(!auxEl)
@@ -87,17 +102,30 @@ vector<Transformation*> XmlParser::getCurTransformations(void) {
             auxEl -> QueryFloatAttribute("X", &x);
             auxEl -> QueryFloatAttribute("Y", &y);
             auxEl -> QueryFloatAttribute("Z", &z);
-            t = new Translate(x, y, z);
+            auxEl -> QueryFloatAttribute("time", &time);
+            if(time != -1) {
+                vector<Vertex> points;
+                points = XmlParser::getPoints();
+                t = new TranslateCR(x, y, z, time, points);
+            }
+            else
+                t = new Translate(x, y, z);
             transforms.push_back(t);
+            time = -1;
         }
 
         else if(!strcmp(value, "rotate")) {
-            auxEl -> QueryFloatAttribute("X", &x);
-            auxEl -> QueryFloatAttribute("Y", &y);
-            auxEl -> QueryFloatAttribute("Z", &z);
-            auxEl -> QueryFloatAttribute("A", &angle);
-            t = new Rotate(x, y, z, angle);
+            auxEl -> QueryFloatAttribute("axisX", &x);
+            auxEl -> QueryFloatAttribute("axisY", &y);
+            auxEl -> QueryFloatAttribute("axisZ", &z);
+            auxEl -> QueryFloatAttribute("angle", &angle);
+            auxEl -> QueryFloatAttribute("time", &time);
+            if(time != -1)
+                t = new RotateAnim(x, y, z, angle, time);
+            else
+                t = new Rotate(x, y, z, angle);
             transforms.push_back(t);
+            time = -1;
         }
 
         else if(!strcmp(value, "scale")) {

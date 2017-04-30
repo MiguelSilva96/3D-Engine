@@ -7,13 +7,18 @@
 #include <GL/glew.h>
 #include <GL/glut.h>
 #endif
+#include "vertex.h"
+#include <math.h>
+#include <vector>
+
+using namespace std;
 
 
 class Transformation {
     public:
         const float x, y, z;
         Transformation(float a, float b, float c) : x(a), y(b), z(c) { }
-        virtual void transform(void){ };
+        virtual void transform(void) { };
 };
 
 class Translate: public Transformation { 
@@ -22,6 +27,16 @@ class Translate: public Transformation {
 		void transform(void) {
 			glTranslatef(x, y, z);
 		}
+};
+
+class TranslateCR: public Transformation { 
+	private:
+		vector<Vertex> points;
+	public:
+		const float time;
+		TranslateCR(float a, float b, float c, float d, vector<Vertex> e) : 
+			Transformation(a,b,c), time(d), points(e) { }
+		void transform(void);
 };
 
 class Scale: public Transformation { 
@@ -48,6 +63,15 @@ class Rotate: public Transformation {
 		void transform(void) {
 			glRotatef(angle, x, y, z);
 		};
+};
+
+class RotateAnim: public Transformation {
+	public:
+		const float angle;
+		const float time;
+		RotateAnim(float a, float b, float c, float d, float e) : 
+						Transformation(a,b,c), angle(d), time(e) { }
+		void transform(void);
 };
 
 #endif

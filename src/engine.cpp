@@ -296,6 +296,7 @@ int main(int argc, char **argv) {
     // Callback registration
     glutDisplayFunc(renderScene);
     glutReshapeFunc(changeSize);
+    glutIdleFunc(renderScene);
 
     // Registration of the keyboard callbacks
     glutSpecialFunc(manageEvents);

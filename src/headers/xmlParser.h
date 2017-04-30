@@ -24,6 +24,7 @@ class XmlParser {
         vector<string> split(string str, char delim);
         vector<Transformation*> getCurTransformations(void);
         vector<pair<Color*,File*>> getCurVertexes(void);
+        vector<Vertex> getPoints(void);
 
     public:
         XmlParser(XmlParser*);

@@ -11,7 +11,7 @@
 		<group>
 			<translate X="-0.2" Y="0.2" Z="0.6" />
 			<scale X="0.2" Y="0.2" Z="0.2" />
-			<rotate X="1" Y="0" Z="0" A="90" />
+			<rotate axisX="1" axisY="0" axisZ="0" angle="90" />
 			<models>
 				<model file="eye.2d" diffR="0.0" diffG="0.0" diffB="0.0"/>
 			</models>
@@ -19,7 +19,7 @@
 		<group>
 			<translate X="0.2" Y="0.2" Z="0.6" />
 			<scale X="0.2" Y="0.2" Z="0.2" />
-			<rotate X="1" Y="0" Z="0" A="90" />
+			<rotate axisX="1" axisY="0" axisZ="0" angle="90" />
 			<models>
 				<model file="eye.2d" diffR="0.0" diffG="0.0" diffB="0.0"/>
 			</models>
@@ -27,7 +27,7 @@
 		<group>
 			<translate X="0.0" Y="-0.1" Z="0.6" />
 			<scale X="0.15" Y="0.2" Z="0.2" />
-			<rotate X="1.2" Y="0" Z="0" A="90" />
+			<rotate axisX="1.2" axisY="0" axisZ="0" angle="90" />
 			<models>
 				<model file="eye.2d" diffR="0.0" diffG="0.0" diffB="0.0"/>
 			</models>
@@ -35,7 +35,7 @@
 		<group>
 			<translate X="0.1" Y="-0.2" Z="0.6" />
 			<scale X="0.12" Y="0.25" Z="0.2" />
-			<rotate X="1" Y="0" Z="0" A="90" />
+			<rotate axisX="1" axisY="0" axisZ="0" angle="90" />
 			<models>
 				<model file="eye.2d" diffR="0.0" diffG="0.0" diffB="0.0"/>
 			</models>
@@ -44,7 +44,7 @@
 		<group>
 			<translate X="-0.1" Y="-0.2" Z="0.6" />
 			<scale X="0.12" Y="0.25" Z="0.2" />
-			<rotate X="1" Y="0" Z="0" A="90" />
+			<rotate axisX="1" axisY="0" axisZ="0" angle="90" />
 			<models>
 				<model file="eye.2d" diffR="0.0" diffG="0.0" diffB="0.0"/>
 			</models>

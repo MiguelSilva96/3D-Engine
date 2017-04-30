@@ -42,6 +42,7 @@
 	<!-- Earth -->
 	<group>
 		<translate X="36" Y="0" Z="0" />
+		<rotate time="10" axisX="0.0" axisY="1.0" axisZ="0.0"/>
 		<scale X="1.5" Y="1.5" Z="1.5"/>
 		<models>
 			<model file="sphereRochosos.3d" diffR="0.27451" diffG="0.509804" diffB="0.705882" />
@@ -159,7 +160,7 @@
 		</models>
 		<!-- Rings -->
 		<group>
-			<rotate X="1.0" Y="0.0" Z="0.0" A="10.0"/>
+			<rotate axisX="1.0" axisY="0.0" axisZ="0.0" angle="10.0"/>
 			<scale X="1.0" Y="1.0" Z="1.2"/>
 			<models>
 				<model file="crown.2d" diffR="0.662745" diffG="0.662745" diffB="0.662745" />
