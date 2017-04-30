@@ -105,7 +105,6 @@ void renderRandom(Group g) {
                 p.first -> transform();
                 glTranslatef(x, 0, z);
                 glScalef(s, s, s);
-                f -> prepare();
                 f -> draw();
                 glPopMatrix();
                 nr++;
@@ -142,7 +141,6 @@ void renderGroup(Group g) {
             pair<Color*,File*> p = *it;
             File *f = p.second;
             p.first -> transform();
-            f -> prepare();
             f -> draw();
         }
     }
@@ -295,16 +293,6 @@ int main(int argc, char **argv) {
     glutInitWindowSize(800,600);
     glutCreateWindow("Engine");
 
-    // init vertex vector
-    if(argc > 1)
-        filename = argv[1];
-    else
-        strcpy(filename, "../config.xml");
-    if(!loadVertexes(filename)) {
-        cout << "Error reading xml" << endl;
-        return 1;
-    }
-
     // Callback registration
     glutDisplayFunc(renderScene);
     glutReshapeFunc(changeSize);
@@ -318,6 +306,16 @@ int main(int argc, char **argv) {
 #endif  
 
     init();
+    // init vertex vector
+    if(argc > 1)
+        filename = argv[1];
+    else
+        strcpy(filename, "../config.xml");
+    if(!loadVertexes(filename)) {
+        cout << "Error reading xml" << endl;
+        return 1;
+    }
+
 
     // GLUT's main loop
     glutMainLoop();
