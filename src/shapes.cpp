@@ -25,6 +25,40 @@ std::string vertexString(float x, float y, float z) {
     return strStream.str();
 }
 
+std::vector<std::vector<float>> preenche(int i, std::vector<std::vector<int>> indices,
+                                    std::vector<std::vector<float>> controlPoints) {
+
+    int t = 0;
+    std::vector<int> linha = indices[i];
+    std::vector<std::vector<float>> setDeControlo;
+    for(int j = 0; j <= 3; j++) {
+      for(int k = 0; k <= 3; k++) {
+        int n = linha[t];
+        setDeControlo.push_back(controlPoints[n]);
+        t++;
+      }
+    }
+    return setDeControlo;
+}
+
+void constroiTeapot(std::vector<std::vector<int>> indices,
+                    std::vector<std::vector<float>> controlPoints,
+                    int nrPatches) {
+
+    std::vector<int> vertices;
+    std::vector<std::vector<float>> pontosDeControlo;
+    for(int i = 1; i < 2; i++) { // não é para ficar assim
+       pontosDeControlo = preenche(i, indices, controlPoints);
+    }
+    for (int i = 0; i < pontosDeControlo.size(); i++) {
+        for (int j = 0; j < pontosDeControlo[i].size(); j++) {
+          printf("%f ", pontosDeControlo[i][j]);
+        }
+    printf("\n");
+    }
+}
+
+
 std::vector<int> addIndex(std::string line) {
     std::vector<int> colIndices;
     std::string token;
@@ -104,6 +138,7 @@ std::vector<std::string> teatopOrComet(char *input) {
 }
 */
   //chamar função que constroi o gajo
+  constroiTeapot(indices,controlPoints, nrPatches);
   return v;
 }
 
