@@ -35,14 +35,14 @@ class Translate: public Transformation {
 class TranslateCR: public Transformation { 
 	private:
 		vector<Vertex> points;
-		void getGlobalCatmullRomPoint(float gt, float *res, float *deriv);
+		void getGlobalCatmullRomPoint(float gt, float *res);
 		void buildRotMatrix(float *x, float *y, float *z, float *m);
 		void cross(float *a, float *b, float *res);
 		void normalize(float *a);
 		float length(float *v);
 		void multMatrixVector(float *m, float *v, float *res);
 		float scalarProd(int len, float* vec1, float* vec2);
-		void getCatmullRomPoint(float t, Vertex p0, Vertex p1, Vertex p2, Vertex p3, float *res, float *deriv);
+		void getCatmullRomPoint(float t, Vertex p0, Vertex p1, Vertex p2, Vertex p3, float *res);
 		void renderCatmullRomCurve(void); 
 	public:
 		const float time;

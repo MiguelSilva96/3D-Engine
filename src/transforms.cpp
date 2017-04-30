@@ -9,8 +9,7 @@ void TranslateCR::transform(void) {
 
   	renderCatmullRomCurve();
 
-  	getGlobalCatmullRomPoint(t, res, deriv);
-  	
+	getGlobalCatmullRomPoint(t, res);
 
   	glTranslatef(res[0], res[1], res[2]);
 }
@@ -78,17 +77,15 @@ float TranslateCR::scalarProd(int len, float* vec1, float* vec2) {
 }
 
 
-void TranslateCR::getCatmullRomPoint(float t, Vertex p0, Vertex p1, Vertex p2, Vertex p3, float *res, float *deriv) {
-
+void TranslateCR::getCatmullRomPoint(float t, Vertex p0, Vertex p1, Vertex p2, Vertex p3, float *res) {
 	// catmull-rom matrix
 	float m[4][4] = { {-0.5f,  1.5f, -1.5f,  0.5f},
 					  { 1.0f, -2.5f,  2.0f, -0.5f},
 					  {-0.5f,  0.0f,  0.5f,  0.0f},
 					  { 0.0f,  1.0f,  0.0f,  0.0f} };
 
-	// reset res and deriv
+	// reset res
 	res[0] = 0.0; res[1] = 0.0; res[2] = 0.0;
-	deriv[0] = 0.0; deriv[1] = 0.0; deriv[2] = 0.0;
 
 	// Compute A = M * P
 	float a[3][4];
@@ -104,16 +101,11 @@ void TranslateCR::getCatmullRomPoint(float t, Vertex p0, Vertex p1, Vertex p2, V
 	res[0] = scalarProd(4, vec_t, a[0]);
 	res[1] = scalarProd(4, vec_t, a[1]);
 	res[2] = scalarProd(4, vec_t, a[2]);
-	// compute deriv = T' * A
-	float dev_t[4] = { 3 * t*t, 2 * t, 1, 0 };
-	deriv[0] = scalarProd(4, dev_t, a[0]);
-	deriv[1] = scalarProd(4, dev_t, a[1]);
-	deriv[2] = scalarProd(4, dev_t, a[2]);
 }
 
 
 // given  global t, returns the point in the curve
-void TranslateCR::getGlobalCatmullRomPoint(float gt, float *res, float *deriv) {
+void TranslateCR::getGlobalCatmullRomPoint(float gt, float *res) {
 	int pointCount = points.size();
 	
 	float t = gt * pointCount; // this is the real global t
@@ -132,7 +124,7 @@ void TranslateCR::getGlobalCatmullRomPoint(float gt, float *res, float *deriv) {
 		points.at(indices[1]), 
 		points.at(indices[2]), 
 		points.at(indices[3]), 
-		res, deriv
+		res
 	);
 }
 
@@ -140,11 +132,10 @@ void TranslateCR::renderCatmullRomCurve(void) {
 
 // desenhar a curva usando segmentos de reta - GL_LINE_LOOP
 	float res[3];
-	float deriv[3];
 
 	glBegin(GL_LINE_LOOP);
 	for (float i = 0; i < 1; i += 0.01) {
-		getGlobalCatmullRomPoint(i, res, deriv);
+		getGlobalCatmullRomPoint(i, res);
 		glVertex3f(res[0], res[1], res[2]);
 	}
 	glEnd();
