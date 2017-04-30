@@ -135,6 +135,7 @@ void TranslateCR::renderCatmullRomCurve(void) {
 
 	glBegin(GL_LINE_LOOP);
 	for (float i = 0; i < 1; i += 0.01) {
+		glColor3f(1.0f,1.0f,1.0f);
 		getGlobalCatmullRomPoint(i, res);
 		glVertex3f(res[0], res[1], res[2]);
 	}
