@@ -7,7 +7,6 @@
     @version 1.3
 */
 
-#include <stdlib.h>
 
 #define _USE_MATH_DEFINES
 #include <math.h>

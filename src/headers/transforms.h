@@ -1,6 +1,9 @@
 #ifndef TRANSFORMS_H
 #define TRANSFORMS_H
 
+
+#include <stdlib.h>
+
 #ifdef __APPLE__
 #include <GLUT/glut.h>
 #else
@@ -32,6 +35,15 @@ class Translate: public Transformation {
 class TranslateCR: public Transformation { 
 	private:
 		vector<Vertex> points;
+		void getGlobalCatmullRomPoint(float gt, float *res, float *deriv);
+		void buildRotMatrix(float *x, float *y, float *z, float *m);
+		void cross(float *a, float *b, float *res);
+		void normalize(float *a);
+		float length(float *v);
+		void multMatrixVector(float *m, float *v, float *res);
+		float scalarProd(int len, float* vec1, float* vec2);
+		void getCatmullRomPoint(float t, Vertex p0, Vertex p1, Vertex p2, Vertex p3, float *res, float *deriv);
+		void renderCatmullRomCurve(void); 
 	public:
 		const float time;
 		TranslateCR(float a, float b, float c, float d, vector<Vertex> e) : 

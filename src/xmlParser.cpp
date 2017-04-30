@@ -18,17 +18,18 @@ vector<string> XmlParser::split(string str, char delim) {
     return tokens;
 }
 
-vector<Vertex> XmlParser::getPoints(void) {
+vector<Vertex> XmlParser::getPoints(tinyxml2::XMLElement* el) {
     vector<Vertex> points;
     tinyxml2::XMLElement* auxEl;
     float x,y,z;
-    auxEl = elem;
-    auxEl = auxEl -> FirstChildElement("point");
+    auxEl = el;
+    auxEl = auxEl -> FirstChildElement();
     for(; auxEl != nullptr; auxEl = auxEl -> NextSiblingElement()) {
         auxEl -> QueryFloatAttribute("X", &x);
         auxEl -> QueryFloatAttribute("Y", &y);
         auxEl -> QueryFloatAttribute("Z", &z);
         points.push_back(Vertex(x,y,z));
+
     }
     return points;
 }
@@ -105,7 +106,7 @@ vector<Transformation*> XmlParser::getCurTransformations(void) {
             auxEl -> QueryFloatAttribute("time", &time);
             if(time != -1) {
                 vector<Vertex> points;
-                points = XmlParser::getPoints();
+                points = XmlParser::getPoints(auxEl);
                 t = new TranslateCR(x, y, z, time, points);
             }
             else

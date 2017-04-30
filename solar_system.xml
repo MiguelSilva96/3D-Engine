@@ -41,7 +41,16 @@
 
 	<!-- Earth -->
 	<group>
-		<translate X="36" Y="0" Z="0" />
+		<translate time="10">
+			<point X="0" Y="-68.4" Z="0"/>
+			<point X="-43.2" Y="-46.8" Z="0"/>
+ 			<point X="-61.2" Y="0" Z="0"/>
+ 			<point X="-43.2" Y="46.8" Z="0"/>
+ 			<point X="0" Y="68.4" Z="0"/>
+ 			<point X="-43.2" Y="46.8" Z="0"/>
+ 			<point X="61.2" Y="0" Z="0"/>
+ 			<point X="-43.2" Y="-46.8" Z="0"/>
+ 		</translate> 
 		<rotate time="10" axisX="0.0" axisY="1.0" axisZ="0.0"/>
 		<scale X="1.5" Y="1.5" Z="1.5"/>
 		<models>
