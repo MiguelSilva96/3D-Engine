@@ -1,7 +1,7 @@
 /**
     Practical Assignment Computer Graphics
     generator.cpp
-    Purpose: Generate vertexes to create geometric figures.	
+    Purpose: Generate vertexes to create geometric figures.
 
     @author Jose Silva, Joao Coelho, Luís Fernandes, Pedro Cunha
     @version 1.0
@@ -22,15 +22,17 @@
     @param input Input strings.
     @return Boolean with the result.
 */
+
 bool verifyInput(char **input) {
     std::regex ints("[-+]?[0-9]+");
     std::regex floats("[-+]?[0-9]+\\.?[0-9]*");
+    std::regex inputFile("[a-zA-Z]+.patch");
     char *shape = input[1];
     bool result = false;
     if(!strcmp(shape, "plane"))
-        result = regex_match(input[2], floats) 
-                && regex_match(input[3], floats) 
-                && regex_match(input[4], ints) 
+        result = regex_match(input[2], floats)
+                && regex_match(input[3], floats)
+                && regex_match(input[4], ints)
                 && (input[5] != NULL);
 
     else if(!strcmp(shape, "box"))
@@ -74,6 +76,9 @@ bool verifyInput(char **input) {
                 && regex_match(input[3], floats)
                 && regex_match(input[4], ints)
                 && (input[5] != NULL);
+    else if(!strcmp(shape, "comet") || !strcmp(shape, "teatop")) {
+        result = regex_match(input[2], inputFile);
+    }
     return result;
 }
 
@@ -89,6 +94,7 @@ std::vector<std::string> getVertexes(char **input) {
     float r1, r2, h1, h2;
     int div, slices, stacks, sides, rings;
     std::vector<std::string> vertexes;
+    std::ifstream readingFile;
     if(!strcmp(shape, "plane")) {
         x = std::stof(input[2]);
         z = std::stof(input[3]);
@@ -145,6 +151,9 @@ std::vector<std::string> getVertexes(char **input) {
         sides = std::stoi(input[4]);
         vertexes = crown(r1, r2, sides);
     }
+    else if(!strcmp(shape, "comet") || !strcmp(shape, "teatop")) {
+        vertexes = teatopOrComet(input[2]);
+    }
     return vertexes;
 }
 
@@ -154,7 +163,7 @@ int main(int argc, char **argv) {
     std::vector<std::string> vertexes;
     std::ofstream file;
     std::string folder = "../shapes/";
-    if(argc < 6 || !verifyInput(argv) || argc > 9) {
+    if(!verifyInput(argv) || argc > 9) {
         std::cout << "Input error\n";
         return -1;
     }
