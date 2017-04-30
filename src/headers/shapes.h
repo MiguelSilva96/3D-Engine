@@ -6,18 +6,20 @@
 
 /**
     Returns vertexes for a plane.
-    
+
     @param x Length of the plane on X axis.
     @param y Position of the plane on Y axis.
     @param z Length of the plane on Z axis.
     @param div Number of divisions of the plane.
     @return Vector with all strings of the vertexes.
 */
+std::vector<std::string> teatopOrComet(char *input);
+
 std::vector<std::string> plane(float x, float y, float z, int div);
 
 /**
     Returns vertexes for a box.
-    
+
     @param x Length of the box on X axis.
     @param y Box's height.
     @param z Length of the box on Z axis.

@@ -76,7 +76,7 @@ bool verifyInput(char **input) {
                 && regex_match(input[3], floats)
                 && regex_match(input[4], ints)
                 && (input[5] != NULL);
-    else if(!strcmp(shape, "comet") || !strcmp(shape, "teatop")) {
+    else if(!strcmp(shape, "comet") || !strcmp(shape, "teapot")) {
         result = regex_match(input[2], inputFile);
     }
     return result;
@@ -151,7 +151,7 @@ std::vector<std::string> getVertexes(char **input) {
         sides = std::stoi(input[4]);
         vertexes = crown(r1, r2, sides);
     }
-    else if(!strcmp(shape, "comet") || !strcmp(shape, "teatop")) {
+    else if(!strcmp(shape, "comet") || !strcmp(shape, "teapot")) {
         vertexes = teatopOrComet(input[2]);
     }
     return vertexes;

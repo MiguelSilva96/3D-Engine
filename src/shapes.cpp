@@ -85,13 +85,11 @@ std::vector<std::string> teatopOrComet(char *input) {
     }
     i++;
   }
-  /* SÓ PARA TESTAR
+/* Só para teste
   printf("%d\n", nrPatches);
-  for (int i = 0; i < indices.size(); i++)
-  {
-      for (int j = 0; j < indices[i].size(); j++)
-      {
-          printf("%d ", indices[i][j]);
+  for (int i = 0; i < indices.size(); i++) {
+      for (int j = 0; j < indices[i].size(); j++) {
+        printf("%d ", indices[i][j]);
       }
   printf("\n");
   }
@@ -103,7 +101,8 @@ std::vector<std::string> teatopOrComet(char *input) {
           printf("%f ", controlPoints[i][j] );
       }
   printf("\n");
-}*/
+}
+*/
   //chamar função que constroi o gajo
   return v;
 }
