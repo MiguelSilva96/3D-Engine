@@ -41,21 +41,81 @@ std::vector<std::vector<float>> preenche(int i, std::vector<std::vector<int>> in
     return setDeControlo;
 }
 
+int factorial(int n) {
+  int result = 0;
+  if (n >= 0) {
+    result = 1;
+    for (int i = n; i > 1; i--)
+    result *= i;
+  }
+  return result;
+}
+
+float coeficienteBi(int i, int n) {
+  if ((i >= 0) && (n >= 0)) {
+    return 1.0f * factorial(n) / (factorial(i) * factorial(n-i));
+  }
+  return 0;
+}
+
+float polinomialBerns(int i, int n, float u) {
+  return coeficienteBi(i, n) * powf(u, i) * powf(1-u, n-i);
+}
+
+
+std::vector<float> calculaPosicao(std::vector<std::vector<float>> pontosDeControlo,
+                                  float u, float v) {
+    std::vector<float> result;
+    int t = 0;
+    for(int i = 0; i <= 3; i++) {
+      for(int j = 0; j <= 3; j++) {
+        float polinomial1 = polinomialBerns(i, 3, u);
+        float polinomial2 = polinomialBerns(j, 3, v);
+        std::vector<float> ponto = pontosDeControlo[t];
+        result[0] += polinomial1 * polinomial2 * ponto[0];
+        result[1] += polinomial1 * polinomial2 * ponto[1];
+        result[2] += polinomial1 * polinomial2 * ponto[2];
+        t++;
+      }
+    }
+    return result;
+}
+
 void constroiTeapot(std::vector<std::vector<int>> indices,
                     std::vector<std::vector<float>> controlPoints,
                     int nrPatches) {
 
-    std::vector<int> vertices;
+    std::vector<std::vector<float>> vertices;
     std::vector<std::vector<float>> pontosDeControlo;
-    for(int i = 1; i < 2; i++) { // não é para ficar assim
+    for(int i = 0; i < nrPatches; i++) { // não é para ficar assim
        pontosDeControlo = preenche(i, indices, controlPoints);
-    }
-    for (int i = 0; i < pontosDeControlo.size(); i++) {
-        for (int j = 0; j < pontosDeControlo[i].size(); j++) {
-          printf("%f ", pontosDeControlo[i][j]);
-        }
-    printf("\n");
-    }
+       for (int ru = 0; ru <= 9; ru++) {
+         float u = 1.0 * ru / 9;
+         for (int rv = 0; rv <= 9; rv++) {
+           float v = 1.0 * rv / (9);
+           std::vector<float> f = calculaPosicao(pontosDeControlo, u, v);
+           vertices[i*10*10 + ru*10 + rv] = f;
+         }
+       }
+     }
+    std::vector<int> elementos;
+     int n = 0;
+     for (int p = 0; p < nrPatches; p++)
+        for (int ru = 0; ru < 9; ru++)
+            for (int rv = 0; rv < 9; rv++) {
+	             elementos[n] = (p*10*10+ru*10+rv);
+               n++;
+	             elementos[n] = (p*10*10+ru*10+(rv+1));
+               n++;
+	             elementos[n] = (p*10*10+(ru+1)*10+(rv+1));
+               n++;
+	             elementos[n] = (p*10*10+(ru+1)*10+(rv+1));
+               n++;
+	             elementos[n] = (p*10*10+(ru+1)*10+rv);
+               n++;
+	             elementos[n] = (p*10*10+ru*10+rv);
+               n++;
+             }
 }
 
 
