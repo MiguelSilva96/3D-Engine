@@ -67,7 +67,16 @@
 		</models>	
 		<!-- Moon -->
 		<group>
-			<translate X="1" Y="0" Z="2" />
+		<translate time="100">
+			<point X="-2.4" Y="2.4" Z="0"/>
+			<point X="-1.7" Y="1.7" Z="1.7"/>
+ 			<point X="0" Y="0" Z="2.4"/>
+ 			<point X="1.7" Y="-1.7" Z="1.7"/>
+ 			<point X="2.4" Y="-2.4" Z="0"/>
+ 			<point X="1.7" Y="-1.7" Z="-1.7"/>
+ 			<point X="0" Y="0" Z="-2.4"/>
+ 			<point X="-1.7" Y="1.7" Z="-1.7"/>
+ 		</translate> 
 			<scale X="0.35" Y="0.35" Z="0.35"/>
 			<models>
 				<model file="sphereLuas.3d" diffR="0.439216" diffG="0.501961" diffB="0.564706" />
