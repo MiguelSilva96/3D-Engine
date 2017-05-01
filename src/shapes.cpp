@@ -26,7 +26,7 @@ string vertexString(float x, float y, float z) {
 }
 
 float getPoint(float u, float v, float m[4][4] , float p[4][4]) {
-  float pointValue = 0;
+  float pValue = 0;
   float aux[4], aux2[4];
 
   //bu*M
@@ -35,7 +35,6 @@ float getPoint(float u, float v, float m[4][4] , float p[4][4]) {
     aux[i] += (powf(u,2.0)*m[1][i]);
     aux[i] += (u*m[2][i]) + m[3][i];
   }
-
 
   //(bu*M)*P
   for(int i = 0; i<4; i++){
@@ -54,31 +53,31 @@ float getPoint(float u, float v, float m[4][4] , float p[4][4]) {
   }
 
   //(((bu*M)*P)*MT)*bv
-  pointValue  = aux[0] * powf(v, 3.0);
-  pointValue += aux[1] * powf(v, 2.0);
-  pointValue += aux[2] * v;
-  pointValue += aux[3];
+  pValue  = aux[0] * powf(v, 3.0);
+  pValue += aux[1] * powf(v, 2.0);
+  pValue += aux[2] * v;
+  pValue += aux[3];
 
-  return pointValue;
+  return pValue;
 }
 
-vector<string> bezierPatches(int tessellation, vector<vector<int>> indices, vector<vector<float>> controlPoints) {
+vector<string> bezierSurface(int tessellation, vector<vector<int>> indices, vector<vector<float>> controlPoints) {
     vector<string> vr;
     int aux, nrPatches = indices.size();
     vector<int> patchIndice;
     vector<vector<float>> ma;
     float px[4][4], py[4][4], pz[4][4], res[3];
     float u, v, level = 1.0f/tessellation;
-    float size = nrPatches * 6 * (1/level) * (1/level);
     for(int patch = 0; patch < nrPatches; patch++) {
         aux = 0;
         patchIndice = indices.at(patch);
 
-        //Fill matrix ma with the control points
+        //Obter os pontos de controlo do patch atual
         for(int i = 0; i < 16; i++) {
             ma.push_back(controlPoints.at(patchIndice[i]));
         }
 
+        //Preencher px, py, e pz com valores dos pontos de controlo
         for(int i = 0; i < 4; i++){
             for(int j = 0; j < 4; j++, aux++){
                 px[i][j] = ma.at(aux).at(0);
@@ -139,10 +138,10 @@ vector<int> addIndex(string line) {
     size_t pos = 0;
     string delimiter = ", ";
     while((pos = line.find(delimiter)) != string::npos) {
-      token = line.substr(0, pos);
-      line.erase(0, pos + delimiter.length());
-      int indexValue = stoi(token);
-      colIndices.push_back(indexValue);
+        token = line.substr(0, pos);
+        line.erase(0, pos + delimiter.length());
+        int indexValue = stoi(token);
+        colIndices.push_back(indexValue);
     }
     int indexValue = stoi(line);
     colIndices.push_back(indexValue);
@@ -193,7 +192,7 @@ vector<string> bezier(char *input, int tessellation) {
         }
         i++;
     }
-    v = bezierPatches(tessellation, indices, controlPoints);
+    v = bezierSurface(tessellation, indices, controlPoints);
     return v;
 }
 

@@ -1,4 +1,8 @@
 <?xml version="1.0" ?>
 <scene>
-    <model file='cylinder.3d' />
+	<group>
+		<models>
+    		<model file='cylinder.3d' />
+    	</models>
+    </group>
 </scene>

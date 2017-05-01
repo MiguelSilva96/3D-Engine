@@ -1,4 +1,8 @@
 <?xml version="1.0" ?>
 <scene>
-    <model file='box.3d' />
+	<group>
+		<models>
+    		<model file='box.3d' />
+    	</models>
+    </group>
 </scene>
