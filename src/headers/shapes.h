@@ -4,6 +4,11 @@
 #include <vector>
 #include <string>
 
+using namespace std;
+
+
+vector<string> bezier(char *input, int tessellation);
+
 /**
     Returns vertexes for a plane.
 
@@ -13,9 +18,7 @@
     @param div Number of divisions of the plane.
     @return Vector with all strings of the vertexes.
 */
-std::vector<std::string> teatopOrComet(char *input, int tessellation);
-
-std::vector<std::string> plane(float x, float y, float z, int div);
+vector<string> plane(float x, float y, float z, int div);
 
 /**
     Returns vertexes for a box.
@@ -26,7 +29,7 @@ std::vector<std::string> plane(float x, float y, float z, int div);
     @param div Number of divisions of each face of the box.
     @return Vector with all strings of the vertexes.
 */
-std::vector<std::string> box(float x, float y, float z, int div);
+vector<string> box(float x, float y, float z, int div);
 
 /**
     Returns vertexes for a sphere.
@@ -36,7 +39,7 @@ std::vector<std::string> box(float x, float y, float z, int div);
     @param stacks Number of stacks.
     @return Vector with all strings of the vertexes.
 */
-std::vector<std::string> sphere(float radius, int slices, int stacks);
+vector<string> sphere(float radius, int slices, int stacks);
 
 /**
     Returns vertexes for a cylinder or cone(if top radius is 0).
@@ -48,7 +51,7 @@ std::vector<std::string> sphere(float radius, int slices, int stacks);
     @param stacks Number of stacks.
     @return Vector with all strings of the vertexes.
 */
-std::vector<std::string> cylinder(float radB, float radT, float height, int slices, int stacks);
+vector<string> cylinder(float radB, float radT, float height, int slices, int stacks);
 
 /**
     Returns vertexes for a torus.
@@ -59,7 +62,7 @@ std::vector<std::string> cylinder(float radB, float radT, float height, int slic
     @param rings Number of rings.
     @return Vector with all strings of the vertexes.
 */
-std::vector<std::string> torus(float inner, float outer, int sides, int rings);
+vector<string> torus(float inner, float outer, int sides, int rings);
 
 /**
     Returns vertexes for a rubi.
@@ -72,7 +75,7 @@ std::vector<std::string> torus(float inner, float outer, int sides, int rings);
     @param stacks Number of stacks.
     @return Vector with all strings of the vertexes.
 */
-std::vector<std::string> ruby(float rb, float rt, float heightb, float heightt, int slices, int stacks);
+vector<string> ruby(float rb, float rt, float heightb, float heightt, int slices, int stacks);
 
 
 /**
@@ -83,6 +86,6 @@ Returns vertexes for a crown.
 @param sides Number of sides.
 @return Vector with all strings of the vertexes.
 */
-std::vector<std::string> crown(float inner, float outer, int sides);
+vector<string> crown(float inner, float outer, int sides);
 
 #endif

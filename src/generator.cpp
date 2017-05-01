@@ -26,7 +26,6 @@
 bool verifyInput(char **input) {
     std::regex ints("[-+]?[0-9]+");
     std::regex floats("[-+]?[0-9]+\\.?[0-9]*");
-    std::regex inputFile("[a-zA-Z]+.patch");
     char *shape = input[1];
     bool result = false;
     if(!strcmp(shape, "plane"))
@@ -76,9 +75,8 @@ bool verifyInput(char **input) {
                 && regex_match(input[3], floats)
                 && regex_match(input[4], ints)
                 && (input[5] != NULL);
-    else if(!strcmp(shape, "comet") || !strcmp(shape, "teapot")) {
-        result = regex_match(input[2], inputFile)
-                && regex_match(input[3], ints);
+    else if(!strcmp(shape, "bezier")) {
+        result = regex_match(input[3], ints);
     }
     return result;
 }
@@ -153,10 +151,10 @@ std::vector<std::string> getVertexes(char **input) {
         sides = std::stoi(input[4]);
         vertexes = crown(r1, r2, sides);
     }
-    else if(!strcmp(shape, "comet") || !strcmp(shape, "teapot")) {
+    else if(!strcmp(shape, "bezier")) {
         file = input[2];
         r1 = std::stoi(input[3]);
-        vertexes = teatopOrComet(file, r1);
+        vertexes = bezier(file, r1);
     }
     return vertexes;
 }
