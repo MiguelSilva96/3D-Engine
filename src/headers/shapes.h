@@ -13,7 +13,7 @@
     @param div Number of divisions of the plane.
     @return Vector with all strings of the vertexes.
 */
-std::vector<std::string> teatopOrComet(char *input);
+std::vector<std::string> teatopOrComet(char *input, int tessellation);
 
 std::vector<std::string> plane(float x, float y, float z, int div);
 

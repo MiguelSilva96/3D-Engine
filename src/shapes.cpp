@@ -27,16 +27,14 @@ std::string vertexString(float x, float y, float z) {
 
 std::vector<std::vector<float>> preenche(int i, std::vector<std::vector<int>> indices,
                                     std::vector<std::vector<float>> controlPoints) {
-
-    int t = 0;
     std::vector<int> linha = indices[i];
     std::vector<std::vector<float>> setDeControlo;
-    for(int j = 0; j <= 3; j++) {
-      for(int k = 0; k <= 3; k++) {
+    int tamanho = indices[i].size();
+    int t = 0;
+    while (t < tamanho) {
         int n = linha[t];
         setDeControlo.push_back(controlPoints[n]);
         t++;
-      }
     }
     return setDeControlo;
 }
@@ -66,38 +64,49 @@ float polinomialBerns(int i, int n, float u) {
 std::vector<float> calculaPosicao(std::vector<std::vector<float>> pontosDeControlo,
                                   float u, float v) {
     std::vector<float> result;
+    float total1 = 0;
+    float total2 = 0;
+    float total3 = 0;
     int t = 0;
-    for(int i = 0; i <= 3; i++) {
-      for(int j = 0; j <= 3; j++) {
+    for(int i = 0; i < 3; i++) {
+      for(int j = 0; j < 3; j++) {
         float polinomial1 = polinomialBerns(i, 3, u);
         float polinomial2 = polinomialBerns(j, 3, v);
         std::vector<float> ponto = pontosDeControlo[t];
-        result[0] += polinomial1 * polinomial2 * ponto[0];
-        result[1] += polinomial1 * polinomial2 * ponto[1];
-        result[2] += polinomial1 * polinomial2 * ponto[2];
+        total1 += polinomial1 * polinomial2 * ponto[0];
+        total2 += polinomial1 * polinomial2 * ponto[1];
+        total3 += polinomial1 * polinomial2 * ponto[2];
         t++;
       }
     }
+    result.push_back(total1);
+    result.push_back(total2);
+    result.push_back(total2);
     return result;
 }
 
 void constroiTeapot(std::vector<std::vector<int>> indices,
                     std::vector<std::vector<float>> controlPoints,
-                    int nrPatches) {
+                    int nrPatches, int tessellation) {
 
-    std::vector<std::vector<float>> vertices;
-    std::vector<std::vector<float>> pontosDeControlo;
-    for(int i = 0; i < nrPatches; i++) { // não é para ficar assim
+    std::vector<std::vector<float>> vertices(nrPatches*tessellation*tessellation);
+    for(int i = 0; i < 1; i++) {
+       std::vector<std::vector<float>> pontosDeControlo;
        pontosDeControlo = preenche(i, indices, controlPoints);
-       for (int ru = 0; ru <= 9; ru++) {
-         float u = 1.0 * ru / 9;
-         for (int rv = 0; rv <= 9; rv++) {
-           float v = 1.0 * rv / (9);
+       for (int ru = 0; ru <= (tessellation-1); ru++) {
+         float u = 1.0 * ru / (tessellation-1);
+         for (int rv = 0; rv <= (tessellation-1); rv++) {
+           float v = 1.0 * rv / (tessellation-1);
            std::vector<float> f = calculaPosicao(pontosDeControlo, u, v);
-           vertices[i*10*10 + ru*10 + rv] = f;
+           vertices[((i*tessellation*tessellation) + (ru*tessellation) + rv)] = f;
+           for (int j = 0; j < vertices[((i*tessellation*tessellation) + (ru*tessellation) + rv)].size(); j++) {
+             printf("%f ", vertices[((i*tessellation*tessellation) + (ru*tessellation) + rv)][j]);
+           }
+           printf("\n");
          }
        }
      }
+    /*
     std::vector<int> elementos;
      int n = 0;
      for (int p = 0; p < nrPatches; p++)
@@ -116,6 +125,7 @@ void constroiTeapot(std::vector<std::vector<int>> indices,
 	             elementos[n] = (p*10*10+ru*10+rv);
                n++;
              }
+    */
 }
 
 
@@ -151,7 +161,7 @@ std::vector<float> addPoint(std::string line) {
     return colPoints;
 }
 
-std::vector<std::string> teatopOrComet(char *input) {
+std::vector<std::string> teatopOrComet(char *input, int tessellation) {
   std::vector<std::string> v;
   std::ifstream readingFile(input);
   int nrPatches = 0;
@@ -179,26 +189,7 @@ std::vector<std::string> teatopOrComet(char *input) {
     }
     i++;
   }
-/* Só para teste
-  printf("%d\n", nrPatches);
-  for (int i = 0; i < indices.size(); i++) {
-      for (int j = 0; j < indices[i].size(); j++) {
-        printf("%d ", indices[i][j]);
-      }
-  printf("\n");
-  }
-  printf("%d\n", nrControlPoints);
-  for (int i = 0; i < controlPoints.size(); i++)
-  {
-      for (int j = 0; j < controlPoints[i].size(); j++)
-      {
-          printf("%f ", controlPoints[i][j] );
-      }
-  printf("\n");
-}
-*/
-  //chamar função que constroi o gajo
-  constroiTeapot(indices,controlPoints, nrPatches);
+  constroiTeapot(indices,controlPoints, nrPatches, tessellation);
   return v;
 }
 
