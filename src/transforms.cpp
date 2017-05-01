@@ -148,15 +148,9 @@ void TranslateCR::getGlobalCatmullRomPoint(float gt, float *res, float *deriv) {
 }
 
 void TranslateCR::renderCatmullRomCurve(void) {
+	glBindBuffer(GL_ARRAY_BUFFER, buffers[0]);
+    glVertexPointer(3, GL_FLOAT, 0, 0);
+    glColor3f(1.0f,1.0f,1.0f);
+    glDrawArrays(GL_LINE_LOOP, 0, vertexes.size());
 
-// desenhar a curva usando segmentos de reta - GL_LINE_LOOP
-	float res[3], deriv[3];
-
-	glBegin(GL_LINE_LOOP);
-	for (float i = 0; i < 1; i += 0.01) {
-		glColor3f(1.0f,1.0f,1.0f);
-		getGlobalCatmullRomPoint(i, res, deriv);
-		glVertex3f(res[0], res[1], res[2]);
-	}
-	glEnd();
 }

@@ -62,7 +62,7 @@ float getPoint(float u, float v, float m[4][4] , float p[4][4]) {
   return pointValue;
 }
 
-vector<string> bezierCurve(int tessellation, vector<vector<int>> indices, vector<vector<float>> controlPoints) {
+vector<string> bezierPatches(int tessellation, vector<vector<int>> indices, vector<vector<float>> controlPoints) {
     vector<string> vr;
     int aux, nrPatches = indices.size();
     vector<int> patchIndice;
@@ -193,7 +193,7 @@ vector<string> bezier(char *input, int tessellation) {
         }
         i++;
     }
-    v = bezierCurve(tessellation, indices, controlPoints);
+    v = bezierPatches(tessellation, indices, controlPoints);
     return v;
 }
 

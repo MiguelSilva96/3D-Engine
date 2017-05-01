@@ -35,6 +35,8 @@ class Translate: public Transformation {
 class TranslateCR: public Transformation { 
 	private:
 		vector<Vertex> points;
+		GLuint buffers[3];
+		vector<Vertex> vertexes;
 		void getGlobalCatmullRomPoint(float gt, float *res, float *deriv);
 		void buildRotMatrix(float *x, float *y, float *z, float *m);
 		void cross(float *a, float *b, float *res);
@@ -47,7 +49,21 @@ class TranslateCR: public Transformation {
 	public:
 		const float time;
 		TranslateCR(float a, float b, float c, float d, vector<Vertex> e) : 
-			Transformation(a,b,c), time(d), points(e) { }
+			Transformation(a,b,c), time(d), points(e) {
+				float res[3], deriv[3];
+				glGenBuffers(1, buffers);
+				for(float i = 0; i < 1; i += 0.01) {
+					getGlobalCatmullRomPoint(i, res, deriv);
+					vertexes.push_back(Vertex(res[0], res[1], res[2]));
+				}
+				glBindBuffer(GL_ARRAY_BUFFER, buffers[0]);
+    			glBufferData(
+        			GL_ARRAY_BUFFER, 
+        			vertexes.size() * sizeof(float) * 3, 
+        			&(vertexes[0].x), 
+        			GL_STATIC_DRAW
+    			);
+			}
 		void transform(void);
 };
 
