@@ -359,13 +359,13 @@
 	<group>
 		<translate time="500">
 			<point X="0" Y="0" Z="-500"/>
-			<point X="-70" Y="0" Z="-400"/>
- 			<point X="-90" Y="0" Z="-250"/>
- 			<point X="-70" Y="0" Z="-100"/>
+			<point X="-40" Y="70" Z="-430"/>
+ 			<point X="-50" Y="80" Z="-250"/>
+ 			<point X="-40" Y="70" Z="-100"/>
  			<point X="0" Y="0" Z="50"/>
- 			<point X="70" Y="0" Z="-100"/>
- 			<point X="90" Y="0" Z="-250"/>
- 			<point X="70" Y="0" Z="-400"/>
+ 			<point X="40" Y="-70" Z="-100"/>
+ 			<point X="50" Y="-80" Z="-250"/>
+ 			<point X="40" Y="-70" Z="-430"/>
  		</translate>
  		<models>
 			<model file="teapot.3d" diffR="0.439216" diffG="0.501961" diffB="0.564706" />
