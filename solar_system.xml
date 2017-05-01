@@ -12,7 +12,7 @@
 
 	<!-- Mercury -->
 	<group>
-		<translate time="24">
+		<translate time="240">
 			<point X="0" Y="0" Z="-47.5"/>
 			<point X="-30" Y="0" Z="-32.5"/>
  			<point X="-42.5" Y="0" Z="0"/>
@@ -31,7 +31,7 @@
 
 	<!-- Venus -->
 	<group>
-		<translate time="62">
+		<translate time="620">
 			<point X="0" Y="0" Z="-57.95"/>
 			<point X="-36.6" Y="0" Z="-39.65"/>
  			<point X="-51.85" Y="0" Z="0"/>
@@ -50,7 +50,7 @@
 
 	<!-- Earth -->
 	<group>
-		<translate time="100">
+		<translate time="1000">
 			<point X="0" Y="0" Z="-68.4"/>
 			<point X="-43.2" Y="0" Z="-46.8"/>
  			<point X="-61.2" Y="0" Z="0"/>
@@ -67,7 +67,7 @@
 		</models>	
 		<!-- Moon -->
 		<group>
-		<translate time="36.9">
+		<translate time="100">
 			<point X="-2.4" Y="2.4" Z="0"/>
 			<point X="-1.7" Y="1.7" Z="1.7"/>
  			<point X="0" Y="0" Z="2.4"/>
@@ -78,7 +78,6 @@
  			<point X="-1.7" Y="1.7" Z="-1.7"/>
  		</translate> 
 			<scale X="0.35" Y="0.35" Z="0.35"/>
-			<rotate time="36.9" axisX="0.0" axisY="1.0" axisZ="0.0"/>
 			<models>
 				<model file="sphereLuas.3d" diffR="0.439216" diffG="0.501961" diffB="0.564706" />
 			</models>
@@ -87,7 +86,7 @@
 
 	<!-- Mars -->
 	<group>
-		<translate time="188">
+		<translate time="1880">
 			<point X="0" Y="0" Z="-81.7"/>
 			<point X="-51.6" Y="0" Z="-55.9"/>
  			<point X="-73.1" Y="0" Z="0"/>
@@ -156,7 +155,7 @@
 
 	<!-- Jupiter -->
 	<group>
-		<translate time="1186">
+		<translate time="11860">
 			<point X="0" Y="0" Z="-143.45"/>
 			<point X="-90.6" Y="0" Z="-98.15"/>
  			<point X="-128.35" Y="0" Z="0"/>
@@ -207,7 +206,7 @@
 
 	<!-- Saturn -->
 	<group>
-		<translate time="2946">
+		<translate time="29460">
 			<point X="0" Y="0" Z="-191.9"/>
 			<point X="-121.2" Y="0" Z="-131.3"/>
  			<point X="-171.7" Y="0" Z="0"/>
@@ -272,7 +271,7 @@
 
 	<!-- Uranus -->
 	<group>
-		<translate time="8375">
+		<translate time="83750">
 			<point X="0" Y="0" Z="-326.8"/>
 			<point X="-206.4" Y="0" Z="-223.6"/>
  			<point X="-292.4" Y="0" Z="0"/>
@@ -323,7 +322,7 @@
 
 	<!-- Neptune -->
 	<group>
-		<translate time="16372">
+		<translate time="163720">
 			<point X="0" Y="0" Z="-478.8"/>
 			<point X="-302.4" Y="0" Z="-327.6"/>
  			<point X="-428.4" Y="0" Z="0"/>
@@ -356,4 +355,20 @@
 		</group>
 	</group>
 
+	<!-- Cometa -->
+	<group>
+		<translate time="100">
+			<point X="0" Y="0" Z="-500"/>
+			<point X="0" Y="-70" Z="-400"/>
+ 			<point X="0" Y="-90" Z="-250"/>
+ 			<point X="0" Y="-70" Z="-100"/>
+ 			<point X="0" Y="0" Z="50"/>
+ 			<point X="0" Y="70" Z="-100"/>
+ 			<point X="0" Y="90" Z="-250"/>
+ 			<point X="0" Y="70" Z="-400"/>
+ 		</translate>
+ 		<models>
+			<model file="sphereLuas.3d" diffR="0.439216" diffG="0.501961" diffB="0.564706" />
+		</models> 	
+ 	</group>
 </scene>
