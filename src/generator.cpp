@@ -24,8 +24,8 @@
 */
 
 bool verifyInput(char **input) {
-    std::regex ints("[-+]?[0-9]+");
-    std::regex floats("[-+]?[0-9]+\\.?[0-9]*");
+    regex ints("[-+]?[0-9]+");
+    regex floats("[-+]?[0-9]+\\.?[0-9]*");
     char *shape = input[1];
     bool result = false;
     if(!strcmp(shape, "plane"))
@@ -87,73 +87,73 @@ bool verifyInput(char **input) {
     @param input Input strings.
     @return Vector with all strings of the vertexes.
 */
-std::vector<std::string> getVertexes(char **input) {
+vector<string>* getVertexes(char **input) {
     char *shape = input[1];
     char *file;
     float x, y, z, radius, height;
     float r1, r2, h1, h2;
     int div, slices, stacks, sides, rings;
-    std::vector<std::string> vertexes;
-    std::ifstream readingFile;
+    vector<string> *vertexes;
+    ifstream readingFile;
     if(!strcmp(shape, "plane")) {
-        x = std::stof(input[2]);
-        z = std::stof(input[3]);
-        div = std::stoi(input[4]);
+        x = stof(input[2]);
+        z = stof(input[3]);
+        div = stoi(input[4]);
         vertexes = plane(x, 0.0, z, div);
     }
     else if(!strcmp(shape, "box")) {
-        x = std::stof(input[2]);
-        y = std::stof(input[3]);
-        z = std::stof(input[4]);
-        div = std::stoi(input[5]);
+        x = stof(input[2]);
+        y = stof(input[3]);
+        z = stof(input[4]);
+        div = stoi(input[5]);
         vertexes =  box(x, y, z, div);
     }
     else if(!strcmp(shape, "sphere")) {
-        radius = std::stof(input[2]);
-        slices = std::stoi(input[3]);
-        stacks = std::stoi(input[4]);
+        radius = stof(input[2]);
+        slices = stoi(input[3]);
+        stacks = stoi(input[4]);
         vertexes = sphere(radius, slices, stacks);
     }
     else if(!strcmp(shape, "cone")) {
-        radius = std::stof(input[2]);
-        height = std::stof(input[3]);
-        slices = std::stoi(input[4]);
-        stacks = std::stoi(input[5]);
+        radius = stof(input[2]);
+        height = stof(input[3]);
+        slices = stoi(input[4]);
+        stacks = stoi(input[5]);
         vertexes = cylinder(radius, 0.0f, height, slices, stacks);
     }
     else if(!strcmp(shape, "cylinder")) {
-        r1 = std::stof(input[2]);
-        r2 = std::stof(input[3]);
-        height = std::stof(input[4]);
-        slices = std::stoi(input[5]);
-        stacks = std::stoi(input[5]);
+        r1 = stof(input[2]);
+        r2 = stof(input[3]);
+        height = stof(input[4]);
+        slices = stoi(input[5]);
+        stacks = stoi(input[5]);
         vertexes = cylinder(r1, r2, height, slices, stacks);
     }
     else if(!strcmp(shape, "torus")) {
-        r1 = std::stof(input[2]);
-        r2 = std::stof(input[3]);
-        sides = std::stoi(input[4]);
-        rings = std::stoi(input[5]);
+        r1 = stof(input[2]);
+        r2 = stof(input[3]);
+        sides = stoi(input[4]);
+        rings = stoi(input[5]);
         vertexes = torus(r1, r2, sides, rings);
     }
     else if(!strcmp(shape, "ruby")) {
-        r1 = std::stof(input[2]);
-        r2 = std::stof(input[3]);
-        h1 = std::stof(input[4]);
-        h2 = std::stof(input[5]);
-        slices = std::stoi(input[6]);
-        stacks = std::stoi(input[7]);
+        r1 = stof(input[2]);
+        r2 = stof(input[3]);
+        h1 = stof(input[4]);
+        h2 = stof(input[5]);
+        slices = stoi(input[6]);
+        stacks = stoi(input[7]);
         vertexes = ruby(r1, r2, h1, h2, slices, stacks);
     }
     else if(!strcmp(shape, "crown")) {
-        r1 = std::stof(input[2]);
-        r2 = std::stof(input[3]);
-        sides = std::stoi(input[4]);
+        r1 = stof(input[2]);
+        r2 = stof(input[3]);
+        sides = stoi(input[4]);
         vertexes = crown(r1, r2, sides);
     }
     else if(!strcmp(shape, "bezier")) {
         file = input[2];
-        r1 = std::stoi(input[3]);
+        r1 = stoi(input[3]);
         vertexes = bezier(file, r1);
     }
     return vertexes;
@@ -162,23 +162,29 @@ std::vector<std::string> getVertexes(char **input) {
 
 
 int main(int argc, char **argv) {
-    std::vector<std::string> vertexes;
-    std::ofstream file;
-    std::string folder = "../shapes/";
+    vector<string> *vertexes;
+    ofstream file;
+    string folder = "../shapes/";
     if(!verifyInput(argv) || argc > 9) {
-        std::cout << "Input error\n";
+        cout << "Input error\n";
         return -1;
     }
     vertexes = getVertexes(argv);
-    std::string fileName(argv[argc-1]);
+    string fileName(argv[argc-1]);
     file.open(folder + fileName);
     if(file.is_open()) {
-        file << vertexes.size() << "\n";
-        std::vector<std::string>::iterator it;
-        for(it = vertexes.begin(); it != vertexes.end(); ++it)
+        //print vertexes
+        file << vertexes[0].size() << "\n";
+        vector<string>::iterator it;
+        for(it = vertexes[0].begin(); it != vertexes[0].end(); ++it)
             file << *it;
+        //print normals
+        file << vertexes[1].size() << "\n";
+        for(it = vertexes[1].begin(); it != vertexes[1].end(); ++it)
+            file << *it;
+        //print textures
     }
-    else std::cout << "Can't write to file\n";
-    vertexes.clear();
+    else cout << "Can't write to file\n";
+    vertexes[0].clear();
     return 0;
 }

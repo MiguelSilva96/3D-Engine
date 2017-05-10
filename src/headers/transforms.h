@@ -79,7 +79,8 @@ class Color: public Transformation {
 	public:
 		Color(float a, float b, float c) : Transformation(a,b,c) { } 
 		void transform(void) {
-			glColor3f(x, y, z);
+			float color[4] = { x, y, z, 1 };
+			glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, color);
 		};
 };
 

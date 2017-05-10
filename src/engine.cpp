@@ -156,6 +156,7 @@ void renderGroup(Group g) {
 
 void renderScene(void) {
     // clear buffers
+    glClearColor(0.0f,0.0f,0.0f,0.0f);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
     // set the camera
@@ -163,10 +164,17 @@ void renderScene(void) {
     lx = px + radius *sin(alfa) * cos(beta);
     ly = py + radius *sin(beta);
     lz = pz + radius *cos(alfa) * cos(beta);
-    gluLookAt(px, py, pz, 
+    float pos1[4] = {  4, 0,  0, 0 };
+    float pos2[4] = {  0, 0,  4, 0 };
+    float pos3[4] = {  4, 0,  4, 0 };
+
+    gluLookAt(px, py, pz,
               lx, ly, lz,
               upx, upy, upz);
 
+    glLightfv(GL_LIGHT0, GL_POSITION, pos1);
+    glLightfv(GL_LIGHT1, GL_POSITION, pos2);
+    glLightfv(GL_LIGHT2, GL_POSITION, pos3);
     glPolygonMode(GL_FRONT, modes[mode]);
 
     vector<Group>::iterator it;
@@ -279,6 +287,19 @@ void init() {
     glClearColor(0.0f,0.0f,0.0f,0.0f);
 
     glEnableClientState(GL_VERTEX_ARRAY);
+    glEnableClientState(GL_NORMAL_ARRAY);
+    glEnable(GL_LIGHTING);
+    glEnable(GL_LIGHT0);
+    glEnable(GL_LIGHT1);
+    glEnable(GL_LIGHT2);
+    GLfloat amb[4] = {0.2, 0.2, 0.2, 1.0};
+    GLfloat diff[4] = {1.0, 1.0, 1.0, 1.0};
+    glLightfv(GL_LIGHT0, GL_AMBIENT, amb);
+    glLightfv(GL_LIGHT0, GL_DIFFUSE, diff);
+    glLightfv(GL_LIGHT1, GL_AMBIENT, amb);
+    glLightfv(GL_LIGHT1, GL_DIFFUSE, diff);
+    glLightfv(GL_LIGHT2, GL_AMBIENT, amb);
+    glLightfv(GL_LIGHT2, GL_DIFFUSE, diff);
 
 }
 

@@ -42,6 +42,7 @@ vector<pair<Color*,File*>> XmlParser::getCurVertexes(void) {
     string file = "../shapes/";
     pair<Color*, File*> p;
 
+    int nlinhas;
     float x, y, z;
     float r, g, b;
     auxEl = elem;
@@ -51,6 +52,7 @@ vector<pair<Color*,File*>> XmlParser::getCurVertexes(void) {
 
     for(; auxEl != nullptr; auxEl = auxEl -> NextSiblingElement()) {
         vector<Vertex> vert;
+        vector<Vertex> norm;
         ifstream filedisc;
 
         auxEl -> QueryFloatAttribute("diffR", &r);
@@ -69,15 +71,31 @@ vector<pair<Color*,File*>> XmlParser::getCurVertexes(void) {
 
         filedisc.open(file);
         getline(filedisc, line);
-    
-        while(getline(filedisc, line)) {
+        nlinhas = stoi(line);
+
+        while(nlinhas > 0) {
+            getline(filedisc, line);
             aux = XmlParser::split(line, ' ');
             x = stof(aux.at(0));
             y = stof(aux.at(1));
             z = stof(aux.at(2));
             vert.push_back(Vertex(x,y,z));
+            nlinhas--;
         }
-        File* f = new File(vert);
+
+        if(getline(filedisc, line))
+            nlinhas = stoi(line);
+
+        while(nlinhas > 0) {
+            getline(filedisc, line);
+            aux = XmlParser::split(line, ' ');
+            x = stof(aux.at(0));
+            y = stof(aux.at(1));
+            z = stof(aux.at(2));
+            norm.push_back(Vertex(x,y,z));
+            nlinhas--;
+        }
+        File* f = new File(vert, norm);
         p = make_pair(c, f);
         vertexes.push_back(p);
         loadedFiles[file] = f;

@@ -6,7 +6,7 @@
 		<scale X="20" Y="20" Z="20"/>
 		<rotate time="15.41" axisX="0.0" axisY="1.0" axisZ="0.0"/>
 		<models>
-			<model file="sphere.3d" diffR="1.00" diffG="0.50" diffB="0.0" />
+			<model file="sphere.3d" texture="texture_sun.jpg" />
 		</models>
 	</group>
 
@@ -25,7 +25,7 @@
 		<scale X="0.75" Y="0.75" Z="0.75"/>
 		<rotate time="803.505" axisX="0.0" axisY="1.0" axisZ="0.0"/>
 		<models>
-			<model file="sphereRochosos.3d" diffR="0.627451" diffG="0.321569" diffB="0.176471" />
+			<model file="sphereRochosos.3d" texture="texture_mercury.jpg" />
 		</models>
 	</group>
 
@@ -44,7 +44,7 @@
 		<scale X="2" Y="2" Z="2"/>
 		<rotate time="3329.1" axisX="0.0" axisY="1.0" axisZ="0.0"/>
 		<models>
-			<model file="sphereRochosos.3d" diffR="0.627451" diffG="0.3" diffB="0.176471" />
+			<model file="sphereRochosos.3d" texture="texture_venus.jpg" />
 		</models>
 	</group>
 
@@ -63,7 +63,7 @@
 		<scale X="1.5" Y="1.5" Z="1.5"/>
 		<rotate time="13.70" axisX="0.0" axisY="1.0" axisZ="0.0"/>
 		<models>
-			<model file="sphereRochosos.3d" diffR="0.27451" diffG="0.509804" diffB="0.705882" />
+			<model file="sphereRochosos.3d" texture="texture_earth.jpg" />
 		</models>	
 		<!-- Moon -->
 		<group>
@@ -79,7 +79,7 @@
  		</translate> 
 			<scale X="0.35" Y="0.35" Z="0.35"/>
 			<models>
-				<model file="sphereLuas.3d" diffR="0.439216" diffG="0.501961" diffB="0.564706" />
+				<model file="sphereLuas.3d" texture="texture_moon.jpg" />
 			</models>
 		</group>
 	</group>
@@ -99,14 +99,14 @@
 		<scale X="1" Y="1" Z="1"/>
 		<rotate time="14.05" axisX="0.0" axisY="1.0" axisZ="0.0"/>
 		<models>
-			<model file="sphereRochosos.3d" diffR="0.545098" diffG="0.0" diffB="0.0" />
+			<model file="sphereRochosos.3d" texture="texture_mars.jpg" />
 		</models>
 		<!-- Fobos -->
 		<group>
 			<translate X="1" Y="0" Z="-2" />
 			<scale X="0.001" Y="0.001" Z="0.001"/>
 			<models>
-				<model file="sphereLuas.3d" diffR="0.439216" diffG="0.501961" diffB="0.564706" />
+				<model file="sphereLuas.3d" texture="texture_moon.jpg" />
 			</models>
 		</group>
 		<!-- Deimos -->
@@ -114,7 +114,7 @@
 			<translate X="1" Y="1" Z="2" />
 			<scale X="0.001" Y="0.001" Z="0.001"/>
 			<models>
-				<model file="sphereLuas.3d" diffR="0.439216" diffG="0.501961" diffB="0.564706" />
+				<model file="sphereLuas.3d" texture="texture_moon.jpg" />
 			</models>
 		</group>
 	</group>
@@ -127,7 +127,7 @@
 			<group>
 				<random N="800" inR="95" outR="110" maxScale="0.2" minScale="0.05"/>
 				<models>
-					<model file="asteroids1.3d" diffR="0.333333" diffG="0.333333" diffB="0.333333" />
+					<model file="asteroids1.3d" texture="texture_asteroid.jpg" />
 				</models>
 			</group>
 		</group>
@@ -137,7 +137,7 @@
 			<group>
 				<random N="800" inR="95" outR="110" maxScale="0.2" minScale="0.05"/>
 				<models>
-					<model file="asteroids1.3d" diffR="0.572549" diffG="0.556863" diffB="0.466667" />
+					<model file="asteroids1.3d" texture="texture_asteroid.jpg" />
 				</models>
 			</group>
 		</group>
@@ -147,7 +147,7 @@
 			<group>
 				<random N="800" inR="95" outR="110" maxScale="0.2" minScale="0.05"/>
 				<models>
-					<model file="asteroids2.3d" diffR="0.439216" diffG="0.501961" diffB="0.564706" />
+					<model file="asteroids2.3d" texture="texture_asteroid.jpg" />
 				</models>
 			</group>
 		</group>
@@ -168,14 +168,14 @@
 		<scale X="4" Y="4" Z="4"/>
 		<rotate time="5.62" axisX="0.0" axisY="1.0" axisZ="0.0"/>
 		<models>
-			<model file="sphere.3d" diffR="0.721569" diffG="0.52549" diffB="0.0431373" />
+			<model file="sphere.3d" texture="texture_jupiter.jpg" />
 		</models>
 		<!-- Io -->
 		<group>
 			<translate X="1.5" Y="0" Z="1.5" />
 			<scale X="0.1" Y="0.1" Z="0.1"/>
 			<models>
-				<model file="sphereLuas.3d" diffR="0.439216" diffG="0.501961" diffB="0.564706" />
+				<model file="sphereLuas.3d" texture="texture_moon.jpg" />
 			</models>
 		</group>
 		<!-- Europa -->
@@ -183,7 +183,7 @@
 			<translate X="-1.5" Y="-0.5" Z="-1.5" />
 			<scale X="0.1" Y="0.1" Z="0.1"/>
 			<models>
-				<model file="sphereLuas.3d" diffR="0.439216" diffG="0.501961" diffB="0.564706" />
+				<model file="sphereLuas.3d" texture="texture_moon.jpg" />
 			</models>
 		</group>
 		<!-- Ganímedes -->
@@ -191,7 +191,7 @@
 			<translate X="-1.5" Y="0.5" Z="1.5" />
 			<scale X="0.25" Y="0.25" Z="0.25"/>
 			<models>
-				<model file="sphereLuas.3d" diffR="0.439216" diffG="0.501961" diffB="0.564706" />
+				<model file="sphereLuas.3d" texture="texture_moon.jpg" />
 			</models>
 		</group>
 		<!-- Calisto -->
@@ -199,7 +199,7 @@
 			<translate X="1.5" Y="1" Z="-1.5" />
 			<scale X="0.2" Y="0.2" Z="0.2"/>
 			<models>
-				<model file="sphereLuas.3d" diffR="0.439216" diffG="0.501961" diffB="0.564706" />
+				<model file="sphereLuas.3d" texture="texture_moon.jpg" />
 			</models>
 		</group>
 	</group>
@@ -219,19 +219,19 @@
 		<scale X="3.25" Y="3.25" Z="3.25"/>
 		<rotate time="6.03" axisX="0.0" axisY="1.0" axisZ="0.0"/>
 		<models>
-			<model file="sphere.3d" diffR="0.870588 " diffG="0.721569 " diffB="0.529412" />
+			<model file="sphere.3d" texture="texture_saturn.jpg" />
 		</models>
 		<!-- Rings -->
 		<group>
 			<rotate axisX="1.0" axisY="0.0" axisZ="0.0" angle="10.0"/>
 			<scale X="1.0" Y="1.0" Z="1.2"/>
 			<models>
-				<model file="crown.2d" diffR="0.662745" diffG="0.662745" diffB="0.662745" />
+				<model file="crown.2d" texture="texture_saturn_ring.jpg" />
 			</models>
 			<group>
 				<scale X="1.30" Y="1.30" Z="1.30"/>
 				<models>
-					<model file="crown.2d" diffR="0.411765" diffG="0.411765" diffB="0.411765" />
+					<model file="crown.2d" texture="texture_saturn_ring.jpg" />
 				</models>
 			</group>
 		</group>
@@ -240,7 +240,7 @@
 			<translate X="-1.75" Y="0" Z="2" />
 			<scale X="0.25" Y="0.25" Z="0.25"/>
 			<models>
-				<model file="sphereLuas.3d" diffR="0.439216" diffG="0.501961" diffB="0.564706" />
+				<model file="sphereLuas.3d" texture="texture_moon.jpg" />
 			</models>
 		</group>
 		<!-- Reia -->
@@ -248,7 +248,7 @@
 			<translate X="1.75" Y="1" Z="-2" />
 			<scale X="0.055" Y="0.055" Z="0.055"/>
 			<models>
-				<model file="sphereLuas.3d" diffR="0.439216" diffG="0.501961" diffB="0.564706" />
+				<model file="sphereLuas.3d" texture="texture_moon.jpg" />
 			</models>
 		</group>
 		<!-- Jápeto -->
@@ -256,7 +256,7 @@
 			<translate X="1.5" Y="0" Z="2.5" />
 			<scale X="0.055" Y="0.055" Z="0.055"/>
 			<models>
-				<model file="sphereLuas.3d" diffR="0.439216" diffG="0.501961" diffB="0.564706" />
+				<model file="sphereLuas.3d" texture="texture_moon.jpg" />
 			</models>
 		</group>
 		<!-- Dione -->
@@ -264,7 +264,7 @@
 			<translate X="-2" Y="1.5" Z="2" />
 			<scale X="0.05" Y="0.05" Z="0.05"/>
 			<models>
-				<model file="sphereLuas.3d" diffR="0.439216" diffG="0.501961" diffB="0.564706" />
+				<model file="sphereLuas.3d" texture="texture_moon.jpg" />
 			</models>
 		</group>
 	</group>
@@ -284,14 +284,14 @@
 		<scale X="2.15" Y="2.15" Z="2.15"/>
 		<rotate time="9.86" axisX="0.0" axisY="1.0" axisZ="0.0"/>
 		<models>
-			<model file="sphere.3d" diffR="0.690196" diffG="0.768627 " diffB="0.870588" />
+			<model file="sphere.3d" texture="texture_uranus.jpg" />
 		</models>
 		<!-- Titânia -->
 		<group>
 			<translate X="-1.5" Y="0" Z="2" />
 			<scale X="0.05" Y="0.05" Z="0.05"/>
 			<models>
-				<model file="sphereLuas.3d" diffR="0.439216" diffG="0.501961" diffB="0.564706" />
+				<model file="sphereLuas.3d" texture="texture_moon.jpg" />
 			</models>
 		</group>
 		<!-- Oberon -->
@@ -299,7 +299,7 @@
 			<translate X="2" Y="0" Z="2" />
 			<scale X="0.05" Y="0.05" Z="0.05"/>
 			<models>
-				<model file="sphereLuas.3d" diffR="0.439216" diffG="0.501961" diffB="0.564706" />
+				<model file="sphereLuas.3d" texture="texture_moon.jpg" />
 			</models>
 		</group>
 		<!-- Umbriel -->
@@ -307,7 +307,7 @@
 			<translate X="1.5" Y="1" Z="-1.5" />
 			<scale X="0.05" Y="0.05" Z="0.05"/>
 			<models>
-				<model file="sphereLuas.3d" diffR="0.439216" diffG="0.501961" diffB="0.564706" />
+				<model file="sphereLuas.3d" texture="texture_moon.jpg" />
 			</models>
 		</group>
 		<!-- Ariel -->
@@ -315,7 +315,7 @@
 			<translate X="-2" Y="1.5" Z="-1.5" />
 			<scale X="0.05" Y="0.05" Z="0.05"/>
 			<models>
-				<model file="sphereLuas.3d" diffR="0.439216" diffG="0.501961" diffB="0.564706" />
+				<model file="sphereLuas.3d" texture="texture_moon.jpg" />
 			</models>
 		</group>
 	</group>
@@ -335,14 +335,14 @@
 		<scale X="2" Y="2" Z="2"/>
 		<rotate time="87.54" axisX="0.0" axisY="1.0" axisZ="0.0"/>
 		<models>
-			<model file="sphere.3d" diffR="0.576471 " diffG="0.439216 " diffB="0.858824" />
+			<model file="sphere.3d" texture="texture_neptune.jpg" />
 		</models>
 		<!-- Proteu -->
 		<group>
 			<translate X="1.5" Y="0" Z="-2" />
 			<scale X="0.035" Y="0.035" Z="0.035"/>
 			<models>
-				<model file="sphereLuas.3d" diffR="0.439216" diffG="0.501961" diffB="0.564706" />
+				<model file="sphereLuas.3d" texture="texture_moon.jpg" />
 			</models>
 		</group>
 		<!-- Tritão --> 
@@ -350,7 +350,7 @@
 			<translate X="1.5" Y="1" Z="1.5" />
 			<scale X="0.08" Y="0.08" Z="0.08"/>
 			<models>
-				<model file="sphereLuas.3d" diffR="0.439216" diffG="0.501961" diffB="0.564706" />
+				<model file="sphereLuas.3d" texture="texture_moon.jpg" />
 			</models>
 		</group>
 	</group>
@@ -369,7 +369,7 @@
  		</translate>
  		<scale X="0.2" Y="0.2" Z="0.2"/>
  		<models>
-			<model file="teapot.3d" diffR="0.439216" diffG="0.501961" diffB="0.564706" />
+			<model file="teapot.3d" texture="texture_gold.jpg" />
 		</models> 	
  	</group>
 </scene>

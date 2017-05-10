@@ -150,7 +150,8 @@ void TranslateCR::getGlobalCatmullRomPoint(float gt, float *res, float *deriv) {
 void TranslateCR::renderCatmullRomCurve(void) {
 	glBindBuffer(GL_ARRAY_BUFFER, buffers[0]);
     glVertexPointer(3, GL_FLOAT, 0, 0);
-    glColor3f(1.0f,1.0f,1.0f);
+    float white[4] = {1.0f, 1.0f, 1.0f, 1.0f};
+    glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, white);
     glDrawArrays(GL_LINE_LOOP, 0, vertexes.size());
 
 }
