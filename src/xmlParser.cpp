@@ -8,6 +8,98 @@ XmlParser::XmlParser(const char *filename) {
     n = -1;
 }
 
+Color** XmlParser::getColor(tinyxml2::XMLElement* elem) {
+        int col = GL_DIFFUSE;
+        unsigned int texID;
+        float r, g, b;
+        int i = 0;
+        Color** colors = new Color*[5];
+        r = g = b = 1.0;
+        for(int i = 0; i < 5; i++)
+            colors[i] = nullptr;
+        texID = XmlParser::getTexture(elem);
+        if(elem -> Attribute("diffR")) {
+            elem -> QueryFloatAttribute("diffR", &r);
+            elem -> QueryFloatAttribute("diffG", &g);
+            elem -> QueryFloatAttribute("diffB", &b);
+            col = GL_DIFFUSE;
+            colors[i++] = new Color(r, g, b, col, texID);
+        }
+        if(elem -> Attribute("specR")) {
+            elem -> QueryFloatAttribute("specR", &r);
+            elem -> QueryFloatAttribute("specG", &g);
+            elem -> QueryFloatAttribute("specB", &b);
+            col = GL_SPECULAR;
+            colors[i++] = new Color(r, g, b, col, texID);
+        }
+        if(elem -> Attribute("emisR")) {
+            elem -> QueryFloatAttribute("emisR", &r);
+            elem -> QueryFloatAttribute("emisG", &g);
+            elem -> QueryFloatAttribute("emisB", &b);
+            col = GL_EMISSION;
+            colors[i++] = new Color(r, g, b, col, texID);
+        }
+        if(elem -> Attribute("ambiR")) {
+            elem -> QueryFloatAttribute("ambiR", &r);
+            elem -> QueryFloatAttribute("ambiG", &g);
+            elem -> QueryFloatAttribute("ambiB", &b);
+            col = GL_AMBIENT;
+            colors[i++] = new Color(r, g, b, col, texID);
+        }
+        if(!i)
+            colors[i] = new Color(r, g, b, col, texID);
+        return colors;
+}
+
+unsigned int XmlParser::getTexture(tinyxml2::XMLElement* elem) {
+    unsigned int t,tw,th;
+    unsigned char *texData;
+    unsigned int texID = 0;
+    string s;
+
+    if(elem -> Attribute("texture")) {
+        s = elem -> Attribute("texture");
+
+        ilInit();
+        ilEnable(IL_ORIGIN_SET);
+        ilOriginFunc(IL_ORIGIN_LOWER_LEFT);
+        ilGenImages(1,&t);
+        ilBindImage(t);
+        ilLoadImage((ILstring)s.c_str());
+        tw = ilGetInteger(IL_IMAGE_WIDTH);
+        th = ilGetInteger(IL_IMAGE_HEIGHT);
+        ilConvertImage(IL_RGBA, IL_UNSIGNED_BYTE);
+        texData = ilGetData();
+
+        glGenTextures(1, &texID);
+        
+        glBindTexture(GL_TEXTURE_2D, texID);
+        glTexParameteri(
+            GL_TEXTURE_2D, 
+            GL_TEXTURE_WRAP_S, 
+            GL_REPEAT
+        );
+        glTexParameteri(GL_TEXTURE_2D, 
+                        GL_TEXTURE_WRAP_T, 
+                        GL_REPEAT);
+        glTexParameteri(GL_TEXTURE_2D, 
+                        GL_TEXTURE_MAG_FILTER, 
+                        GL_LINEAR_MIPMAP_LINEAR);
+        glTexParameteri(GL_TEXTURE_2D, 
+                        GL_TEXTURE_MIN_FILTER, 
+                        GL_LINEAR_MIPMAP_LINEAR);
+            
+        glTexImage2D(GL_TEXTURE_2D, 0, 
+                    GL_RGBA, tw, th, 0, GL_RGBA, 
+                    GL_UNSIGNED_BYTE, texData);
+        glGenerateMipmap(GL_TEXTURE_2D);
+
+        glBindTexture(GL_TEXTURE_2D, 0);
+
+    }
+    return texID;
+}
+
 
 vector<string> XmlParser::split(string str, char delim) {
     string buf;
@@ -34,13 +126,13 @@ vector<Vertex> XmlParser::getPoints(tinyxml2::XMLElement* el) {
     return points;
 }
 
-vector<pair<Color*,File*>> XmlParser::getCurVertexes(void) {
+vector<pair<Color**,File*>> XmlParser::getCurVertexes(void) {
     tinyxml2::XMLElement* auxEl;
     vector<string> aux;
-    vector<pair<Color*,File*>> vertexes;
+    vector<pair<Color**,File*>> vertexes;
     string line;
     string file = "../shapes/";
-    pair<Color*, File*> p;
+    pair<Color**, File*> p;
 
     int nlinhas;
     float x, y, z;
@@ -53,14 +145,10 @@ vector<pair<Color*,File*>> XmlParser::getCurVertexes(void) {
     for(; auxEl != nullptr; auxEl = auxEl -> NextSiblingElement()) {
         vector<Vertex> vert;
         vector<Vertex> norm;
+        vector<float>  txtr;
         ifstream filedisc;
 
-        auxEl -> QueryFloatAttribute("diffR", &r);
-        auxEl -> QueryFloatAttribute("diffG", &g);
-        auxEl -> QueryFloatAttribute("diffB", &b);
-        if(!auxEl -> Attribute("diffR"))
-            r = g = b = 1.0f;
-        Color* c =  new Color(r, g, b);
+        Color** c = XmlParser::getColor(auxEl);
 
         file.append(auxEl -> Attribute("file"));
         if(loadedFiles.find(file) != loadedFiles.end()) {
@@ -95,7 +183,21 @@ vector<pair<Color*,File*>> XmlParser::getCurVertexes(void) {
             norm.push_back(Vertex(x,y,z));
             nlinhas--;
         }
-        File* f = new File(vert, norm);
+
+        if(getline(filedisc, line))
+            nlinhas = stoi(line);
+
+        while(nlinhas > 0) {
+            getline(filedisc, line);
+            aux = XmlParser::split(line, ' ');
+            x = stof(aux.at(0));
+            y = stof(aux.at(1));
+            txtr.push_back(x);
+            txtr.push_back(y);
+            nlinhas--;
+        }
+
+        File* f = new File(vert, norm, txtr);
         p = make_pair(c, f);
         vertexes.push_back(p);
         loadedFiles[file] = f;
@@ -171,7 +273,7 @@ vector<Transformation*> XmlParser::getCurTransformations(void) {
 
 Group XmlParser::getGroup(void) {
     tinyxml2::XMLElement* auxEl;
-    vector<pair<Color*,File*>> vertexes;
+    vector<pair<Color**,File*>> vertexes;
     vector<Transformation*> transforms;
     vector<Group> subgroups;
     auxEl = elem;
@@ -212,4 +314,21 @@ bool XmlParser::startNextGroup(void) {
 
 bool XmlParser::readError(void) {
     return error != 0;
+}
+
+
+vector<Light> XmlParser::getLights(void) {
+    tinyxml2::XMLElement* aux;
+    vector<Light> lights;
+    float x, y, z;
+    aux = root -> FirstChildElement("lights");
+    if(aux)
+        aux = aux -> FirstChildElement("light");
+    for(; aux != nullptr; aux = aux -> NextSiblingElement()) {
+        aux -> QueryFloatAttribute("posX", &x);
+        aux -> QueryFloatAttribute("posY", &y);
+        aux -> QueryFloatAttribute("posZ", &z);
+        lights.push_back(Light(x,y,z));
+    }
+    return lights;
 }

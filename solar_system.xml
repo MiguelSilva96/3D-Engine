@@ -1,12 +1,16 @@
 <?xml version="1.0" ?>
 <scene>
+	<lights>
+		<light type="POINT" posX="0.0" posY="0.0" posZ="0.0"/>
+	</lights>
+
 	<!-- Sun -->
 	<group>
 	 	<translate X="0" Y="0" Z="0" />
 		<scale X="20" Y="20" Z="20"/>
 		<rotate time="15.41" axisX="0.0" axisY="1.0" axisZ="0.0"/>
 		<models>
-			<model file="sphere.3d" texture="texture_sun.jpg" />
+			<model file="sphere.3d" texture="texture_sun.jpg" emisR="1" emisG="1" emisB="1"/>
 		</models>
 	</group>
 
@@ -137,7 +141,7 @@
 			<group>
 				<random N="800" inR="95" outR="110" maxScale="0.2" minScale="0.05"/>
 				<models>
-					<model file="asteroids1.3d" texture="texture_asteroid.jpg" />
+					<model file="asteroids1.3d" texture="texture_asteroid2.jpg" />
 				</models>
 			</group>
 		</group>
@@ -224,16 +228,10 @@
 		<!-- Rings -->
 		<group>
 			<rotate axisX="1.0" axisY="0.0" axisZ="0.0" angle="10.0"/>
-			<scale X="1.0" Y="1.0" Z="1.2"/>
+			<scale X="1.0" Y="1.0" Z="1.1"/>
 			<models>
 				<model file="crown.2d" texture="texture_saturn_ring.jpg" />
 			</models>
-			<group>
-				<scale X="1.30" Y="1.30" Z="1.30"/>
-				<models>
-					<model file="crown.2d" texture="texture_saturn_ring.jpg" />
-				</models>
-			</group>
 		</group>
 		<!-- Titã -->
 		<group>

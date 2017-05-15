@@ -24,6 +24,7 @@
 using namespace std;
 
 vector<Group> groups;
+vector<Light> lights;
 int modes[] = {GL_FILL, GL_LINE, GL_POINT};
 int mode = 0;
 float radius = 80;
@@ -79,8 +80,8 @@ float myRandom() {
 
 
 void renderRandom(Group g) {
-    vector<pair<Color*,File*>> files;
-    vector<pair<Color*,File*>>::iterator it;
+    vector<pair<Color**,File*>> files;
+    vector<pair<Color**,File*>>::iterator it;
 
     srand(31457);
     int nr = 0;
@@ -90,10 +91,10 @@ void renderRandom(Group g) {
     files = g.getVertexes();
     it = files.begin();
     for(; it != files.end(); ++it) {
-        pair<Color*,File*> p = *it;
+        pair<Color**,File*> p = *it;
         File *f = p.second;
         while (nr < g.n) {
-
+            int i = 0;
             float x = myRandom() * 2*out - out;
             float z = myRandom() * 2*out - out;
             float s = myRandom() * g.maxScale + g.minScale;
@@ -101,10 +102,12 @@ void renderRandom(Group g) {
             
             if (aux > in*in && aux < out*out) {
                 glPushMatrix();
-                p.first -> transform();
+                Color **c = p.first;
+                while(c[i])
+                    c[i++] -> transform();
                 glTranslatef(x, 0, z);
                 glScalef(s, s, s);
-                f -> draw();
+                f -> draw(c[0] -> texID);
                 glPopMatrix();
                 nr++;
             }
@@ -114,13 +117,14 @@ void renderRandom(Group g) {
 }
 
 void renderGroup(Group g) {
-    vector<pair<Color*,File*>> files;
+    vector<pair<Color**,File*>> files;
     vector<Group> subgroups;
     vector<Transformation*> aux;
     vector<Transformation*> transforms;
     vector<Transformation*>::iterator itTr;
-    vector<pair<Color*,File*>>::iterator it;
+    vector<pair<Color**,File*>>::iterator it;
     vector<Group>::iterator itGr;
+    int i;
 
     glPushMatrix();
     
@@ -136,11 +140,13 @@ void renderGroup(Group g) {
 
         files = g.getVertexes();
         it = files.begin();
-        for(; it != files.end(); ++it) {
-            pair<Color*,File*> p = *it;
+        for(i = 0; it != files.end(); ++it) {
+            pair<Color**,File*> p = *it;
             File *f = p.second;
-            p.first -> transform();
-            f -> draw();
+            Color **c = p.first;
+            while(c[i])
+                c[i++] -> transform();
+            f -> draw(c[0] -> texID);
         }
     }
     subgroups = g.getSubGroups();
@@ -164,18 +170,17 @@ void renderScene(void) {
     lx = px + radius *sin(alfa) * cos(beta);
     ly = py + radius *sin(beta);
     lz = pz + radius *cos(alfa) * cos(beta);
-    float pos1[4] = {  4, 0,  0, 0 };
-    float pos2[4] = {  0, 0,  4, 0 };
-    float pos3[4] = {  4, 0,  4, 0 };
 
     gluLookAt(px, py, pz,
               lx, ly, lz,
               upx, upy, upz);
 
-    glLightfv(GL_LIGHT0, GL_POSITION, pos1);
-    glLightfv(GL_LIGHT1, GL_POSITION, pos2);
-    glLightfv(GL_LIGHT2, GL_POSITION, pos3);
     glPolygonMode(GL_FRONT, modes[mode]);
+    vector<Light>::iterator itL;
+    for(itL = lights.begin(); itL != lights.end(); ++itL) {
+        Light l = *itL;
+        l.placeLight();
+    }
 
     vector<Group>::iterator it;
     for(it = groups.begin(); it != groups.end(); ++it) {
@@ -272,9 +277,9 @@ bool loadVertexes(const char* filename) {
     XmlParser *xmlparser = new XmlParser(filename);
     if(xmlparser -> readError())
         return false;
+    lights = xmlparser -> getLights();
     while(xmlparser -> startNextGroup())
         groups.push_back(xmlparser -> getGroup());
-    vector<Group>::iterator it;
     delete(xmlparser);
     return true;
 }
@@ -284,22 +289,14 @@ void init() {
     // OpenGL settings 
     glEnable(GL_DEPTH_TEST);
     glEnable(GL_CULL_FACE);
-    glClearColor(0.0f,0.0f,0.0f,0.0f);
 
     glEnableClientState(GL_VERTEX_ARRAY);
     glEnableClientState(GL_NORMAL_ARRAY);
+    glEnableClientState(GL_TEXTURE_COORD_ARRAY);
+    glEnable(GL_RESCALE_NORMAL);
     glEnable(GL_LIGHTING);
     glEnable(GL_LIGHT0);
-    glEnable(GL_LIGHT1);
-    glEnable(GL_LIGHT2);
-    GLfloat amb[4] = {0.2, 0.2, 0.2, 1.0};
-    GLfloat diff[4] = {1.0, 1.0, 1.0, 1.0};
-    glLightfv(GL_LIGHT0, GL_AMBIENT, amb);
-    glLightfv(GL_LIGHT0, GL_DIFFUSE, diff);
-    glLightfv(GL_LIGHT1, GL_AMBIENT, amb);
-    glLightfv(GL_LIGHT1, GL_DIFFUSE, diff);
-    glLightfv(GL_LIGHT2, GL_AMBIENT, amb);
-    glLightfv(GL_LIGHT2, GL_DIFFUSE, diff);
+    glEnable(GL_TEXTURE_2D);
 
 }
 
@@ -336,8 +333,6 @@ int main(int argc, char **argv) {
         cout << "Error reading xml" << endl;
         return 1;
     }
-
-
     // GLUT's main loop
     glutMainLoop();
     free(filename);

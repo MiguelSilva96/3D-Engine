@@ -183,8 +183,13 @@ int main(int argc, char **argv) {
         for(it = vertexes[1].begin(); it != vertexes[1].end(); ++it)
             file << *it;
         //print textures
+        file << vertexes[2].size() << "\n";
+        for(it = vertexes[2].begin(); it != vertexes[2].end(); ++it)
+            file << *it;
     }
     else cout << "Can't write to file\n";
     vertexes[0].clear();
+    vertexes[1].clear();
+    vertexes[2].clear();
     return 0;
 }

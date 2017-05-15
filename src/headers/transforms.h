@@ -14,6 +14,9 @@
 #include <math.h>
 #include <vector>
 
+#include <IL/il.h>
+
+
 using namespace std;
 
 
@@ -77,10 +80,13 @@ class Scale: public Transformation {
 
 class Color: public Transformation { 
 	public:
-		Color(float a, float b, float c) : Transformation(a,b,c) { } 
+		const int component;
+		const unsigned int texID;
+		Color(float a, float b, float c, int d, unsigned int e) : 
+					Transformation(a,b,c), component(d), texID(e) { } 
 		void transform(void) {
 			float color[4] = { x, y, z, 1 };
-			glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, color);
+			glMaterialfv(GL_FRONT, component, color);
 		};
 };
 

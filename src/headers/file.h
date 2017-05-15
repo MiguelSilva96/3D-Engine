@@ -8,15 +8,15 @@
 
 class File {
     private:
-    	std::vector<Vertex> vertexes;
-    	std::vector<Vertex> normals;
+    	vector<Vertex> vertexes;
+    	vector<Vertex> normals;
+    	vector<float> textureCoords;
     	GLuint buffers[3];
     
     public:
-    	File(std::vector<Vertex>, std::vector<Vertex>);
-    	std::vector<Vertex> getVertexes(void);
-    	void draw(void);
-    	void prepare(void);
+    	File(vector<Vertex>, vector<Vertex>, vector<float>);
+    	vector<Vertex> getVertexes(void);
+    	void draw(unsigned int);
 };
 
 #endif

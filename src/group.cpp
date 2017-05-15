@@ -1,6 +1,6 @@
 #include "group.h"
 
-Group::Group(vector<pair<Color*,File*>> v, vector<Transformation*> t, vector<Group> g) {
+Group::Group(vector<pair<Color**,File*>> v, vector<Transformation*> t, vector<Group> g) {
 	vertexes   = v;
 	transforms = t;
 	subgroups  = g;
@@ -11,7 +11,7 @@ vector<Transformation*> Group::getTransformations(void) {
 	return transforms;
 }
 
-vector<pair<Color*,File*>> Group::getVertexes(void) {
+vector<pair<Color**,File*>> Group::getVertexes(void) {
 	return vertexes;
 }
 

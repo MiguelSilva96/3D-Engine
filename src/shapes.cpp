@@ -25,6 +25,13 @@ string vertexString(float x, float y, float z) {
     return strStream.str();
 }
 
+string vertexString(float x, float y) {
+    stringstream strStream;
+    strStream << x << " ";
+    strStream << y << "\n";
+    return strStream.str();
+}
+
 float getPoint(float u, float v, float m[4][4] , float p[4][4]) {
   float pValue = 0;
   float aux[4], aux2[4];
@@ -165,7 +172,7 @@ vector<float> addPoint(string line) {
 }
 
 vector<string>* bezier(char *input, int tessellation) {
-    vector<string> *v = new vector<string>[2];
+    vector<string> *v = new vector<string>[3];
     ifstream readingFile(input);
     int nrPatches = 0;
     int nrControlPoints = 0;
@@ -198,8 +205,8 @@ vector<string>* bezier(char *input, int tessellation) {
 
 
 vector<string>* plane(float x, float y, float z, int div) {
-    // 0 - vertices; 1 - normals 
-    vector<string> *v = new vector<string>[2];
+    // 0 - vertices; 1 - normals; 2 - texCoords
+    vector<string> *v = new vector<string>[3];
     for(int i = 0; i < div; i++) {
         for(int j = 0; j < div; j++) {
             v[0].push_back(vertexString(x/2-x/div*(i+1),
@@ -228,8 +235,8 @@ vector<string>* plane(float x, float y, float z, int div) {
 
 
 vector<string>* box(float x, float y, float z, int div) {
-    // 0 - vertices; 1 - normals
-    vector<string> *v = new vector<string>[2];
+    // 0 - vertices; 1 - normals; 2 - texCoords
+    vector<string> *v = new vector<string>[3];
     //top
     v = plane(x, y/2, z, div);
     for(int i = 0; i < div; i++) {
@@ -316,8 +323,8 @@ vector<string>* box(float x, float y, float z, int div) {
 
 
 vector<string>* sphere(float radius, int slices, int stacks) {
-    // 0 - vertices; 1 - normals;
-    vector<string> *v = new vector<string>[2];
+    // 0 - vertices; 1 - normals; 2 - texCoords
+    vector<string> *v = new vector<string>[3];
     double teta, fi;
     for (int i = 0; i < stacks; i++) {
         for (int j = 0; j < slices; j++) {
@@ -330,6 +337,8 @@ vector<string>* sphere(float radius, int slices, int stacks) {
                 v[1].push_back(vertexString(cos(teta)*sin(fi),
                             cos(fi),
                             sin(teta)*sin(fi)));
+                v[2].push_back(vertexString((float)j/slices,1 - (float)i/stacks));
+
                 fi = (i+1) * M_PI/stacks;
                 teta = (j+1) * 2 * M_PI/slices;
                 v[0].push_back(vertexString(radius * cos(teta)*sin(fi),
@@ -338,6 +347,7 @@ vector<string>* sphere(float radius, int slices, int stacks) {
                 v[1].push_back(vertexString(cos(teta)*sin(fi),
                             cos(fi),
                             sin(teta)*sin(fi)));
+                v[2].push_back(vertexString((float)(j+1)/slices,1 - (float)(i+1)/stacks));
                 teta = j * 2 * M_PI/slices;
                 v[0].push_back(vertexString(radius * cos(teta)*sin(fi),
                             radius * cos(fi),
@@ -345,6 +355,7 @@ vector<string>* sphere(float radius, int slices, int stacks) {
                 v[1].push_back(vertexString(cos(teta)*sin(fi),
                             cos(fi),
                             sin(teta)*sin(fi)));
+                v[2].push_back(vertexString((float)j/slices,1 - (float)(i+1)/stacks));
             }
             if (i != 0) {
                 fi = i * M_PI/stacks;
@@ -355,6 +366,7 @@ vector<string>* sphere(float radius, int slices, int stacks) {
                 v[1].push_back(vertexString(cos(teta)*sin(fi),
                             cos(fi),
                             sin(teta)*sin(fi)));
+                v[2].push_back(vertexString((float)j/slices,1 - (float)i/stacks));
                 teta = (j + 1) * 2 * M_PI/slices;
                 v[0].push_back(vertexString(radius * cos(teta)*sin(fi),
                             radius * cos(fi),
@@ -362,6 +374,7 @@ vector<string>* sphere(float radius, int slices, int stacks) {
                 v[1].push_back(vertexString(cos(teta)*sin(fi),
                             cos(fi),
                             sin(teta) * sin(fi)));
+                v[2].push_back(vertexString((float)(j+1)/slices,1 - (float)i/stacks));
                 fi = (i + 1) * M_PI/stacks;
                 v[0].push_back(vertexString(radius * cos(teta)*sin(fi),
                             radius * cos(fi),
@@ -369,6 +382,7 @@ vector<string>* sphere(float radius, int slices, int stacks) {
                 v[1].push_back(vertexString(cos(teta)*sin(fi),
                             cos(fi),
                             sin(teta) * sin(fi)));
+                v[2].push_back(vertexString((float)(j+1)/slices, 1 - (float)(i+1)/stacks));
             }
         }
     }
@@ -377,8 +391,8 @@ vector<string>* sphere(float radius, int slices, int stacks) {
 
 
 vector<string>* cylinder(float radB, float radT, float height, int slices, int stacks) {
-    // 0 - vertices; 1 - normals
-    vector<string> *v = new vector<string>[2];
+    // 0 - vertices; 1 - normals; 2 - texCoords
+    vector<string> *v = new vector<string>[3];
     float alpha = (float)2* M_PI / slices;
     float h = (float)height / stacks;
     float angle;                            //ângulo formado pela linha do raio do ponto em que estamos e o eixo dos z's
@@ -425,11 +439,12 @@ vector<string>* cylinder(float radB, float radT, float height, int slices, int s
 
 
 vector<string>* torus(float inner, float outer, int sides, int rings) {
+    // 0 - vertices; 1 - normals; 2 - texCoords
+    vector<string> *v = new vector<string>[3];
     float alpha = (float) 2 * M_PI / rings;
     float r = outer - inner;
     float beta = (float) 2 * M_PI / sides;
     float angle1, angle2;
-    vector<string> *v = new vector<string>[2];
     for (int i = 1; i <= rings; i++) {
         for (int j = 1; j <= sides; j++) {
             angle1 = alpha * (i - 1);
@@ -464,13 +479,14 @@ vector<string>* torus(float inner, float outer, int sides, int rings) {
 }
 
 vector<string>* ruby(float rb, float rt, float heightb, float heightt, int slices, int stacks) {
+    // 0 - vertices; 1 - normals; 2 - texCoords
+    vector<string> *v = new vector<string>[3];
     int i, j;
     float alpha = (float)2 * M_PI / slices;
     float h = (float)heightb / stacks;
     float angle;                            //ângulo formado pela linha do raio do ponto em que estamos e o eixo dos z's
     float lvl;                              //recebe o valor do raio em função das stacks percorridas
     float prev_lvl;                         //recebe o valor anterior do raio em função das stacks percorridas
-    vector<string> *v = new vector<string>[2];
     v = cylinder(rb, rt, heightt, slices, stacks);
     for (j = 1; j <= slices; j++) {
         angle = alpha * j;
@@ -498,39 +514,46 @@ vector<string>* ruby(float rb, float rt, float heightb, float heightt, int slice
 
 
 vector<string>* crown(float inner, float outer, int sides) {
+    // 0 - vertices; 1 - normals; 2 - texCoords
+    vector<string> *v = new vector<string>[3];
     float alpha = (float) 2 * M_PI / sides;
     float r = outer - inner;
     float beta = (float) 2 * M_PI / sides;
     float angle1, angle2;
-    vector<string> *v = new vector<string>[2];
-    for (int i = 1; i <= sides; i++) {
-        for (int j = 1; j <= sides; j++) {
+    for (float i = 1; i <= sides; i++) {
+        for (float j = 1; j <= sides; j++) {
             angle1 = alpha * (i - 1);
             angle2 = beta * (j - 1);
             v[0].push_back(vertexString(sin(angle1)*(outer - r*cos(angle2)),
                         0,
                         cos(angle1)*(outer - r*cos(angle2))));
+            v[2].push_back(vertexString((i-1)/sides,(j-1)/sides));
             angle2 = beta * j;
             v[0].push_back(vertexString(sin(angle1)*(outer - r*cos(angle2)),
                         0,
                         cos(angle1)*(outer - r*cos(angle2))));
+            v[2].push_back(vertexString((i-1)/sides,(j)/sides));
             angle2 = beta * (j-1);
             angle1 = alpha * i;
             v[0].push_back(vertexString(sin(angle1)*(outer - r*cos(angle2)),
                         0,
                         cos(angle1)*(outer - r*cos(angle2))));
+            v[2].push_back(vertexString((i)/sides,(j-1)/sides));
             v[0].push_back(vertexString(sin(angle1)*(outer - r*cos(angle2)),
                         0,
                         cos(angle1)*(outer - r*cos(angle2))));
+            v[2].push_back(vertexString((i)/sides,(j-1)/sides));
             angle1 = alpha * (i - 1);
             angle2 = beta * j;
             v[0].push_back(vertexString(sin(angle1)*(outer - r*cos(angle2)),
                         0,
                         cos(angle1)*(outer - r*cos(angle2))));
+            v[2].push_back(vertexString((i-1)/sides,(j)/sides));
             angle1 = alpha * i;
             v[0].push_back(vertexString(sin(angle1)*(outer - r*cos(angle2)),
                         0,
                         cos(angle1)*(outer - r*cos(angle2))));
+            v[2].push_back(vertexString((i)/sides,(j)/sides));
             v[1].push_back(vertexString(0,1,0));
             v[1].push_back(vertexString(0,1,0));
             v[1].push_back(vertexString(0,1,0));

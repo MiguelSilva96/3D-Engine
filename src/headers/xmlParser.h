@@ -9,6 +9,7 @@
 #include <sstream>
 #include "tinyxml2.h"
 #include "group.h"
+#include "light.h"
 
 using namespace std;
 
@@ -23,8 +24,10 @@ class XmlParser {
 
         vector<string> split(string str, char delim);
         vector<Transformation*> getCurTransformations(void);
-        vector<pair<Color*,File*>> getCurVertexes(void);
-        vector<Vertex> getPoints(tinyxml2::XMLElement* el);
+        vector<pair<Color**,File*>> getCurVertexes(void);
+        vector<Vertex> getPoints(tinyxml2::XMLElement*);
+        Color** getColor(tinyxml2::XMLElement*);
+        unsigned int getTexture(tinyxml2::XMLElement*);
 
     public:
         XmlParser(XmlParser*);
@@ -32,6 +35,7 @@ class XmlParser {
         bool startNextGroup(void);
         Group getGroup(void);
         bool readError(void);
+        vector<Light> getLights(void); 
 };
 
 #endif
