@@ -24,7 +24,7 @@
 using namespace std;
 
 vector<Group> groups;
-vector<Light> lights;
+vector<Light*> lights;
 int modes[] = {GL_FILL, GL_LINE, GL_POINT};
 int mode = 0;
 float radius = 80;
@@ -176,10 +176,10 @@ void renderScene(void) {
               upx, upy, upz);
 
     glPolygonMode(GL_FRONT, modes[mode]);
-    vector<Light>::iterator itL;
+    vector<Light*>::iterator itL;
     for(itL = lights.begin(); itL != lights.end(); ++itL) {
-        Light l = *itL;
-        l.placeLight();
+        Light *l = *itL;
+        l -> placeLight();
     }
 
     vector<Group>::iterator it;
@@ -281,6 +281,8 @@ bool loadVertexes(const char* filename) {
     while(xmlparser -> startNextGroup())
         groups.push_back(xmlparser -> getGroup());
     delete(xmlparser);
+    for(int i = 0; i < lights.size(); i++)
+        glEnable(GL_LIGHT0 + i);
     return true;
 }
 
@@ -295,7 +297,6 @@ void init() {
     glEnableClientState(GL_TEXTURE_COORD_ARRAY);
     glEnable(GL_RESCALE_NORMAL);
     glEnable(GL_LIGHTING);
-    glEnable(GL_LIGHT0);
     glEnable(GL_TEXTURE_2D);
 
 }

@@ -9,7 +9,7 @@
 #include <sstream>
 #include "tinyxml2.h"
 #include "group.h"
-#include "light.h"
+#include "lights.h"
 
 using namespace std;
 
@@ -35,7 +35,7 @@ class XmlParser {
         bool startNextGroup(void);
         Group getGroup(void);
         bool readError(void);
-        vector<Light> getLights(void); 
+        vector<Light*> getLights(void); 
 };
 
 #endif

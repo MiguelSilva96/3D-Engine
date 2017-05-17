@@ -41,7 +41,7 @@ include_directories(${CMAKE_CURRENT_SOURCE_DIR}/tinyxml2)
 
 add_definitions(-std=c++11)
 
-add_executable(engine engine.cpp xmlParser.cpp group.cpp file.cpp transforms.cpp tinyxml2/tinyxml2.cpp light.cpp)
+add_executable(engine engine.cpp xmlParser.cpp group.cpp file.cpp transforms.cpp tinyxml2/tinyxml2.cpp lights.cpp)
 add_executable(generator generator.cpp shapes.cpp)
 
 file(COPY ../textures/ DESTINATION ${CMAKE_BINARY_DIR})

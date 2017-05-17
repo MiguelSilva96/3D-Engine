@@ -1,5 +1,8 @@
 <?xml version="1.0" ?>
 <scene>
+	<lights>
+		<light type="DIR" posX="1" posY="0.0" posZ="0.0"/>
+	</lights>
 	<!--HOUSE-->
 	<group>
 		<scale X="30" Y="30" Z="30"/>

@@ -86,6 +86,8 @@ class Color: public Transformation {
 					Transformation(a,b,c), component(d), texID(e) { } 
 		void transform(void) {
 			float color[4] = { x, y, z, 1 };
+			GLfloat low_shininess[1] = { 100 }; 
+			glMaterialfv(GL_FRONT, GL_SHININESS, low_shininess); 
 			glMaterialfv(GL_FRONT, component, color);
 		};
 };

@@ -317,10 +317,11 @@ bool XmlParser::readError(void) {
 }
 
 
-vector<Light> XmlParser::getLights(void) {
+vector<Light*> XmlParser::getLights(void) {
     tinyxml2::XMLElement* aux;
-    vector<Light> lights;
+    vector<Light*> lights;
     float x, y, z;
+    Light *light;
     aux = root -> FirstChildElement("lights");
     if(aux)
         aux = aux -> FirstChildElement("light");
@@ -328,7 +329,12 @@ vector<Light> XmlParser::getLights(void) {
         aux -> QueryFloatAttribute("posX", &x);
         aux -> QueryFloatAttribute("posY", &y);
         aux -> QueryFloatAttribute("posZ", &z);
-        lights.push_back(Light(x,y,z));
+        const char *type = aux -> Attribute("type");
+        if(!strcmp(type, "POINT"))
+            light =  new LightPoint(x,y,z);
+        else if(!strcmp(type, "DIR"))
+            light =  new DirectionalLight(x,y,z);
+        lights.push_back(light);
     }
     return lights;
 }
