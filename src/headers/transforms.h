@@ -78,17 +78,26 @@ class Scale: public Transformation {
 		};
 };
 
-class Color: public Transformation { 
+class Color: public Transformation {
+	private:
+		float *def;
 	public:
 		const int component;
 		const unsigned int texID;
 		Color(float a, float b, float c, int d, unsigned int e) : 
-					Transformation(a,b,c), component(d), texID(e) { } 
+			Transformation(a,b,c), component(d), texID(e) {
+			def = (float*)malloc(4*sizeof(float));
+			def[0] = a;
+			def[1] = b;
+			def[2] = c;
+			def[3] = 1;
+		}
+		Color(float a, int d, unsigned int e) : Transformation(a,a,a), component(d), texID(e) {
+			def = (float*)malloc(sizeof(float));
+			def[0] = a;
+		} 
 		void transform(void) {
-			float color[4] = { x, y, z, 1 };
-			GLfloat low_shininess[1] = { 100 }; 
-			glMaterialfv(GL_FRONT, GL_SHININESS, low_shininess); 
-			glMaterialfv(GL_FRONT, component, color);
+			glMaterialfv(GL_FRONT, component, def);
 		};
 };
 

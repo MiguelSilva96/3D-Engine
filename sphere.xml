@@ -1,11 +1,11 @@
 <?xml version="1.0" ?>
 <scene>
 	<lights>
-		<light type="POINT" posX="100000.0" posY="0.0" posZ="0.0"/>
+		<light type="POINT" posX="10.0" posY="0.0" posZ="0.0"/>
 	</lights>
 	<group>
 		<models>
-    		<model file='sphere.3d'  diffR="1" diffG="0.01" diffB="0.1" ambiR="0.5" ambiG="0" ambiB="0" specR="1" specG="1" specB="1"/>
+    		<model file='sphere.3d' diffR="1" diffG="0.01" diffB="0.1" ambiR="0.5" ambiG="0" ambiB="0" specR="1" specG="1" specB="1" shine="50"/>
     	</models>
     </group>
 </scene>

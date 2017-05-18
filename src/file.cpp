@@ -52,9 +52,11 @@ void File::draw(unsigned int texID) {
     float def[4]  = { 0.0f, 0.0f, 0.0f, 1.0f };
     float defA[4] = { 0.2f, 0.2f, 0.2f, 1.0f };
     float defD[4] = { 0.8f, 0.8f, 0.8f, 1.0f };
+    float defS[1] = { 0.0f };
     glMaterialfv(GL_FRONT, GL_EMISSION, def);
     glMaterialfv(GL_FRONT, GL_SPECULAR, def);
     glMaterialfv(GL_FRONT, GL_AMBIENT, defA);
     glMaterialfv(GL_FRONT, GL_DIFFUSE, defD);
+    glMaterialfv(GL_FRONT, GL_SHININESS, defS);
 }
 

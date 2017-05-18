@@ -46,6 +46,11 @@ Color** XmlParser::getColor(tinyxml2::XMLElement* elem) {
             col = GL_AMBIENT;
             colors[i++] = new Color(r, g, b, col, texID);
         }
+        if(elem -> Attribute("shine")) {
+            elem -> QueryFloatAttribute("shine", &r);
+            col = GL_SHININESS;
+            colors[i++] = new Color(r, col, texID);
+        }
         if(!i)
             colors[i] = new Color(r, g, b, col, texID);
         return colors;
@@ -321,20 +326,27 @@ vector<Light*> XmlParser::getLights(void) {
     tinyxml2::XMLElement* aux;
     vector<Light*> lights;
     float x, y, z;
+    int i = 0;
+    float cutOff;
     Light *light;
     aux = root -> FirstChildElement("lights");
     if(aux)
         aux = aux -> FirstChildElement("light");
-    for(; aux != nullptr; aux = aux -> NextSiblingElement()) {
+    for(; aux != nullptr && i < 8; aux = aux -> NextSiblingElement()) {
         aux -> QueryFloatAttribute("posX", &x);
         aux -> QueryFloatAttribute("posY", &y);
         aux -> QueryFloatAttribute("posZ", &z);
         const char *type = aux -> Attribute("type");
         if(!strcmp(type, "POINT"))
-            light =  new LightPoint(x,y,z);
+            light =  new LightPoint(x,y,z,i);
         else if(!strcmp(type, "DIR"))
-            light =  new DirectionalLight(x,y,z);
+            light =  new DirectionalLight(x,y,z,i);
+        else if(!strcmp(type, "SPOTLIGHT")) {
+            aux -> QueryFloatAttribute("cutOff", &cutOff);
+            light =  new SpotLight(x,y,z,cutOff,i);
+        }
         lights.push_back(light);
+        i++;
     }
     return lights;
 }
