@@ -32,40 +32,221 @@ string vertexString(float x, float y) {
     return strStream.str();
 }
 
-float getPoint(float u, float v, float m[4][4] , float p[4][4]) {
-  float pValue = 0;
-  float aux[4], aux2[4];
+void cross(float *a, float *b, float *res) {
+    res[0] = a[1]*b[2] - a[2]*b[1];
+    res[1] = a[2]*b[0] - a[0]*b[2];
+    res[2] = a[0]*b[1] - a[1]*b[0];
+}
 
-  //bu*M
-  for(int i = 0; i<4; i++){
-    aux[i]  = (powf(u,3.0)*m[0][i]);
-    aux[i] += (powf(u,2.0)*m[1][i]);
-    aux[i] += (u*m[2][i]) + m[3][i];
-  }
 
-  //(bu*M)*P
-  for(int i = 0; i<4; i++){
-    aux2[i]  = (aux[0]*p[0][i]);
-    aux2[i] += (aux[1]*p[1][i]);
-    aux2[i] += (aux[2]*p[2][i]);
-    aux2[i] += (aux[3]*p[3][i]);
-  }
+void normalize(float *a) {
+    float l = sqrt(a[0]*a[0] + a[1] * a[1] + a[2] * a[2]);
+    a[0] = a[0]/l;
+    a[1] = a[1]/l;
+    a[2] = a[2]/l;
+}
 
-  //((bu*M)*P)*MT
-  for(int i = 0; i<4; i++){
-    aux[i]  = (aux2[0]*m[0][i]);
-    aux[i] += (aux2[1]*m[1][i]);
-    aux[i] += (aux2[2]*m[2][i]);
-    aux[i] += (aux2[3]*m[3][i]);
-  }
+float getPoint(float u, float v, float m[4][4], float p[4][4]) {
+    float pValue = 0;
+    float aux[4], aux2[4];
 
-  //(((bu*M)*P)*MT)*bv
-  pValue  = aux[0] * powf(v, 3.0);
-  pValue += aux[1] * powf(v, 2.0);
-  pValue += aux[2] * v;
-  pValue += aux[3];
+    //bu*M
+    for(int i = 0; i<4; i++){
+        aux[i]  = (powf(u,3.0)*m[0][i]);
+        aux[i] += (powf(u,2.0)*m[1][i]);
+        aux[i] += (u*m[2][i]) + m[3][i];
+    }
 
-  return pValue;
+    //(bu*M)*P
+    for(int i = 0; i<4; i++){
+        aux2[i]  = (aux[0]*p[0][i]);
+        aux2[i] += (aux[1]*p[1][i]);
+        aux2[i] += (aux[2]*p[2][i]);
+        aux2[i] += (aux[3]*p[3][i]);
+    }
+
+    //((bu*M)*P)*MT
+    for(int i = 0; i<4; i++){
+        aux[i]  = (aux2[0]*m[0][i]);
+        aux[i] += (aux2[1]*m[1][i]);
+        aux[i] += (aux2[2]*m[2][i]);
+        aux[i] += (aux2[3]*m[3][i]);
+    }
+
+    //(((bu*M)*P)*MT)*bv
+    pValue  = aux[0] * powf(v, 3.0);
+    pValue += aux[1] * powf(v, 2.0);
+    pValue += aux[2] * v;
+    pValue += aux[3];
+
+    return pValue;
+}
+
+float getUTangent(float u, float v, float m[4][4], float p[4][4]) {
+    float tValue = 0;
+    float aux[4], aux2[4];
+    //u*M
+    for(int i = 0; i<4; i++){
+        aux[i]  = 3*(powf(u,2.0)*m[0][i]);
+        aux[i] += 2*u*m[1][i];
+        aux[i] += m[2][i];
+    }
+    //(u*M)*P
+    for(int i = 0; i<4; i++){
+        aux2[i]  = (aux[0]*p[0][i]);
+        aux2[i] += (aux[1]*p[1][i]);
+        aux2[i] += (aux[2]*p[2][i]);
+        aux2[i] += (aux[3]*p[3][i]);
+    }
+    //((u*M)*P)*MT
+    for(int i = 0; i<4; i++){
+        aux[i]  = (aux2[0]*m[0][i]);
+        aux[i] += (aux2[1]*m[1][i]);
+        aux[i] += (aux2[2]*m[2][i]);
+        aux[i] += (aux2[3]*m[3][i]);
+    }
+    //(((bu*M)*P)*MT)*VT
+    tValue  = aux[0] * powf(v, 3.0);
+    tValue += aux[1] * powf(v, 2.0);
+    tValue += aux[2] * v;
+    tValue += aux[3];
+    return tValue;
+}
+
+float getVTangent(float u, float v, float m[4][4], float p[4][4]) {
+    float tValue = 0;
+    float aux[4], aux2[4];
+    //u*M
+    for(int i = 0; i<4; i++){
+        aux[i]  = (powf(u,3.0)*m[0][i]);
+        aux[i] += (powf(u,2.0)*m[1][i]);
+        aux[i] += (u*m[2][i]) + m[3][i];
+    }
+    //(u*M)*P
+    for(int i = 0; i<4; i++){
+        aux2[i]  = (aux[0]*p[0][i]);
+        aux2[i] += (aux[1]*p[1][i]);
+        aux2[i] += (aux[2]*p[2][i]);
+        aux2[i] += (aux[3]*p[3][i]);
+    }
+    //((u*M)*P)*MT
+    for(int i = 0; i<4; i++){
+        aux[i]  = (aux2[0]*m[0][i]);
+        aux[i] += (aux2[1]*m[1][i]);
+        aux[i] += (aux2[2]*m[2][i]);
+        aux[i] += (aux2[3]*m[3][i]);
+    }
+    //(((bu*M)*P)*MT)*v
+    tValue  = aux[0] * (3 * powf(v,2.0));
+    tValue += aux[1] * (2 * v);
+    tValue += aux[2];
+    return tValue;
+}
+
+vector<string> bezierNormals(int tessellation, vector<vector<int>> indices, vector<vector<float>> controlPoints) {
+    vector<string> vr;
+    int aux, nrPatches = indices.size();
+    vector<int> patchIndice;
+    vector<vector<float>> ma;
+    float px[4][4], py[4][4], pz[4][4], res[3], resU[3], resV[3];
+    float u, v, level = 1.0f/tessellation;
+    for(int patch = 0; patch < nrPatches; patch++) {
+        aux = 0;
+        patchIndice = indices.at(patch);
+
+        //Obter os pontos de controlo do patch atual
+        for(int i = 0; i < 16; i++) {
+            ma.push_back(controlPoints.at(patchIndice[i]));
+        }
+
+        //Preencher px, py, e pz com valores dos pontos de controlo
+        for(int i = 0; i < 4; i++){
+            for(int j = 0; j < 4; j++, aux++){
+                px[i][j] = ma.at(aux).at(0);
+                py[i][j] = ma.at(aux).at(1);
+                pz[i][j] = ma.at(aux).at(2);
+            }
+        }
+
+        float m[4][4] = { 
+                          {-1,  3, -3, 1},
+                          { 3, -6,  3, 0},
+                          {-3,  3,  0, 0},
+                          { 1,  0,  0, 0} 
+                        };
+
+        for(u = 0.0f; u < 1 ; u += level){
+            for(v = 0.0f; v < 1 ; v += level){
+                resU[0] = getUTangent(u, v, m, px);
+                resU[1] = getUTangent(u, v, m, py);
+                resU[2] = getUTangent(u, v, m, pz);
+                resV[0] = getVTangent(u, v, m, px);
+                resV[1] = getVTangent(u, v, m, py);
+                resV[2] = getVTangent(u, v, m, pz);
+                normalize(resU);
+                normalize(resV);
+                cross(resV, resU, res);
+                vr.push_back(vertexString(res[0],res[1],res[2]));
+
+                resU[0] = getUTangent(u+level,v+level, m, px);
+                resU[1] = getUTangent(u+level,v+level, m, py);
+                resU[2] = getUTangent(u+level,v+level, m, pz);
+                resV[0] = getVTangent(u+level,v+level, m, px);
+                resV[1] = getVTangent(u+level,v+level, m, py);
+                resV[2] = getVTangent(u+level,v+level, m, pz);
+                normalize(resU);
+                normalize(resV);
+                cross(resV, resU, res);
+                vr.push_back(vertexString(res[0],res[1],res[2]));
+
+                resU[0] = getUTangent(u+level,v, m, px);
+                resU[1] = getUTangent(u+level,v, m, py);
+                resU[2] = getUTangent(u+level,v, m, pz);
+                resV[0] = getVTangent(u+level,v, m, px);
+                resV[1] = getVTangent(u+level,v, m, py);
+                resV[2] = getVTangent(u+level,v, m, pz);
+                normalize(resU);
+                normalize(resV);
+                cross(resV, resU, res);
+                vr.push_back(vertexString(res[0],res[1],res[2]));
+
+                resU[0] = getUTangent(u, v, m, px);
+                resU[1] = getUTangent(u, v, m, py);
+                resU[2] = getUTangent(u, v, m, pz);
+                resV[0] = getVTangent(u, v, m, px);
+                resV[1] = getVTangent(u, v, m, py);
+                resV[2] = getVTangent(u, v, m, pz);
+                normalize(resU);
+                normalize(resV);
+                cross(resV, resU, res);
+                vr.push_back(vertexString(res[0],res[1],res[2]));
+
+                resU[0] = getUTangent(u,v+level, m, px);
+                resU[1] = getUTangent(u,v+level, m, py);
+                resU[2] = getUTangent(u,v+level, m, pz);
+                resV[0] = getVTangent(u,v+level, m, px);
+                resV[1] = getVTangent(u,v+level, m, py);
+                resV[2] = getVTangent(u,v+level, m, pz);
+                normalize(resU);
+                normalize(resV);
+                cross(resV, resU, res);
+                vr.push_back(vertexString(res[0],res[1],res[2]));
+
+                resU[0] = getUTangent(u+level,v+level, m, px);
+                resU[1] = getUTangent(u+level,v+level, m, py);
+                resU[2] = getUTangent(u+level,v+level, m, pz);
+                resV[0] = getVTangent(u+level,v+level, m, px);
+                resV[1] = getVTangent(u+level,v+level, m, py);
+                resV[2] = getVTangent(u+level,v+level, m, pz);
+                normalize(resU);
+                normalize(resV);
+                cross(resV, resU, res);
+                vr.push_back(vertexString(res[0],res[1],res[2]));
+            }
+        }
+        ma.clear();
+    }
+    return vr;
 }
 
 vector<string> bezierSurface(int tessellation, vector<vector<int>> indices, vector<vector<float>> controlPoints) {
@@ -200,6 +381,7 @@ vector<string>* bezier(char *input, int tessellation) {
         i++;
     }
     v[0] = bezierSurface(tessellation, indices, controlPoints);
+    v[1] = bezierNormals(tessellation, indices, controlPoints);
     return v;
 }
 

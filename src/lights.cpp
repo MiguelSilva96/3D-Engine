@@ -6,9 +6,9 @@ Light::Light(float a, float b, float c, int l) {
 	GLfloat amb[4]  = {0.2, 0.2, 0.2, 1.0};
   	GLfloat diff[4] = {0.8, 0.8, 0.8, 1.0};
   	GLfloat spec[4] = {1.0, 1.0, 1.0, 1.0};
-  	glLightfv(GL_LIGHT0, GL_AMBIENT, amb);
-  	glLightfv(GL_LIGHT0, GL_DIFFUSE, diff);
-  	glLightfv(GL_LIGHT0, GL_SPECULAR, spec);
+  	glLightfv(GL_LIGHT0 + l, GL_AMBIENT, amb);
+  	glLightfv(GL_LIGHT0 + l, GL_DIFFUSE, diff);
+  	glLightfv(GL_LIGHT0 + l, GL_SPECULAR, spec);
 	x = a; y = b; z = c;
 	lightNum = l;
 }

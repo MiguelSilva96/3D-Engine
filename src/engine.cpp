@@ -281,10 +281,8 @@ bool loadVertexes(const char* filename) {
     while(xmlparser -> startNextGroup())
         groups.push_back(xmlparser -> getGroup());
     delete(xmlparser);
-    for(int i = 0; i < lights.size(); i++) {
+    for(int i = 0; i < lights.size(); i++)
         glEnable(GL_LIGHT0 + i);
-        cout <<" cucu" <<endl;
-    }
     return true;
 }
 
