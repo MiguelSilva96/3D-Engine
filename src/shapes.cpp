@@ -410,6 +410,12 @@ vector<string>* plane(float x, float y, float z, int div) {
             v[1].push_back(vertexString(0,1,0));
             v[1].push_back(vertexString(0,1,0));
             v[1].push_back(vertexString(0,1,0));
+            /*v[2].push_back(vertexString(0,1));
+            v[2].push_back(vertexString(0,1));
+            v[2].push_back(vertexString(0,1));
+            v[2].push_back(vertexString(0,1));
+            v[2].push_back(vertexString(0,1));
+            v[2].push_back(vertexString(0,1));*/
         }
     }
     return v;
