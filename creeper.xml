@@ -5,17 +5,26 @@
 	</lights>
 	<!--HOUSE-->
 	<group>
+		<scale X="5" Y="5" Z="5"/>
+		<translate X="0" Y="30" Z="0"/>
+		<models>
+			<model file="ruby.3d" texture="texture_earth.jpg"/>
+		</models>
+	</group>
+
+	<group>
 		<scale X="30" Y="30" Z="30"/>
 		<translate X="0" Y="1.5" Z="0"/>
 		<models>
 			<model file="box.3d" diffR="0.33" diffG="0.33" diffB="0.33" />
 		</models>
 	</group>
+
 	<group>
 		<scale X="15" Y="10" Z="15"/>
 		<translate X="0" Y="11" Z="0"/>
 		<models>
-			<model file="torus.3d" diffR="1.0" diffG="0.1" diffB="0.001" />
+			<model file="torus.3d" texture="texture_earth.jpg"/>
 		</models>
 	</group>
 
@@ -43,7 +52,7 @@
 		<scale X="7" Y="7" Z="7"/>
 		<translate X="0" Y="5.0" Z="-8.9"/>
 		<models>
-			<model file="ruby.3d" diffR="0.66" diffG="0.66" diffB="0.66" />
+			<model file="ruby.3d" texture="texture_earth.jpg"/>
 		</models>
 	</group>
 

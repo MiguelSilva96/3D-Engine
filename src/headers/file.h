@@ -8,14 +8,11 @@
 
 class File {
     private:
-    	vector<Vertex> vertexes;
-    	vector<Vertex> normals;
-    	vector<float> textureCoords;
+    	int nVertex;
     	GLuint buffers[3];
     
     public:
     	File(vector<Vertex>, vector<Vertex>, vector<float>);
-    	vector<Vertex> getVertexes(void);
     	void draw(unsigned int);
 };
 

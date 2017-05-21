@@ -131,84 +131,82 @@ vector<Vertex> XmlParser::getPoints(tinyxml2::XMLElement* el) {
     return points;
 }
 
-vector<pair<Color**,File*>> XmlParser::getCurVertexes(void) {
-    tinyxml2::XMLElement* auxEl;
-    vector<string> aux;
-    vector<pair<Color**,File*>> vertexes;
-    string line;
-    string file = "../shapes/";
-    pair<Color**, File*> p;
+vector<pair<Color**, File*>> XmlParser::getCurVertexes(void) {
+	tinyxml2::XMLElement* auxEl;
+	vector<string> aux;
+	vector<pair<Color**, File*>> vertexes;
+	string line;
+	string file = "../shapes/";
+	pair<Color**, File*> p;
 
-    int nlinhas;
-    float x, y, z;
-    float r, g, b;
-    auxEl = elem;
-    auxEl = auxEl -> FirstChildElement("models");
-    if(auxEl)
-        auxEl = auxEl -> FirstChildElement("model");
+	int nlinhas;
+	float x, y, z;
+	float r, g, b;
+	auxEl = elem;
+	auxEl = auxEl->FirstChildElement("models");
+	if (auxEl)
+		auxEl = auxEl->FirstChildElement("model");
 
-    for(; auxEl != nullptr; auxEl = auxEl -> NextSiblingElement()) {
-        vector<Vertex> vert;
-        vector<Vertex> norm;
-        vector<float>  txtr;
-        ifstream filedisc;
+	for (; auxEl != nullptr; auxEl = auxEl->NextSiblingElement()) {
+		vector<Vertex> vert;
+		vector<Vertex> norm;
+		vector<float>  txtr;
+		ifstream filedisc;
 
-        Color** c = XmlParser::getColor(auxEl);
+		Color** c = XmlParser::getColor(auxEl);
 
-        file.append(auxEl -> Attribute("file"));
-        if(loadedFiles.find(file) != loadedFiles.end()) {
-            p = make_pair(c, loadedFiles[file]);
-            vertexes.push_back(p);
-            continue;
-        }
+		file.append(auxEl->Attribute("file"));
+		if (loadedFiles.find(file) != loadedFiles.end()) {
+			p = make_pair(c, loadedFiles[file]);
+			vertexes.push_back(p);
+			continue;
+		}
 
-        filedisc.open(file);
-        getline(filedisc, line);
-        nlinhas = stoi(line);
+		filedisc.open(file);
+		getline(filedisc, line);
+		nlinhas = stoi(line);
+		while (nlinhas > 0) {
+			getline(filedisc, line);
+			aux = XmlParser::split(line, ' ');
+			x = stof(aux.at(0));
+			y = stof(aux.at(1));
+			z = stof(aux.at(2));
+			vert.push_back(Vertex(x, y, z));
+			nlinhas--;
+		}
 
-        while(nlinhas > 0) {
-            getline(filedisc, line);
-            aux = XmlParser::split(line, ' ');
-            x = stof(aux.at(0));
-            y = stof(aux.at(1));
-            z = stof(aux.at(2));
-            vert.push_back(Vertex(x,y,z));
-            nlinhas--;
-        }
+		if (getline(filedisc, line))
+			nlinhas = stoi(line);
+		while (nlinhas > 0) {
+			getline(filedisc, line);
+			aux = XmlParser::split(line, ' ');
+			x = stof(aux.at(0));
+			y = stof(aux.at(1));
+			z = stof(aux.at(2));
+			norm.push_back(Vertex(x, y, z));
+			nlinhas--;
+		}
 
-        if(getline(filedisc, line))
-            nlinhas = stoi(line);
+		if (getline(filedisc, line))
+			nlinhas = stoi(line);
 
-        while(nlinhas > 0) {
-            getline(filedisc, line);
-            aux = XmlParser::split(line, ' ');
-            x = stof(aux.at(0));
-            y = stof(aux.at(1));
-            z = stof(aux.at(2));
-            norm.push_back(Vertex(x,y,z));
-            nlinhas--;
-        }
+		while (nlinhas > 0) {
+			getline(filedisc, line);
+			aux = XmlParser::split(line, ' ');
+			x = stof(aux.at(0));
+			y = stof(aux.at(1));
+			txtr.push_back(x);
+			txtr.push_back(y);
+			nlinhas--;
+		}
 
-        if(getline(filedisc, line))
-            nlinhas = stoi(line);
-
-        while(nlinhas > 0) {
-            getline(filedisc, line);
-            aux = XmlParser::split(line, ' ');
-            x = stof(aux.at(0));
-            y = stof(aux.at(1));
-            txtr.push_back(x);
-            txtr.push_back(y);
-            nlinhas--;
-        }
-
-        File* f = new File(vert, norm, txtr);
-        p = make_pair(c, f);
-        vertexes.push_back(p);
-        loadedFiles[file] = f;
-        file = "../shapes/";
-    }
-    return vertexes;
+		File* f = new File(vert, norm, txtr);
+		p = make_pair(c, f);
+		vertexes.push_back(p);
+		loadedFiles[file] = f;
+		file = "../shapes/";
+	}
+	return vertexes;
 }
 
 vector<Transformation*> XmlParser::getCurTransformations(void) {
