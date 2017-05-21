@@ -1,7 +1,9 @@
 <?xml version="1.0" ?>
 <scene>
 	<lights>
+		<light type="DIR" posX="0" posY="1.0" posZ="0.0"/>
 		<light type="DIR" posX="1" posY="0.0" posZ="0.0"/>
+		<light type="DIR" posX="0" posY="0.0" posZ="1.0"/>
 	</lights>
 	<!--HOUSE-->
 	<group>
@@ -16,7 +18,7 @@
 		<scale X="30" Y="30" Z="30"/>
 		<translate X="0" Y="1.5" Z="0"/>
 		<models>
-			<model file="box.3d" diffR="0.33" diffG="0.33" diffB="0.33" />
+			<model file="box.3d" texture="texture_sun.jpg" />
 		</models>
 	</group>
 
@@ -32,7 +34,7 @@
 		<scale X="15" Y="15" Z="15"/>
 		<translate X="0" Y="4" Z="-3.5"/>
 		<models>
-			<model file="sphere.3d" diffR="1.0" diffG="1" diffB="1" />
+			<model file="sphere.3d" texture="eye.jpg" diffR="1" diffG="1" diffB="1" emisR="1" emisG="1" emisB="1" />
 		</models>
 	</group>
 
@@ -43,7 +45,7 @@
 		<group>
 			<translate X="0" Y="0.5" Z="0"/>
 		<models>
-			<model file="sphere.3d" diffR="0" diffG="0" diffB="0" />
+			<model file="sphere.3d" diffR="0" diffG="0" diffB="0"/>
 		</models>
 		</group>
 	</group>
@@ -72,59 +74,26 @@
 		<translate X="0" Y="23" Z="0" />
 		<scale X="10" Y="10" Z="10"/>
 		<models>
-			<model file="boxCreeper.3d" diffR="0.00" diffG="1.0" diffB="0.0" />
+			<model file="boxCreeper.3d" texture="creeper.png" />
 		</models>
-		<!--Eyes-->
+		<!--Face-->
 		<group>
-			<translate X="-0.2" Y="0.2" Z="0.6" />
-			<scale X="0.2" Y="0.2" Z="0.2" />
-			<rotate axisX="1" axisY="0" axisZ="0" angle="90" />
+			<translate X="0.0" Y="0.0" Z="0.51" />
+			<rotate axisX="0" axisY="1" axisZ="0" angle="180" />
+			<rotate axisX="1" axisY="0" axisZ="0" angle="-90" />
 			<models>
-				<model file="eye.2d" diffR="0.0" diffG="0.0" diffB="0.0"/>
-			</models>
-		</group>
-		<group>
-			<translate X="0.2" Y="0.2" Z="0.6" />
-			<scale X="0.2" Y="0.2" Z="0.2" />
-			<rotate axisX="1" axisY="0" axisZ="0" angle="90" />
-			<models>
-				<model file="eye.2d" diffR="0.0" diffG="0.0" diffB="0.0"/>
-			</models>
-		</group>
-		<group>
-			<translate X="0.0" Y="-0.1" Z="0.6" />
-			<scale X="0.15" Y="0.2" Z="0.2" />
-			<rotate axisX="1.2" axisY="0" axisZ="0" angle="90" />
-			<models>
-				<model file="eye.2d" diffR="0.0" diffG="0.0" diffB="0.0"/>
-			</models>
-		</group>
-		<group>
-			<translate X="0.1" Y="-0.2" Z="0.6" />
-			<scale X="0.12" Y="0.25" Z="0.2" />
-			<rotate axisX="1" axisY="0" axisZ="0" angle="90" />
-			<models>
-				<model file="eye.2d" diffR="0.0" diffG="0.0" diffB="0.0"/>
-			</models>
-
-		</group>
-		<group>
-			<translate X="-0.1" Y="-0.2" Z="0.6" />
-			<scale X="0.12" Y="0.25" Z="0.2" />
-			<rotate axisX="1" axisY="0" axisZ="0" angle="90" />
-			<models>
-				<model file="eye.2d" diffR="0.0" diffG="0.0" diffB="0.0"/>
+				<model file="planeCreeper.2d" texture="creeperFace.jpg" />
 			</models>
 			
 		</group>
+		
 	</group>
-
 	<!--Body-->
 	<group>
 		<translate X="0" Y="13" Z="0" />
 		<scale X="10" Y="20" Z="3"/>
 		<models>
-			<model file="boxCreeper.3d" diffR="0.00" diffG="1.0" diffB="0.0" />
+			<model file="boxCreeper.3d" texture="creeper.png" />
 		</models>
 	</group>
 	<!--Feet-->
@@ -132,28 +101,28 @@
 		<translate X="4" Y="3" Z="-2" />
 		<scale X="4" Y="6" Z="4"/>
 		<models>
-			<model file="boxCreeper.3d" diffR="0.00" diffG="1.0" diffB="0.0" />
+			<model file="boxCreeper.3d" texture="creeper.png" />
 		</models>
 	</group>
 	<group>
 		<translate X="-4" Y="3" Z="2" />
 		<scale X="4" Y="6" Z="4"/>
 		<models>
-			<model file="boxCreeper.3d" diffR="0.00" diffG="1.0" diffB="0.0" />
+			<model file="boxCreeper.3d" texture="creeper.png" />
 		</models>
 	</group>
 	<group>
 		<translate X="4" Y="3" Z="2" />
 		<scale X="4" Y="6" Z="4"/>
 		<models>
-			<model file="boxCreeper.3d" diffR="0.00" diffG="1.0" diffB="0.0" />
+			<model file="boxCreeper.3d" texture="creeper.png" />
 		</models>
 	</group>
 	<group>
 		<translate X="-4" Y="3" Z="-2" />
 		<scale X="4" Y="6" Z="4"/>
 		<models>
-			<model file="boxCreeper.3d" diffR="0.00" diffG="1.0" diffB="0.0" />
+			<model file="boxCreeper.3d" texture="creeper.png" />
 		</models>
 	</group>
 	</group>
@@ -173,48 +142,15 @@
 		<translate X="0" Y="23" Z="0" />
 		<scale X="10" Y="10" Z="10"/>
 		<models>
-			<model file="boxCreeper.3d" diffR="0.00" diffG="1.0" diffB="0.0" />
+			<model file="boxCreeper.3d" texture="creeper.png" />
 		</models>
-		<!--Eyes-->
+		<!--Face-->
 		<group>
-			<translate X="-0.2" Y="0.2" Z="0.6" />
-			<scale X="0.2" Y="0.2" Z="0.2" />
-			<rotate axisX="1" axisY="0" axisZ="0" angle="90" />
+			<translate X="0.0" Y="0.0" Z="0.51" />
+			<rotate axisX="0" axisY="1" axisZ="0" angle="180" />
+			<rotate axisX="1" axisY="0" axisZ="0" angle="-90" />
 			<models>
-				<model file="eye.2d" diffR="0.0" diffG="0.0" diffB="0.0"/>
-			</models>
-		</group>
-		<group>
-			<translate X="0.2" Y="0.2" Z="0.6" />
-			<scale X="0.2" Y="0.2" Z="0.2" />
-			<rotate axisX="1" axisY="0" axisZ="0" angle="90" />
-			<models>
-				<model file="eye.2d" diffR="0.0" diffG="0.0" diffB="0.0"/>
-			</models>
-		</group>
-		<group>
-			<translate X="0.0" Y="-0.1" Z="0.6" />
-			<scale X="0.15" Y="0.2" Z="0.2" />
-			<rotate axisX="1.2" axisY="0" axisZ="0" angle="90" />
-			<models>
-				<model file="eye.2d" diffR="0.0" diffG="0.0" diffB="0.0"/>
-			</models>
-		</group>
-		<group>
-			<translate X="0.1" Y="-0.2" Z="0.6" />
-			<scale X="0.12" Y="0.25" Z="0.2" />
-			<rotate axisX="1" axisY="0" axisZ="0" angle="90" />
-			<models>
-				<model file="eye.2d" diffR="0.0" diffG="0.0" diffB="0.0"/>
-			</models>
-
-		</group>
-		<group>
-			<translate X="-0.1" Y="-0.2" Z="0.6" />
-			<scale X="0.12" Y="0.25" Z="0.2" />
-			<rotate axisX="1" axisY="0" axisZ="0" angle="90" />
-			<models>
-				<model file="eye.2d" diffR="0.0" diffG="0.0" diffB="0.0"/>
+				<model file="planeCreeper.2d" texture="creeperFace.jpg" />
 			</models>
 			
 		</group>
@@ -225,7 +161,7 @@
 		<translate X="0" Y="13" Z="0" />
 		<scale X="10" Y="20" Z="3"/>
 		<models>
-			<model file="boxCreeper.3d" diffR="0.00" diffG="1.0" diffB="0.0" />
+			<model file="boxCreeper.3d" texture="creeper.png" />
 		</models>
 	</group>
 	<!--Feet-->
@@ -233,28 +169,28 @@
 		<translate X="4" Y="3" Z="-2" />
 		<scale X="4" Y="6" Z="4"/>
 		<models>
-			<model file="boxCreeper.3d" diffR="0.00" diffG="1.0" diffB="0.0" />
+			<model file="boxCreeper.3d" texture="creeper.png" />
 		</models>
 	</group>
 	<group>
 		<translate X="-4" Y="3" Z="2" />
 		<scale X="4" Y="6" Z="4"/>
 		<models>
-			<model file="boxCreeper.3d" diffR="0.00" diffG="1.0" diffB="0.0" />
+			<model file="boxCreeper.3d" texture="creeper.png" />
 		</models>
 	</group>
 	<group>
 		<translate X="4" Y="3" Z="2" />
 		<scale X="4" Y="6" Z="4"/>
 		<models>
-			<model file="boxCreeper.3d" diffR="0.00" diffG="1.0" diffB="0.0" />
+			<model file="boxCreeper.3d" texture="creeper.png" />
 		</models>
 	</group>
 	<group>
 		<translate X="-4" Y="3" Z="-2" />
 		<scale X="4" Y="6" Z="4"/>
 		<models>
-			<model file="boxCreeper.3d" diffR="0.00" diffG="1.0" diffB="0.0" />
+			<model file="boxCreeper.3d" texture="creeper.png" />
 		</models>
 	</group>
 	</group>
@@ -274,48 +210,15 @@
 		<translate X="0" Y="23" Z="0" />
 		<scale X="10" Y="10" Z="10"/>
 		<models>
-			<model file="boxCreeper.3d" diffR="0.00" diffG="1.0" diffB="0.0" />
+			<model file="boxCreeper.3d" texture="creeper.png" />
 		</models>
-		<!--Eyes-->
+		<!--Face-->
 		<group>
-			<translate X="-0.2" Y="0.2" Z="0.6" />
-			<scale X="0.2" Y="0.2" Z="0.2" />
-			<rotate axisX="1" axisY="0" axisZ="0" angle="90" />
+			<translate X="0.0" Y="0.0" Z="0.51" />
+			<rotate axisX="0" axisY="1" axisZ="0" angle="180" />
+			<rotate axisX="1" axisY="0" axisZ="0" angle="-90" />
 			<models>
-				<model file="eye.2d" diffR="0.0" diffG="0.0" diffB="0.0"/>
-			</models>
-		</group>
-		<group>
-			<translate X="0.2" Y="0.2" Z="0.6" />
-			<scale X="0.2" Y="0.2" Z="0.2" />
-			<rotate axisX="1" axisY="0" axisZ="0" angle="90" />
-			<models>
-				<model file="eye.2d" diffR="0.0" diffG="0.0" diffB="0.0"/>
-			</models>
-		</group>
-		<group>
-			<translate X="0.0" Y="-0.1" Z="0.6" />
-			<scale X="0.15" Y="0.2" Z="0.2" />
-			<rotate axisX="1.2" axisY="0" axisZ="0" angle="90" />
-			<models>
-				<model file="eye.2d" diffR="0.0" diffG="0.0" diffB="0.0"/>
-			</models>
-		</group>
-		<group>
-			<translate X="0.1" Y="-0.2" Z="0.6" />
-			<scale X="0.12" Y="0.25" Z="0.2" />
-			<rotate axisX="1" axisY="0" axisZ="0" angle="90" />
-			<models>
-				<model file="eye.2d" diffR="0.0" diffG="0.0" diffB="0.0"/>
-			</models>
-
-		</group>
-		<group>
-			<translate X="-0.1" Y="-0.2" Z="0.6" />
-			<scale X="0.12" Y="0.25" Z="0.2" />
-			<rotate axisX="1" axisY="0" axisZ="0" angle="90" />
-			<models>
-				<model file="eye.2d" diffR="0.0" diffG="0.0" diffB="0.0"/>
+				<model file="planeCreeper.2d" texture="creeperFace.jpg" />
 			</models>
 			
 		</group>
@@ -326,7 +229,7 @@
 		<translate X="0" Y="13" Z="0" />
 		<scale X="10" Y="20" Z="3"/>
 		<models>
-			<model file="boxCreeper.3d" diffR="0.00" diffG="1.0" diffB="0.0" />
+			<model file="boxCreeper.3d" texture="creeper.png" />
 		</models>
 	</group>
 	<!--Feet-->
@@ -334,28 +237,28 @@
 		<translate X="4" Y="3" Z="-2" />
 		<scale X="4" Y="6" Z="4"/>
 		<models>
-			<model file="boxCreeper.3d" diffR="0.00" diffG="1.0" diffB="0.0" />
+			<model file="boxCreeper.3d" texture="creeper.png" />
 		</models>
 	</group>
 	<group>
 		<translate X="-4" Y="3" Z="2" />
 		<scale X="4" Y="6" Z="4"/>
 		<models>
-			<model file="boxCreeper.3d" diffR="0.00" diffG="1.0" diffB="0.0" />
+			<model file="boxCreeper.3d" texture="creeper.png" />
 		</models>
 	</group>
 	<group>
 		<translate X="4" Y="3" Z="2" />
 		<scale X="4" Y="6" Z="4"/>
 		<models>
-			<model file="boxCreeper.3d" diffR="0.00" diffG="1.0" diffB="0.0" />
+			<model file="boxCreeper.3d" texture="creeper.png" />
 		</models>
 	</group>
 	<group>
 		<translate X="-4" Y="3" Z="-2" />
 		<scale X="4" Y="6" Z="4"/>
 		<models>
-			<model file="boxCreeper.3d" diffR="0.00" diffG="1.0" diffB="0.0" />
+			<model file="boxCreeper.3d" texture="creeper.png" />
 		</models>
 	</group>
 	</group>
@@ -363,7 +266,7 @@
 	<group>
 		<scale X="10" Y="0" Z="10"/>
 		<models>
-			<model file="plane.2d" diffR="0.0" diffG="0.224" diffB="0.1"/>
+			<model file="plane.2d" texture="grass.jpg"/>
 		</models>
 	</group>
 </scene>

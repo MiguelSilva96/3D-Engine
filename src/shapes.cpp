@@ -389,8 +389,8 @@ vector<string>* bezier(char *input, int tessellation) {
 vector<string>* plane(float x, float y, float z, int div) {
     // 0 - vertices; 1 - normals; 2 - texCoords
     vector<string> *v = new vector<string>[3];
-    for(int i = 0; i < div; i++) {
-        for(int j = 0; j < div; j++) {
+    for(float i = 0; i < div; i++) {
+        for(float j = 0; j < div; j++) {
             v[0].push_back(vertexString(x/2-x/div*(i+1),
                         y, -z/2+z/div*j));
             v[0].push_back(vertexString(x/2-x/div*i,
@@ -410,6 +410,12 @@ vector<string>* plane(float x, float y, float z, int div) {
             v[1].push_back(vertexString(0,1,0));
             v[1].push_back(vertexString(0,1,0));
             v[1].push_back(vertexString(0,1,0));
+            v[2].push_back(vertexString((i+1)/div,j/div));
+            v[2].push_back(vertexString(i/div,(j+1)/div));
+            v[2].push_back(vertexString(i/div,j/div));
+            v[2].push_back(vertexString((i+1)/div,j/div));
+            v[2].push_back(vertexString((i+1)/div,(j+1)/div));
+            v[2].push_back(vertexString(i/div,(j+1)/div));
         }
     }
     return v;
@@ -421,8 +427,8 @@ vector<string>* box(float x, float y, float z, int div) {
     vector<string> *v = new vector<string>[3];
     //top
     v = plane(x, y/2, z, div);
-    for(int i = 0; i < div; i++) {
-        for(int j = 0; j < div; j++) {
+    for(float i = 0; i < div; i++) {
+        for(float j = 0; j < div; j++) {
             //base
             v[0].push_back(vertexString(x/2-x/div*(i+1), -y/2, -z/2+z/div*j));
             v[0].push_back(vertexString(x/2-x/div*i, -y/2, -z/2+z/div*j));
@@ -438,6 +444,12 @@ vector<string>* box(float x, float y, float z, int div) {
             v[1].push_back(vertexString(0,-1,0));
             v[1].push_back(vertexString(0,-1,0));
             v[1].push_back(vertexString(0,-1,0));
+            v[2].push_back(vertexString((i+1)/div,j/div));
+            v[2].push_back(vertexString(i/div,(j+1)/div));
+            v[2].push_back(vertexString(i/div,j/div));
+            v[2].push_back(vertexString((i+1)/div,j/div));
+            v[2].push_back(vertexString((i+1)/div,(j+1)/div));
+            v[2].push_back(vertexString(i/div,(j+1)/div));
             //front
             v[0].push_back(vertexString(-x/2+x/div*j, y/2-y/div*(i+1), z/2));
             v[0].push_back(vertexString(-x/2+x/div*(j+1), y/2-y/div*i, z/2));
@@ -453,6 +465,12 @@ vector<string>* box(float x, float y, float z, int div) {
             v[1].push_back(vertexString(1,0,0));
             v[1].push_back(vertexString(1,0,0));
             v[1].push_back(vertexString(1,0,0));
+            v[2].push_back(vertexString((i+1)/div,j/div));
+            v[2].push_back(vertexString(i/div,(j+1)/div));
+            v[2].push_back(vertexString(i/div,j/div));
+            v[2].push_back(vertexString((i+1)/div,j/div));
+            v[2].push_back(vertexString((i+1)/div,(j+1)/div));
+            v[2].push_back(vertexString(i/div,(j+1)/div));
             //back
             v[0].push_back(vertexString(-x/2+x/div*j, y/2-y/div*(i+1), -z/2));
             v[0].push_back(vertexString(-x/2+x/div*j, y/2-y/div*i, -z/2));
@@ -468,6 +486,12 @@ vector<string>* box(float x, float y, float z, int div) {
             v[1].push_back(vertexString(-1,0,0));
             v[1].push_back(vertexString(-1,0,0));
             v[1].push_back(vertexString(-1,0,0));
+            v[2].push_back(vertexString((i+1)/div,j/div));
+            v[2].push_back(vertexString(i/div,(j+1)/div));
+            v[2].push_back(vertexString(i/div,j/div));
+            v[2].push_back(vertexString((i+1)/div,j/div));
+            v[2].push_back(vertexString((i+1)/div,(j+1)/div));
+            v[2].push_back(vertexString(i/div,(j+1)/div));
             //right
             v[0].push_back(vertexString(x/2, -y/2+y/div*j, z/2-z/div*(i+1)));
             v[0].push_back(vertexString(x/2, -y/2+y/div*(j+1), z/2-z/div*i));
@@ -483,6 +507,12 @@ vector<string>* box(float x, float y, float z, int div) {
             v[1].push_back(vertexString(0,0,1));
             v[1].push_back(vertexString(0,0,1));
             v[1].push_back(vertexString(0,0,1));
+            v[2].push_back(vertexString((i+1)/div,j/div));
+            v[2].push_back(vertexString(i/div,(j+1)/div));
+            v[2].push_back(vertexString(i/div,j/div));
+            v[2].push_back(vertexString((i+1)/div,j/div));
+            v[2].push_back(vertexString((i+1)/div,(j+1)/div));
+            v[2].push_back(vertexString(i/div,(j+1)/div));
             //left
             v[0].push_back(vertexString(-x/2, -y/2+y/div*j, z/2-z/div*(i+1)));
             v[0].push_back(vertexString(-x/2, -y/2+y/div*j, z/2-z/div*i));
@@ -498,6 +528,12 @@ vector<string>* box(float x, float y, float z, int div) {
             v[1].push_back(vertexString(0,0,-1));
             v[1].push_back(vertexString(0,0,-1));
             v[1].push_back(vertexString(0,0,-1));
+            v[2].push_back(vertexString((i+1)/div,j/div));
+            v[2].push_back(vertexString(i/div,(j+1)/div));
+            v[2].push_back(vertexString(i/div,j/div));
+            v[2].push_back(vertexString((i+1)/div,j/div));
+            v[2].push_back(vertexString((i+1)/div,(j+1)/div));
+            v[2].push_back(vertexString(i/div,(j+1)/div));
         }
     }
     return v;

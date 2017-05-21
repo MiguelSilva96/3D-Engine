@@ -64,6 +64,8 @@ unsigned int XmlParser::getTexture(tinyxml2::XMLElement* elem) {
 
     if(elem -> Attribute("texture")) {
         s = elem -> Attribute("texture");
+        if(loadedTextures.find(s) != loadedTextures.end())
+            return loadedTextures[s];
 
         ilInit();
         ilEnable(IL_ORIGIN_SET);
@@ -102,6 +104,7 @@ unsigned int XmlParser::getTexture(tinyxml2::XMLElement* elem) {
         glBindTexture(GL_TEXTURE_2D, 0);
 
     }
+    loadedTextures[s] = texID;
     return texID;
 }
 
