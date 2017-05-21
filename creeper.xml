@@ -13,7 +13,6 @@
 			<model file="ruby.3d" texture="texture_earth.jpg"/>
 		</models>
 	</group>
-
 	<group>
 		<scale X="30" Y="30" Z="30"/>
 		<translate X="0" Y="1.5" Z="0"/>

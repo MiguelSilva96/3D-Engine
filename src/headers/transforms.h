@@ -82,19 +82,22 @@ class Color: public Transformation {
 	private:
 		float *def;
 	public:
+		char *label;
 		const int component;
 		const unsigned int texID;
-		Color(float a, float b, float c, int d, unsigned int e) : 
+		Color(float a, float b, float c, int d, unsigned int e, char *lab) : 
 			Transformation(a,b,c), component(d), texID(e) {
 			def = (float*)malloc(4*sizeof(float));
 			def[0] = a;
 			def[1] = b;
 			def[2] = c;
 			def[3] = 1;
+			label = lab;
 		}
-		Color(float a, int d, unsigned int e) : Transformation(a,a,a), component(d), texID(e) {
+		Color(float a, int d, unsigned int e, char *lab) : Transformation(a,a,a), component(d), texID(e) {
 			def = (float*)malloc(sizeof(float));
 			def[0] = a;
+			label = lab;
 		} 
 		void transform(void) {
 			glMaterialfv(GL_FRONT, component, def);

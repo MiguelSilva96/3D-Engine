@@ -115,8 +115,8 @@ void renderRandom(Group g, bool picking) {
                 glTranslatef(x, 0, z);
                 glScalef(s, s, s);
 				if (picking) {
-					if (strcmp(f->label,"")) {
-						strcpy(labels[code], f->label);
+					if (strcmp(c[i-1]->label,"")) {
+						strcpy(labels[code], c[i-1]->label);
 						f->drawPICK(code);
 					}
 					else f->drawPICK(0);
@@ -164,8 +164,8 @@ void renderGroup(Group g, bool picking) {
             while(c[i])
                 c[i++] -> transform();
 			if (picking) {
-				if (strcmp(f->label, "")) {
-					strcpy(labels[code], f->label);
+				if (strcmp(c[i-1]->label, "")) {
+					strcpy(labels[code], c[i-1]->label);
 					f->drawPICK(code);
 					code++;
 				}
@@ -277,16 +277,12 @@ unsigned char picking(int x, int y) {
 
 void processMouseButtons(int button, int state, int xx, int yy) {
 	if (state == GLUT_DOWN) {
-		if (button == GLUT_RIGHT_BUTTON) {
+		if (button == GLUT_LEFT_BUTTON) {
 			picked = picking(xx, yy);
-			if (picked) {
+			if (picked)
 				sprintf(label, "%s", labels.find(picked)->second);
-				//printf("%s\n",label);
-			}
-			else {
-				sprintf(label, "Not labeled", picked);
-				//printf("%s\n", label);
-			}
+			else
+				sprintf(label, "Not labeled");
 			glutPostRedisplay();
 		}
 	}

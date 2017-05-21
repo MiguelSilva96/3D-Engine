@@ -10,7 +10,7 @@ XmlParser::XmlParser(const char *filename) {
 
 
 char* XmlParser::getLabel(tinyxml2::XMLElement* elem) {
-	char s[64];
+	char *s = (char*)malloc(64);
 	elem->Attribute("label") ? strcpy(s, elem->Attribute("label")) : strcpy(s,"");
 	return s;
 }
@@ -18,9 +18,11 @@ char* XmlParser::getLabel(tinyxml2::XMLElement* elem) {
 Color** XmlParser::getColor(tinyxml2::XMLElement* elem) {
         int col = GL_DIFFUSE;
         unsigned int texID;
+        char *label = (char*)malloc(64);
         float r, g, b;
         int i = 0;
         Color** colors = new Color*[5];
+        strcpy(label, XmlParser::getLabel(elem));
         r = g = b = 1.0;
         for(int i = 0; i < 5; i++)
             colors[i] = nullptr;
@@ -30,36 +32,36 @@ Color** XmlParser::getColor(tinyxml2::XMLElement* elem) {
             elem -> QueryFloatAttribute("diffG", &g);
             elem -> QueryFloatAttribute("diffB", &b);
             col = GL_DIFFUSE;
-            colors[i++] = new Color(r, g, b, col, texID);
+            colors[i++] = new Color(r, g, b, col, texID, label);
         }
         if(elem -> Attribute("specR")) {
             elem -> QueryFloatAttribute("specR", &r);
             elem -> QueryFloatAttribute("specG", &g);
             elem -> QueryFloatAttribute("specB", &b);
             col = GL_SPECULAR;
-            colors[i++] = new Color(r, g, b, col, texID);
+            colors[i++] = new Color(r, g, b, col, texID, label);
         }
         if(elem -> Attribute("emisR")) {
             elem -> QueryFloatAttribute("emisR", &r);
             elem -> QueryFloatAttribute("emisG", &g);
             elem -> QueryFloatAttribute("emisB", &b);
             col = GL_EMISSION;
-            colors[i++] = new Color(r, g, b, col, texID);
+            colors[i++] = new Color(r, g, b, col, texID, label);
         }
         if(elem -> Attribute("ambiR")) {
             elem -> QueryFloatAttribute("ambiR", &r);
             elem -> QueryFloatAttribute("ambiG", &g);
             elem -> QueryFloatAttribute("ambiB", &b);
             col = GL_AMBIENT;
-            colors[i++] = new Color(r, g, b, col, texID);
+            colors[i++] = new Color(r, g, b, col, texID, label);
         }
         if(elem -> Attribute("shine")) {
             elem -> QueryFloatAttribute("shine", &r);
             col = GL_SHININESS;
-            colors[i++] = new Color(r, col, texID);
+            colors[i++] = new Color(r, col, texID, label);
         }
         if(!i)
-            colors[i] = new Color(r, g, b, col, texID);
+            colors[i] = new Color(r, g, b, col, texID, label);
         return colors;
 }
 
@@ -145,7 +147,6 @@ vector<pair<Color**, File*>> XmlParser::getCurVertexes(void) {
 	string line;
 	string file = "../shapes/";
 	pair<Color**, File*> p;
-	char label[64];
 
 	int nlinhas;
 	float x, y, z;
@@ -162,7 +163,6 @@ vector<pair<Color**, File*>> XmlParser::getCurVertexes(void) {
 		ifstream filedisc;
 
 		Color** c = XmlParser::getColor(auxEl);
-		strcpy(label, XmlParser::getLabel(auxEl));
 
 		file.append(auxEl->Attribute("file"));
 		if (loadedFiles.find(file) != loadedFiles.end()) {
@@ -209,7 +209,7 @@ vector<pair<Color**, File*>> XmlParser::getCurVertexes(void) {
 			nlinhas--;
 		}
 
-		File* f = new File(vert, norm, txtr, label);
+		File* f = new File(vert, norm, txtr);
 		p = make_pair(c, f);
 		vertexes.push_back(p);
 		loadedFiles[file] = f;

@@ -12,10 +12,9 @@ class File {
     	GLuint buffers[3];
     
     public:
-    	File(vector<Vertex>, vector<Vertex>, vector<float>, char[]);
+    	File(vector<Vertex>, vector<Vertex>, vector<float>);
     	void draw(unsigned int);
-		void drawPICK(int);
-		char label[64];
+    	void drawPICK(int);
 };
 
 #endif
