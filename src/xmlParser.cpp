@@ -327,6 +327,7 @@ vector<Light*> XmlParser::getLights(void) {
     tinyxml2::XMLElement* aux;
     vector<Light*> lights;
     float x, y, z;
+    float dx, dy, dz;
     int i = 0;
     float cutOff;
     Light *light;
@@ -344,7 +345,10 @@ vector<Light*> XmlParser::getLights(void) {
             light =  new DirectionalLight(x,y,z,i);
         else if(!strcmp(type, "SPOTLIGHT")) {
             aux -> QueryFloatAttribute("cutOff", &cutOff);
-            light =  new SpotLight(x,y,z,cutOff,i);
+            aux -> QueryFloatAttribute("dX", &dx);
+            aux -> QueryFloatAttribute("dY", &dy);
+            aux -> QueryFloatAttribute("dZ", &dz);
+            light =  new SpotLight(x,y,z,cutOff,dx,dy,dz,i);
         }
         lights.push_back(light);
         i++;

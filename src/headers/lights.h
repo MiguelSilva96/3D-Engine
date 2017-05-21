@@ -22,8 +22,10 @@ class LightPoint : public Light {
 class SpotLight : public Light {
 	private:
 		float cutOff;
+		float dx, dy, dz;
 	public:
-		SpotLight(float a, float b, float c, float d, int l) : Light(a,b,c,l), cutOff(d) {};
+		SpotLight(float a, float b, float c, float d, float e, float f, float g, int l) : 
+		Light(a,b,c,l), cutOff(d), dx(e), dy(f), dz(g) {};
 		void placeLight(void);
 };
 

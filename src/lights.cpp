@@ -1,7 +1,6 @@
 #include "lights.h"
 
 
-//This light only represents type POINT and DIRECTIONAL
 Light::Light(float a, float b, float c, int l) {
 	GLfloat amb[4]  = {0.2, 0.2, 0.2, 1.0};
   	GLfloat diff[4] = {0.8, 0.8, 0.8, 1.0};
@@ -24,7 +23,9 @@ void DirectionalLight::placeLight(void) {
 }
 
 void SpotLight::placeLight(void) {
-	float dir[4] = { x, y, z };
-	glLightf(GL_LIGHT0 + lightNum, GL_SPOT_CUTOFF, cutOff);
+	float dir[4] = { dx, dy, dz };
+	float pos[4] = { x, y, z, 1 };
+	glLightfv(GL_LIGHT0 + lightNum, GL_POSITION, pos);
 	glLightfv(GL_LIGHT0 + lightNum, GL_SPOT_DIRECTION, dir);
+	glLightf(GL_LIGHT0 + lightNum, GL_SPOT_CUTOFF, cutOff);
 }

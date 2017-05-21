@@ -1,8 +1,11 @@
 <?xml version="1.0" ?>
 <scene>
+	<lights>
+		<light type="SPOTLIGHT" posX="0" posY="10.0" posZ="0.0" dX="0" dY="-1" dZ="0" cutOff="45"/>
+	</lights>
 	<group>
 		<models>
-    		<model file='plane.3d' />
+    		<model file='planeSPOT.2d' />
     	</models>
     </group>
 </scene>
