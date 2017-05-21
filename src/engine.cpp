@@ -26,17 +26,23 @@ using namespace std;
 vector<Group> groups;
 vector<Light*> lights;
 int modes[] = {GL_FILL, GL_LINE, GL_POINT};
-int mode = 0;
+int w, h, mode = 0;
 float radius = 80;
 float beta = 0, alfa = 0;
 float lx = 0.0f, ly = 0.0f, lz = 0.0f;
 float px = 0.0f, py = 0.0f, pz = -100.0f;
 float upx = 0.0f, upy = 1.0f, upz = 0.0f;
+unsigned int picked = 0;
+int code = 1;
+char label[64];
+map<int, char[64]> labels;
 
-void changeSize(int w, int h) {
+void changeSize(int ww, int hh) {
     // Prevent a divide by zero, when window is too short
     // (you cant make a window with zero width).
-    if(h == 0)
+	w = ww;
+	h = hh;
+	if(h == 0)
         h = 1;
 
     // compute window's aspect ratio 
@@ -79,9 +85,10 @@ float myRandom() {
 }
 
 
-void renderRandom(Group g) {
+void renderRandom(Group g, bool picking) {
     vector<pair<Color**,File*>> files;
     vector<pair<Color**,File*>>::iterator it;
+	char str[64];
 
     srand(31457);
     int nr = 0;
@@ -107,7 +114,14 @@ void renderRandom(Group g) {
                     c[i++] -> transform();
                 glTranslatef(x, 0, z);
                 glScalef(s, s, s);
-                f -> draw(c[0] -> texID);
+				if (picking) {
+					if (strcmp(f->label,"")) {
+						strcpy(labels[code], f->label);
+						f->drawPICK(code);
+					}
+					else f->drawPICK(0);
+				}
+				else f->draw(c[0]->texID);
                 glPopMatrix();
                 nr++;
             }
@@ -116,7 +130,7 @@ void renderRandom(Group g) {
     }
 }
 
-void renderGroup(Group g) {
+void renderGroup(Group g, bool picking) {
     vector<pair<Color**,File*>> files;
     vector<Group> subgroups;
     vector<Transformation*> aux;
@@ -125,11 +139,13 @@ void renderGroup(Group g) {
     vector<pair<Color**,File*>>::iterator it;
     vector<Group>::iterator itGr;
     int i;
+	char str[64];
 
     glPushMatrix();
     
     if(g.n > 0) {
-        renderRandom(g);
+		renderRandom(g, picking);
+		code++;
     } else {
         transforms = g.getTransformations();
         itTr = transforms.begin();
@@ -144,21 +160,54 @@ void renderGroup(Group g) {
             pair<Color**,File*> p = *it;
             File *f = p.second;
             Color **c = p.first;
+
             while(c[i])
                 c[i++] -> transform();
-            f -> draw(c[0] -> texID);
+			if (picking) {
+				if (strcmp(f->label, "")) {
+					strcpy(labels[code], f->label);
+					f->drawPICK(code);
+					code++;
+				}
+				else f->drawPICK(0);
+			}
+			else f->draw(c[0]->texID);
         }
     }
     subgroups = g.getSubGroups();
     itGr = subgroups.begin();
     for(; itGr != subgroups.end(); ++itGr) {
         Group gr = *itGr;
-        renderGroup(gr);
+        renderGroup(gr,picking);
     }
-    
+
     glPopMatrix();
 }
 
+void renderText() {
+	float orange[4] = { 0.8f, 0.4f , 0.4f,1.0f };
+	float black[4] = { 0.0f,0.0f,0.0f,0.0f };
+
+	glMatrixMode(GL_PROJECTION);
+	glPushMatrix();
+	glLoadIdentity();
+	gluOrtho2D(0, w, h, 0);
+	glMatrixMode(GL_MODELVIEW);
+	glDisable(GL_DEPTH_TEST);
+	glPushMatrix();
+	glLoadIdentity();
+	glMaterialfv(GL_FRONT, GL_EMISSION, orange);
+	glRasterPos2d(10, 20);
+	for (char *c = label; *c != '\0'; c++) {
+		glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, *c);
+	}
+	glMaterialfv(GL_FRONT, GL_EMISSION, black);
+	glMatrixMode(GL_PROJECTION);
+	glPopMatrix();
+	glMatrixMode(GL_MODELVIEW);
+	glPopMatrix();
+	glEnable(GL_DEPTH_TEST);
+}
 
 void renderScene(void) {
     // clear buffers
@@ -185,10 +234,62 @@ void renderScene(void) {
     vector<Group>::iterator it;
     for(it = groups.begin(); it != groups.end(); ++it) {
         Group g = *it;
-        renderGroup(g);
+        renderGroup(g, false);
     }
+	renderText();
     // End of frame
     glutSwapBuffers();
+}
+
+unsigned char picking(int x, int y) {
+	unsigned char res[4];
+	code = 1;
+	//Disable lighting and textures
+	glDisable(GL_LIGHTING);
+	glDisable(GL_TEXTURE_2D);
+
+	glClear(GL_COLOR_BUFFER_BIT);
+	glLoadIdentity();
+	lx = px + radius *sin(alfa) * cos(beta);
+	ly = py + radius *sin(beta);
+	lz = pz + radius *cos(alfa) * cos(beta);
+
+	gluLookAt(px, py, pz,
+		lx, ly, lz,
+		upx, upy, upz);
+
+	glDepthFunc(GL_LEQUAL);
+	//Draw
+	vector<Group>::iterator it;
+	for (it = groups.begin(); it != groups.end(); ++it) {
+		Group g = *it;
+		renderGroup(g, true);
+	}
+	glDepthFunc(GL_LESS);
+	GLint viewport[4];
+	glGetIntegerv(GL_VIEWPORT, viewport);
+	glReadPixels(x, viewport[3] - y, 1, 1,
+		GL_RGBA, GL_UNSIGNED_BYTE, res);
+	glEnable(GL_LIGHTING);
+	glEnable(GL_TEXTURE_2D);
+	return res[0];
+}
+
+void processMouseButtons(int button, int state, int xx, int yy) {
+	if (state == GLUT_DOWN) {
+		if (button == GLUT_RIGHT_BUTTON) {
+			picked = picking(xx, yy);
+			if (picked) {
+				sprintf(label, "%s", labels.find(picked)->second);
+				//printf("%s\n",label);
+			}
+			else {
+				sprintf(label, "Not labeled", picked);
+				//printf("%s\n", label);
+			}
+			glutPostRedisplay();
+		}
+	}
 }
 
 void manageKeyboard(unsigned char key_code, int x, int y) {
@@ -319,6 +420,7 @@ int main(int argc, char **argv) {
     // Registration of the keyboard callbacks
     glutSpecialFunc(manageEvents);
     glutKeyboardFunc(manageKeyboard);
+	glutMouseFunc(processMouseButtons);
 
 #ifndef __APPLE__   
     glewInit();

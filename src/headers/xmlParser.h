@@ -20,7 +20,6 @@ class XmlParser {
         tinyxml2::XMLNode* root;
         tinyxml2::XMLError error;
         map<string, File*> loadedFiles;
-        map<string, unsigned int> loadedTextures;
         float n, outR, inR, minScale, maxScale;
 
         vector<string> split(string str, char delim);
@@ -29,6 +28,7 @@ class XmlParser {
         vector<Vertex> getPoints(tinyxml2::XMLElement*);
         Color** getColor(tinyxml2::XMLElement*);
         unsigned int getTexture(tinyxml2::XMLElement*);
+		char* getLabel(tinyxml2::XMLElement*);
 
     public:
         XmlParser(XmlParser*);

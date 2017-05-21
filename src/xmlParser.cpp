@@ -8,6 +8,13 @@ XmlParser::XmlParser(const char *filename) {
     n = -1;
 }
 
+
+char* XmlParser::getLabel(tinyxml2::XMLElement* elem) {
+	char s[64];
+	elem->Attribute("label") ? strcpy(s, elem->Attribute("label")) : strcpy(s,"");
+	return s;
+}
+
 Color** XmlParser::getColor(tinyxml2::XMLElement* elem) {
         int col = GL_DIFFUSE;
         unsigned int texID;
@@ -64,8 +71,6 @@ unsigned int XmlParser::getTexture(tinyxml2::XMLElement* elem) {
 
     if(elem -> Attribute("texture")) {
         s = elem -> Attribute("texture");
-        if(loadedTextures.find(s) != loadedTextures.end())
-            return loadedTextures[s];
 
         ilInit();
         ilEnable(IL_ORIGIN_SET);
@@ -104,7 +109,6 @@ unsigned int XmlParser::getTexture(tinyxml2::XMLElement* elem) {
         glBindTexture(GL_TEXTURE_2D, 0);
 
     }
-    loadedTextures[s] = texID;
     return texID;
 }
 
@@ -141,6 +145,7 @@ vector<pair<Color**, File*>> XmlParser::getCurVertexes(void) {
 	string line;
 	string file = "../shapes/";
 	pair<Color**, File*> p;
+	char label[64];
 
 	int nlinhas;
 	float x, y, z;
@@ -157,12 +162,13 @@ vector<pair<Color**, File*>> XmlParser::getCurVertexes(void) {
 		ifstream filedisc;
 
 		Color** c = XmlParser::getColor(auxEl);
+		strcpy(label, XmlParser::getLabel(auxEl));
 
 		file.append(auxEl->Attribute("file"));
 		if (loadedFiles.find(file) != loadedFiles.end()) {
 			p = make_pair(c, loadedFiles[file]);
 			vertexes.push_back(p);
-			continue;
+			continue; 
 		}
 
 		filedisc.open(file);
@@ -203,12 +209,13 @@ vector<pair<Color**, File*>> XmlParser::getCurVertexes(void) {
 			nlinhas--;
 		}
 
-		File* f = new File(vert, norm, txtr);
+		File* f = new File(vert, norm, txtr, label);
 		p = make_pair(c, f);
 		vertexes.push_back(p);
 		loadedFiles[file] = f;
 		file = "../shapes/";
 	}
+
 	return vertexes;
 }
 
@@ -327,7 +334,7 @@ vector<Light*> XmlParser::getLights(void) {
     tinyxml2::XMLElement* aux;
     vector<Light*> lights;
     float x, y, z;
-    float dx, dy, dz;
+	float dx, dy, dz;
     int i = 0;
     float cutOff;
     Light *light;
@@ -345,10 +352,10 @@ vector<Light*> XmlParser::getLights(void) {
             light =  new DirectionalLight(x,y,z,i);
         else if(!strcmp(type, "SPOTLIGHT")) {
             aux -> QueryFloatAttribute("cutOff", &cutOff);
-            aux -> QueryFloatAttribute("dX", &dx);
-            aux -> QueryFloatAttribute("dY", &dy);
-            aux -> QueryFloatAttribute("dZ", &dz);
-            light =  new SpotLight(x,y,z,cutOff,dx,dy,dz,i);
+			aux -> QueryFloatAttribute("dX", &dx);
+			aux -> QueryFloatAttribute("dY", &dy);
+			aux -> QueryFloatAttribute("dZ", &dz);
+			light = new SpotLight(x, y, z, cutOff, dx, dy, dz, i);
         }
         lights.push_back(light);
         i++;

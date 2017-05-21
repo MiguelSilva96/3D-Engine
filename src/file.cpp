@@ -1,8 +1,9 @@
 #include <file.h>
 #include <iostream>
 
-File::File(vector<Vertex> vs, vector<Vertex> ns, vector<float> ts) {
-    void *norm = nullptr;
+File::File(vector<Vertex> vs, vector<Vertex> ns, vector<float> ts, char l[]) {
+	strcpy(label, l);
+	void *norm = nullptr;
     void *txtr = nullptr;
     if(ns.size() > 0)
         norm = &(ns[0].x);
@@ -59,4 +60,14 @@ void File::draw(unsigned int texID) {
     glMaterialfv(GL_FRONT, GL_DIFFUSE, defD);
     glMaterialfv(GL_FRONT, GL_SHININESS, defS);
 }
+
+void File::drawPICK(int code) {
+	float color = code / 255.0f;
+
+	glBindBuffer(GL_ARRAY_BUFFER, buffers[0]);
+	glVertexPointer(3, GL_FLOAT, 0, 0);
+	glColor3f(color, color, color);
+	glDrawArrays(GL_TRIANGLES, 0, nVertex);
+}
+
 
