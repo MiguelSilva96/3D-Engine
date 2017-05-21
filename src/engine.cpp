@@ -32,10 +32,10 @@ float beta = 0, alfa = 0;
 float lx = 0.0f, ly = 0.0f, lz = 0.0f;
 float px = 0.0f, py = 0.0f, pz = -100.0f;
 float upx = 0.0f, upy = 1.0f, upz = 0.0f;
-unsigned int picked = 0;
+/*unsigned int picked = 0;
 int code = 1;
 char label[64];
-map<int, char[64]> labels;
+map<int, char[64]> labels;*/
 
 void changeSize(int ww, int hh) {
     // Prevent a divide by zero, when window is too short
@@ -85,7 +85,7 @@ float myRandom() {
 }
 
 
-void renderRandom(Group g, bool picking) {
+void renderRandom(Group g) {
     vector<pair<Color**,File*>> files;
     vector<pair<Color**,File*>>::iterator it;
 	char str[64];
@@ -114,14 +114,14 @@ void renderRandom(Group g, bool picking) {
                     c[i++] -> transform();
                 glTranslatef(x, 0, z);
                 glScalef(s, s, s);
-				if (picking) {
+				/*if (picking) {
 					if (strcmp(c[i-1]->label,"")) {
 						strcpy(labels[code], c[i-1]->label);
 						f->drawPICK(code);
 					}
 					else f->drawPICK(0);
-				}
-				else f->draw(c[0]->texID);
+				}*/
+				f->draw(c[0]->texID);
                 glPopMatrix();
                 nr++;
             }
@@ -130,7 +130,7 @@ void renderRandom(Group g, bool picking) {
     }
 }
 
-void renderGroup(Group g, bool picking) {
+void renderGroup(Group g) {
     vector<pair<Color**,File*>> files;
     vector<Group> subgroups;
     vector<Transformation*> aux;
@@ -144,8 +144,8 @@ void renderGroup(Group g, bool picking) {
     glPushMatrix();
     
     if(g.n > 0) {
-		renderRandom(g, picking);
-		code++;
+		renderRandom(g);
+		//code++;
     } else {
         transforms = g.getTransformations();
         itTr = transforms.begin();
@@ -163,27 +163,27 @@ void renderGroup(Group g, bool picking) {
 
             while(c[i])
                 c[i++] -> transform();
-			if (picking) {
+			/*if (picking) {
 				if (strcmp(c[i-1]->label, "")) {
 					strcpy(labels[code], c[i-1]->label);
 					f->drawPICK(code);
 					code++;
 				}
 				else f->drawPICK(0);
-			}
-			else f->draw(c[0]->texID);
+			}*/
+			f->draw(c[0]->texID);
         }
     }
     subgroups = g.getSubGroups();
     itGr = subgroups.begin();
     for(; itGr != subgroups.end(); ++itGr) {
         Group gr = *itGr;
-        renderGroup(gr,picking);
+        renderGroup(gr);
     }
 
     glPopMatrix();
 }
-
+/*
 void renderText() {
 	float orange[4] = { 0.8f, 0.4f , 0.4f,1.0f };
 	float black[4] = { 0.0f,0.0f,0.0f,0.0f };
@@ -208,7 +208,7 @@ void renderText() {
 	glPopMatrix();
 	glEnable(GL_DEPTH_TEST);
 }
-
+*/
 void renderScene(void) {
     // clear buffers
     glClearColor(0.0f,0.0f,0.0f,0.0f);
@@ -234,13 +234,13 @@ void renderScene(void) {
     vector<Group>::iterator it;
     for(it = groups.begin(); it != groups.end(); ++it) {
         Group g = *it;
-        renderGroup(g, false);
+        renderGroup(g);
     }
-	renderText();
+	//renderText();
     // End of frame
     glutSwapBuffers();
 }
-
+/*
 unsigned char picking(int x, int y) {
 	unsigned char res[4];
 	code = 1;
@@ -287,7 +287,7 @@ void processMouseButtons(int button, int state, int xx, int yy) {
 		}
 	}
 }
-
+*/
 void manageKeyboard(unsigned char key_code, int x, int y) {
     int step = 10;
     float d[3];
@@ -416,7 +416,7 @@ int main(int argc, char **argv) {
     // Registration of the keyboard callbacks
     glutSpecialFunc(manageEvents);
     glutKeyboardFunc(manageKeyboard);
-	glutMouseFunc(processMouseButtons);
+	//glutMouseFunc(processMouseButtons);
 
 #ifndef __APPLE__   
     glewInit();
