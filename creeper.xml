@@ -1,9 +1,10 @@
 <?xml version="1.0" ?>
 <scene>
 	<lights>
+		<!--<light type="DIR" posX="0" posY="1.0" posZ="0.0"/>
+		<light type="DIR" posX="1" posY="0.0" posZ="0.0"/>-->
 		<light type="DIR" posX="0" posY="1.0" posZ="0.0"/>
 		<light type="DIR" posX="1" posY="0.0" posZ="0.0"/>
-		<light type="DIR" posX="0" posY="0.0" posZ="1.0"/>
 	</lights>
 	<!--HOUSE-->
 	<group>

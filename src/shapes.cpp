@@ -459,12 +459,12 @@ vector<string>* box(float x, float y, float z, int div) {
             v[0].push_back(vertexString(-x/2+x/div*(j+1), y/2-y/div*(i+1), z/2));
             v[0].push_back(vertexString(-x/2+x/div*(j+1), y/2-y/div*i, z/2));
 
-            v[1].push_back(vertexString(1,0,0));
-            v[1].push_back(vertexString(1,0,0));
-            v[1].push_back(vertexString(1,0,0));
-            v[1].push_back(vertexString(1,0,0));
-            v[1].push_back(vertexString(1,0,0));
-            v[1].push_back(vertexString(1,0,0));
+            v[1].push_back(vertexString(0,0,1));
+            v[1].push_back(vertexString(0,0,1));
+            v[1].push_back(vertexString(0,0,1));
+            v[1].push_back(vertexString(0,0,1));
+            v[1].push_back(vertexString(0,0,1));
+            v[1].push_back(vertexString(0,0,1));
             v[2].push_back(vertexString((i+1)/div,j/div));
             v[2].push_back(vertexString(i/div,(j+1)/div));
             v[2].push_back(vertexString(i/div,j/div));
@@ -480,12 +480,12 @@ vector<string>* box(float x, float y, float z, int div) {
             v[0].push_back(vertexString(-x/2+x/div*(j+1), y/2-y/div*i, -z/2));
             v[0].push_back(vertexString(-x/2+x/div*(j+1), y/2-y/div*(i+1), -z/2));
 
-            v[1].push_back(vertexString(-1,0,0));
-            v[1].push_back(vertexString(-1,0,0));
-            v[1].push_back(vertexString(-1,0,0));
-            v[1].push_back(vertexString(-1,0,0));
-            v[1].push_back(vertexString(-1,0,0));
-            v[1].push_back(vertexString(-1,0,0));
+            v[1].push_back(vertexString(0,0,-1));
+            v[1].push_back(vertexString(0,0,-1));
+            v[1].push_back(vertexString(0,0,-1));
+            v[1].push_back(vertexString(0,0,-1));
+            v[1].push_back(vertexString(0,0,-1));
+            v[1].push_back(vertexString(0,0,-1));
             v[2].push_back(vertexString((i+1)/div,j/div));
             v[2].push_back(vertexString(i/div,(j+1)/div));
             v[2].push_back(vertexString(i/div,j/div));
@@ -501,12 +501,12 @@ vector<string>* box(float x, float y, float z, int div) {
             v[0].push_back(vertexString(x/2, -y/2+y/div*(j+1), z/2-z/div*(i+1)));
             v[0].push_back(vertexString(x/2, -y/2+y/div*(j+1), z/2-z/div*i));
 
-            v[1].push_back(vertexString(0,0,1));
-            v[1].push_back(vertexString(0,0,1));
-            v[1].push_back(vertexString(0,0,1));
-            v[1].push_back(vertexString(0,0,1));
-            v[1].push_back(vertexString(0,0,1));
-            v[1].push_back(vertexString(0,0,1));
+            v[1].push_back(vertexString(1,0,0));
+            v[1].push_back(vertexString(1,0,0));
+            v[1].push_back(vertexString(1,0,0));
+            v[1].push_back(vertexString(1,0,0));
+            v[1].push_back(vertexString(1,0,0));
+            v[1].push_back(vertexString(1,0,0));
             v[2].push_back(vertexString((i+1)/div,j/div));
             v[2].push_back(vertexString(i/div,(j+1)/div));
             v[2].push_back(vertexString(i/div,j/div));
@@ -522,12 +522,12 @@ vector<string>* box(float x, float y, float z, int div) {
             v[0].push_back(vertexString(-x/2, -y/2+y/div*(j+1), z/2-z/div*i));
             v[0].push_back(vertexString(-x/2, -y/2+y/div*(j+1), z/2-z/div*(i+1)));
 
-            v[1].push_back(vertexString(0,0,-1));
-            v[1].push_back(vertexString(0,0,-1));
-            v[1].push_back(vertexString(0,0,-1));
-            v[1].push_back(vertexString(0,0,-1));
-            v[1].push_back(vertexString(0,0,-1));
-            v[1].push_back(vertexString(0,0,-1));
+            v[1].push_back(vertexString(-1,0,0));
+            v[1].push_back(vertexString(-1,0,0));
+            v[1].push_back(vertexString(-1,0,0));
+            v[1].push_back(vertexString(-1,0,0));
+            v[1].push_back(vertexString(-1,0,0));
+            v[1].push_back(vertexString(-1,0,0));
             v[2].push_back(vertexString((i+1)/div,j/div));
             v[2].push_back(vertexString(i/div,(j+1)/div));
             v[2].push_back(vertexString(i/div,j/div));
