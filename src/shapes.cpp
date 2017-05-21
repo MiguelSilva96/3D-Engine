@@ -753,8 +753,7 @@ vector<string>* ruby(float rb, float rt, float heightb, float heightt, int slice
     float angle;                            //ângulo formado pela linha do raio do ponto em que estamos e o eixo dos z's
     float lvl;                              //recebe o valor do raio em função das stacks percorridas
     float prev_lvl;                         //recebe o valor anterior do raio em função das stacks percorridas
-    int total_len = rt + heightt + heightb;                 //for texture
-    float begin_base = (float) (rt + heightt)/total_len;   //for texture
+
     v = cylinder(rb, rt, heightt, slices, stacks);
     for (j = 1; j <= slices; j++) {
         angle = alpha * j;
@@ -765,28 +764,28 @@ vector<string>* ruby(float rb, float rt, float heightb, float heightt, int slice
 			v[0].push_back(vertexString(prev_lvl * sin(angle),
 				-h*(i - 1), prev_lvl * cos(angle)));
             v[1].push_back(vertexString(sin(angle), 0, cos(angle)));
-            v[2].push_back(vertexString((float)j/slices,(float) begin_base + (i-1)*heightb/(total_len*stacks)));
+            v[2].push_back(vertexString((float)j/slices,(float) (i-1)/stacks));
             v[0].push_back(vertexString(prev_lvl * sin(alpha*(j - 1)),
                         -h*(i - 1), prev_lvl * cos(alpha*(j - 1))));
             v[1].push_back(vertexString(sin(alpha*(j-1)), 0, cos(alpha*(j-1))));
-            v[2].push_back(vertexString((float)(j-1)/slices,(float) begin_base + (i-1)*heightb/(total_len*stacks)));
+            v[2].push_back(vertexString((float)(j-1)/slices,(float)(i-1)/stacks));
             v[0].push_back(vertexString(lvl * sin(alpha*(j - 1)),
                         -h * i, lvl * cos(alpha * (j - 1))));
             v[1].push_back(vertexString(sin(alpha * (j - 1)), 0, cos(alpha * (j - 1))));
-            v[2].push_back(vertexString((float)(j-1)/slices,(float) begin_base + i*heightb/(total_len*stacks)));
+            v[2].push_back(vertexString((float)(j-1)/slices,(float) i/stacks));
             v[0].push_back(vertexString(lvl * sin(alpha*(j - 1)),
                         -h * i, lvl * cos(alpha * (j - 1))));
             v[1].push_back(vertexString(sin(alpha * (j - 1)), 0, cos(alpha * (j - 1))));
-            v[2].push_back(vertexString((float)(j-1)/slices,(float) begin_base + i*heightb/(total_len*stacks)));
+            v[2].push_back(vertexString((float)(j-1)/slices,(float) i/stacks));
 			v[0].push_back(vertexString(lvl * sin(angle),
 				-h * i, lvl * cos(angle)));
             v[1].push_back(vertexString(sin(angle), 0, cos(angle)));
-            v[2].push_back(vertexString((float)j/slices,(float) begin_base + i*heightb/(total_len*stacks)));
+            v[2].push_back(vertexString((float)j/slices,(float)i/stacks));
 			v[0].push_back(vertexString(prev_lvl * sin(angle),
                         -h * (i - 1), prev_lvl * cos(angle)));
             v[1].push_back(vertexString(sin(angle), 0, cos(angle)));
             prev_lvl = lvl;
-            v[2].push_back(vertexString((float)j/slices,(float) begin_base + (i-1)*heightb/(total_len*stacks)));
+            v[2].push_back(vertexString((float)j/slices,(float)(i-1)/stacks));
         }
     }
     return v;
