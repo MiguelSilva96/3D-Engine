@@ -20,7 +20,7 @@ DevIL
 	• Install GLEW  
 		– sudo apt-get install libglew-dev  
 	  
-	• Install Linux  
+	• Install Devil  
 		– sudo apt-get install libdevil-dev  
 
 ### For windows you need to have to install cmake from the website and have the files organized as follows:
