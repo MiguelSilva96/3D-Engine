@@ -7,21 +7,21 @@ OpenGL - Glut and the extension glew;
 DevIL
 
 ### For linux you only need to have them installed:
-(apt package manager example)
-	– sudo apt-get install cmake
-	– sudo apt-get install cmake-qt-gui
-• Install freeglut
-	– sudo apt-get install freeglut3-dev
-• Check OpenGL version
-	– glxinfo | grep "OpenGL“
-	– (sudo apt-get install mesa-utils)
-
-– sudo apt-get install libxmu-dev libxi-dev
-• Install GLEW
-	– sudo apt-get install libglew-dev
-
-• Install Linux
-	– sudo apt-get install libdevil-dev
+(apt package manager example)  
+	– sudo apt-get install cmake  
+	– sudo apt-get install cmake-qt-gui  
+• Install freeglut  
+	– sudo apt-get install freeglut3-dev  
+• Check OpenGL version  
+	– glxinfo | grep "OpenGL“  
+	– (sudo apt-get install mesa-utils)  
+  
+– sudo apt-get install libxmu-dev libxi-dev  
+• Install GLEW  
+	– sudo apt-get install libglew-dev  
+  
+• Install Linux  
+	– sudo apt-get install libdevil-dev  
 
 ### For windows you need to have to install cmake from the website and have the files organized as follows:
 	toolkits
