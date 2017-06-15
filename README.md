@@ -6,7 +6,7 @@ Install cmake;
 OpenGL - Glut and the extension glew;
 DevIL
 
-# For linux you only need to have them installed:
+### For linux you only need to have them installed:
 (apt package manager example)
 	– sudo apt-get install cmake
 	– sudo apt-get install cmake-qt-gui
@@ -23,7 +23,7 @@ DevIL
 • Install Linux
 	– sudo apt-get install libdevil-dev
 
-# For windows you need to have to install cmake from the website and have the files organized as follows:
+### For windows you need to have to install cmake from the website and have the files organized as follows:
 	toolkits
 		devil
 			IL
