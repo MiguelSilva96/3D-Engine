@@ -1,6 +1,48 @@
 # CGTP
 Computer Graphics Pratical Assignment, University of Minho 2016/2017
 
+## Requirements
+Install cmake;
+OpenGL - Glut and the extension glew;
+DevIL
+
+#For linux you only need to have them installed:
+(apt package manager example)
+	– sudo apt-get install cmake
+	– sudo apt-get install cmake-qt-gui
+• Install freeglut
+	– sudo apt-get install freeglut3-dev
+• Check OpenGL version
+	– glxinfo | grep "OpenGL“
+	– (sudo apt-get install mesa-utils)
+
+– sudo apt-get install libxmu-dev libxi-dev
+• Install GLEW
+	– sudo apt-get install libglew-dev
+
+• Install Linux
+	– sudo apt-get install libdevil-dev
+
+#For windows you need to have to install cmake from the website and have the files organized as follows:
+	toolkits
+		devil
+			IL
+				il.h
+			devil.dll
+			DevIL.lib
+		glew
+			GL
+				glew.h
+			glew.zip
+			glew32.dll
+			glew32.lib
+		glut
+			GL
+				glut.h
+			glut32.dll
+			glut32.lib
+
+
 ## Run
 Use cmake:  
 source directory: src;  
@@ -18,10 +60,12 @@ build directory: build;
     cone radius height slices stacks filename
     cylinder bottomRadius topRadius height slices stacks filename
     torus innerRadius outterRadius sides rings filename
-    ruby middleRadius topRadius bottomHeight TopHeight slices stacks filename 
+    ruby middleRadius topRadius bottomHeight TopHeight slices stacks filename
+    bezier inputPatches Tesselation
+    crown innerRadius outterRadius Sides
 
 
-Example scenes for each shape available(box.xml, sphere.xml, etc...),  
+Example scenes for each shape available(solar_system.xml, creeper.xml, sphere.xml, etc...)
 Load them on engine to see the examples.
 
 ### Note:  
@@ -30,13 +74,9 @@ don't forget to add the file name at config.xml,
     or other xml file using that form (in this case you must
     give the path as an argument for engine)
 
-## Explorer Cam 
-Use Arrow keys;
+## FPS Cam 
+Use Arrow keys to change direction;
+Use WASD to move;
 
 ## Change fill/line/point
 F1;
-
-## Zoom
-
-In: PageDown
-Out: PageUp
