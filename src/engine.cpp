@@ -40,9 +40,9 @@ map<int, char[64]> labels;*/
 void changeSize(int ww, int hh) {
     // Prevent a divide by zero, when window is too short
     // (you cant make a window with zero width).
-	w = ww;
-	h = hh;
-	if(h == 0)
+    w = ww;
+    h = hh;
+    if(h == 0)
         h = 1;
 
     // compute window's aspect ratio 
@@ -88,7 +88,7 @@ float myRandom() {
 void renderRandom(Group g) {
     vector<pair<Color**,File*>> files;
     vector<pair<Color**,File*>>::iterator it;
-	char str[64];
+    char str[64];
 
     srand(31457);
     int nr = 0;
@@ -114,14 +114,14 @@ void renderRandom(Group g) {
                     c[i++] -> transform();
                 glTranslatef(x, 0, z);
                 glScalef(s, s, s);
-				/*if (picking) {
-					if (strcmp(c[i-1]->label,"")) {
-						strcpy(labels[code], c[i-1]->label);
-						f->drawPICK(code);
-					}
-					else f->drawPICK(0);
-				}*/
-				f->draw(c[0]->texID);
+                /*if (picking) {
+                    if (strcmp(c[i-1]->label,"")) {
+                        strcpy(labels[code], c[i-1]->label);
+                        f->drawPICK(code);
+                    }
+                    else f->drawPICK(0);
+                }*/
+                f->draw(c[0]->texID);
                 glPopMatrix();
                 nr++;
             }
@@ -139,13 +139,13 @@ void renderGroup(Group g) {
     vector<pair<Color**,File*>>::iterator it;
     vector<Group>::iterator itGr;
     int i;
-	char str[64];
+    char str[64];
 
     glPushMatrix();
     
     if(g.n > 0) {
-		renderRandom(g);
-		//code++;
+        renderRandom(g);
+        //code++;
     } else {
         transforms = g.getTransformations();
         itTr = transforms.begin();
@@ -163,15 +163,15 @@ void renderGroup(Group g) {
 
             while(c[i])
                 c[i++] -> transform();
-			/*if (picking) {
-				if (strcmp(c[i-1]->label, "")) {
-					strcpy(labels[code], c[i-1]->label);
-					f->drawPICK(code);
-					code++;
-				}
-				else f->drawPICK(0);
-			}*/
-			f->draw(c[0]->texID);
+            /*if (picking) {
+                if (strcmp(c[i-1]->label, "")) {
+                    strcpy(labels[code], c[i-1]->label);
+                    f->drawPICK(code);
+                    code++;
+                }
+                else f->drawPICK(0);
+            }*/
+            f->draw(c[0]->texID);
         }
     }
     subgroups = g.getSubGroups();
@@ -185,28 +185,28 @@ void renderGroup(Group g) {
 }
 /*
 void renderText() {
-	float orange[4] = { 0.8f, 0.4f , 0.4f,1.0f };
-	float black[4] = { 0.0f,0.0f,0.0f,0.0f };
+    float orange[4] = { 0.8f, 0.4f , 0.4f,1.0f };
+    float black[4] = { 0.0f,0.0f,0.0f,0.0f };
 
-	glMatrixMode(GL_PROJECTION);
-	glPushMatrix();
-	glLoadIdentity();
-	gluOrtho2D(0, w, h, 0);
-	glMatrixMode(GL_MODELVIEW);
-	glDisable(GL_DEPTH_TEST);
-	glPushMatrix();
-	glLoadIdentity();
-	glMaterialfv(GL_FRONT, GL_EMISSION, orange);
-	glRasterPos2d(10, 20);
-	for (char *c = label; *c != '\0'; c++) {
-		glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, *c);
-	}
-	glMaterialfv(GL_FRONT, GL_EMISSION, black);
-	glMatrixMode(GL_PROJECTION);
-	glPopMatrix();
-	glMatrixMode(GL_MODELVIEW);
-	glPopMatrix();
-	glEnable(GL_DEPTH_TEST);
+    glMatrixMode(GL_PROJECTION);
+    glPushMatrix();
+    glLoadIdentity();
+    gluOrtho2D(0, w, h, 0);
+    glMatrixMode(GL_MODELVIEW);
+    glDisable(GL_DEPTH_TEST);
+    glPushMatrix();
+    glLoadIdentity();
+    glMaterialfv(GL_FRONT, GL_EMISSION, orange);
+    glRasterPos2d(10, 20);
+    for (char *c = label; *c != '\0'; c++) {
+        glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, *c);
+    }
+    glMaterialfv(GL_FRONT, GL_EMISSION, black);
+    glMatrixMode(GL_PROJECTION);
+    glPopMatrix();
+    glMatrixMode(GL_MODELVIEW);
+    glPopMatrix();
+    glEnable(GL_DEPTH_TEST);
 }
 */
 void renderScene(void) {
@@ -236,56 +236,56 @@ void renderScene(void) {
         Group g = *it;
         renderGroup(g);
     }
-	//renderText();
+    //renderText();
     // End of frame
     glutSwapBuffers();
 }
 /*
 unsigned char picking(int x, int y) {
-	unsigned char res[4];
-	code = 1;
-	//Disable lighting and textures
-	glDisable(GL_LIGHTING);
-	glDisable(GL_TEXTURE_2D);
+    unsigned char res[4];
+    code = 1;
+    //Disable lighting and textures
+    glDisable(GL_LIGHTING);
+    glDisable(GL_TEXTURE_2D);
 
-	glClear(GL_COLOR_BUFFER_BIT);
-	glLoadIdentity();
-	lx = px + radius *sin(alfa) * cos(beta);
-	ly = py + radius *sin(beta);
-	lz = pz + radius *cos(alfa) * cos(beta);
+    glClear(GL_COLOR_BUFFER_BIT);
+    glLoadIdentity();
+    lx = px + radius *sin(alfa) * cos(beta);
+    ly = py + radius *sin(beta);
+    lz = pz + radius *cos(alfa) * cos(beta);
 
-	gluLookAt(px, py, pz,
-		lx, ly, lz,
-		upx, upy, upz);
+    gluLookAt(px, py, pz,
+        lx, ly, lz,
+        upx, upy, upz);
 
-	glDepthFunc(GL_LEQUAL);
-	//Draw
-	vector<Group>::iterator it;
-	for (it = groups.begin(); it != groups.end(); ++it) {
-		Group g = *it;
-		renderGroup(g, true);
-	}
-	glDepthFunc(GL_LESS);
-	GLint viewport[4];
-	glGetIntegerv(GL_VIEWPORT, viewport);
-	glReadPixels(x, viewport[3] - y, 1, 1,
-		GL_RGBA, GL_UNSIGNED_BYTE, res);
-	glEnable(GL_LIGHTING);
-	glEnable(GL_TEXTURE_2D);
-	return res[0];
+    glDepthFunc(GL_LEQUAL);
+    //Draw
+    vector<Group>::iterator it;
+    for (it = groups.begin(); it != groups.end(); ++it) {
+        Group g = *it;
+        renderGroup(g, true);
+    }
+    glDepthFunc(GL_LESS);
+    GLint viewport[4];
+    glGetIntegerv(GL_VIEWPORT, viewport);
+    glReadPixels(x, viewport[3] - y, 1, 1,
+        GL_RGBA, GL_UNSIGNED_BYTE, res);
+    glEnable(GL_LIGHTING);
+    glEnable(GL_TEXTURE_2D);
+    return res[0];
 }
 
 void processMouseButtons(int button, int state, int xx, int yy) {
-	if (state == GLUT_DOWN) {
-		if (button == GLUT_LEFT_BUTTON) {
-			picked = picking(xx, yy);
-			if (picked)
-				sprintf(label, "%s", labels.find(picked)->second);
-			else
-				sprintf(label, "Not labeled");
-			glutPostRedisplay();
-		}
-	}
+    if (state == GLUT_DOWN) {
+        if (button == GLUT_LEFT_BUTTON) {
+            picked = picking(xx, yy);
+            if (picked)
+                sprintf(label, "%s", labels.find(picked)->second);
+            else
+                sprintf(label, "Not labeled");
+            glutPostRedisplay();
+        }
+    }
 }
 */
 void manageKeyboard(unsigned char key_code, int x, int y) {
@@ -416,7 +416,7 @@ int main(int argc, char **argv) {
     // Registration of the keyboard callbacks
     glutSpecialFunc(manageEvents);
     glutKeyboardFunc(manageKeyboard);
-	//glutMouseFunc(processMouseButtons);
+    //glutMouseFunc(processMouseButtons);
 
 #ifndef __APPLE__   
     glewInit();
